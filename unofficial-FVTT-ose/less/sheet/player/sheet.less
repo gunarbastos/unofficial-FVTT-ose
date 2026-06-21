@@ -1,0 +1,24 @@
+.dtg.dtg-Player {
+  form,
+  .sheet-body {
+    display: grid !important;                       // override the default column flex
+    grid-template-columns: minmax(200px, max-content) 1fr;
+    grid-template-rows: max-content max-content max-content 1fr max-content;
+    grid-auto-rows: auto;
+    column-gap: 12px;
+    row-gap: 0;
+  }
+
+  // Character Info spans full width; then two columns for the next parts
+  .part-character-info { grid-column: 1 / -1; }
+  .part-resources      { grid-column: 1; }
+  .part-traits         { grid-column: 2; }
+  .part-quick-access   { grid-column: 1 / -1; }
+  .part-inventory      { grid-column: 1 / -1; }
+  .part-roleplay       { grid-column: 1 / -1; }
+
+  .window-content {
+    display: flex;
+    flex-direction: column;
+  }
+}

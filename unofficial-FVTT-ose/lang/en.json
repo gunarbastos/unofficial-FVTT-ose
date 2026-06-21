@@ -1,0 +1,16 @@
+{
+  "UOSE": {
+    "ATTRIBUTES": {
+      "STR": "Strength",
+      "SHORT": {
+        "STR": "STR"
+      },
+      "FULL": {
+        "STR": "{UOSE.ATTRIBUTES.STR} ({UOSE.ATTRIBUTES.SHORT.STR})"
+      }
+    },
+    "SALUTATIONS": "Greetings and Salutations, hope you have enough {UOSE.ATTRIBUTES.STR} ({UOSE.ATTRIBUTES.SHORT.STR})",
+    "YADDA": "Greetings and Salutations, hope you have enough {UOSE.ATTRIBUTES.FULL.STR}",
+    "YEDDE": "Greetings and Salutations {name}, hope you have enough {UOSE.ATTRIBUTES.FULL.STR}"
+  }
+}

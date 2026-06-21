@@ -1,0 +1,95 @@
+.dtg.dtg-Player .part-inventory {
+  display: grid;
+  grid-template-rows: auto auto 1fr;
+  gap: 10px;
+
+  .inv-backpack {
+    border: 0;
+    border-bottom: 1px solid var(--color-border);
+    border-radius: 0 0 8px 8px;
+
+    --side-offset: 8px;   // adjust to your header height
+    --border-w: 1px;
+
+    background:
+            linear-gradient(var(--color-border), var(--color-border))
+            left 0 bottom / var(--border-w) calc(100% - var(--side-offset)) no-repeat,
+            linear-gradient(var(--color-border), var(--color-border))
+            right 0 bottom / var(--border-w) calc(100% - var(--side-offset)) no-repeat;
+  }
+
+
+  .item-list {
+    --number-of-items: 6;
+    --row-height: 46px;
+    --row-gap: 6px;
+    --hgt: max(
+            0px,
+            calc(
+                    (var(--number-of-items) * var(--row-height)) +
+                    ((var(--number-of-items) - 1) * var(--row-gap))
+            )
+    );
+
+    list-style: none;
+    margin: 0 0 0 0.8em;
+    padding: 0;
+    display: grid;
+    gap: var(--row-gap);
+    grid-auto-rows: var(--row-height);
+    height: var(--hgt);
+    max-height: var(--hgt);
+    overflow-y: auto;
+
+    scrollbar-gutter: stable;
+
+    .empty { padding: 6px 0; }
+  }
+
+  .inv-currency {
+    display:flex;
+    justify-content:center;
+
+    .currency-box {
+      background: var(--color-bg-panel, transparent);
+      max-width: 100%;
+      margin-bottom: 10px;
+    }
+
+    .currency-list {
+      display: flex;
+      column-gap: 12px;
+      justify-items: center;
+      margin: 0;
+    }
+
+    .curr {
+      display: contents;
+    }
+
+    .curr-head {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 600;
+      margin-bottom: 4px;
+      white-space: nowrap;
+
+      &.bi {
+        display: inline-block;
+        vertical-align: middle;
+        line-height: 1;        // remove extra ascender/descender space
+      }
+    }
+
+    .curr-head .bi { font-size: 1.1rem; }
+
+    .curr-input {
+      width: 3em;
+      text-align: center;
+      border-radius: 8px;
+      padding: 4px 6px;
+    }
+  }
+
+}
