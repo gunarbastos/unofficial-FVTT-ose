@@ -4,7 +4,7 @@ import {DamageEffectDataModel} from "./effects/index.js"
 
 console.log(`Loaded: ${import.meta.url}`);
 
-export class AbilitiesDataModel extends foundry.abstract.DataModel {
+export class AbilityDataModel extends foundry.abstract.DataModel {
 
     /** @inheritDoc */
     static _enableV10Validation = true;

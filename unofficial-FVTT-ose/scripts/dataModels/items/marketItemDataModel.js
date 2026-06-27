@@ -10,7 +10,7 @@ function _commonAttributes() {
     }
 }
 
-export class MarketDataModel extends BaseDataModel {
+export class MarketItemDataModel extends BaseDataModel {
 
     /** @inheritDoc */
     static _enableV10Validation = true;
@@ -25,7 +25,7 @@ export class MarketDataModel extends BaseDataModel {
     }
 }
 
-export class EmbedMarketDataModel extends EmbedBaseDataModel {
+export class EmbedMarketItemDataModel extends EmbedBaseDataModel {
 
     /** @inheritDoc */
     static _enableV10Validation = true;
