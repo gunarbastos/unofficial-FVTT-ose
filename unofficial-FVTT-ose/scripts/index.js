@@ -3,4 +3,4 @@
 
 console.log(`Loaded: ${import.meta.url}`);
 
-export {EffectDataModel} from './effectDataModel.js';
+export {EffectDataModel} from './UOSEEffectDataModel.js';

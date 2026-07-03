@@ -1,3 +1,5 @@
+import {UOSE} from "../foundry/uose.js"
+
 console.log(`Loaded: ${import.meta.url}`);
 
 export class Utils {
@@ -326,19 +328,18 @@ export class Utils {
         );
     }
 
-    // static getCachedDocument(uuid) {
-    //     if (!this._document_cache.has(uuid)) { this._document_cache.set(uuid, Utils.fromUuidSync(uuid)); }
-    //     return this._document_cache.get(uuid);
-    // }
-    //
-    // static invalidateDocument(uuid){
-    //     if(this._document_cache.has(uuid)) { this._document_cache.delete(uuid); }
-    // }
-    //
-    // static invalidateEntireCache(){
-    //     this._document_cache.clear();
-    // }
-    //
+    static getCachedDocument(uuid) {
+        if (!this._document_cache.has(uuid)) { this._document_cache.set(uuid, Utils.fromUuidSync(uuid)); }
+        return this._document_cache.get(uuid);
+    }
+
+    static invalidateDocument(uuid){
+        if(this._document_cache.has(uuid)) { this._document_cache.delete(uuid); }
+    }
+
+    static invalidateEntireCache(){
+        this._document_cache.clear();
+    }
 
     static deepFreeze(obj) {
         Object.freeze(obj);
@@ -568,3 +569,5 @@ export class Utils {
         Utils.registerHandlebarHelper('absolute', this.absolute);
     }
 }
+
+UOSE.publicView().utils = Utils;

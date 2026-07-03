@@ -1,13 +1,13 @@
 // import {
 //     AncestryDataModel,
-//     ArmorDataModel,
-//     ClassDataModel, CommonItemDataModel, CommunityDataModel, ConsumableDataModel, DomainCardDataModel, DomainDataModel,
-//     EffectDataModel, FeatureDataModel, MagicItemDataModel, MateriaDataModel, SpellDataModel, SubClassDataModel,
-//     WeaponDataModel
+//     UOSEArmorDataModel,
+//     UOSEClassDataModel, CommonItemDataModel, CommunityDataModel, ConsumableDataModel, DomainCardDataModel, DomainDataModel,
+//     UOSEEffectDataModel, FeatureDataModel, MagicItemDataModel, MateriaDataModel, UOSESpellDataModel, SubClassDataModel,
+//     UOSEWeaponDataModel
 // } from "../../../dtg-old/module/dataModel/item/index.js";
 // import {
 //     ApplyConditionEffectDataModel,
-//     ChangeRollEffectDataModel, ConsumeResourceEffectDataModel, DamageEffectDataModel, DamageResistanceEffectDataModel,
+//     ChangeRollEffectDataModel, ConsumeResourceEffectDataModel, UOSEDamageEffectDataModel, DamageResistanceEffectDataModel,
 //     HealEffectDataModel, RemoveConditionEffectDataModel, RestoreResourceEffectDataModel
 // } from "../../../dtg-old/module/dataModel/item/effect/index.js";
 // import {AdversarySheet, EnvironmentSheet, PlayerSheet} from "../../../dtg-old/module/sheet/actor/index.js";
@@ -24,6 +24,7 @@
 //     EnvironmentDataModel,
 //     PlayerDataModel
 // } from "../../../dtg-old/module/dataModel/actor/index.js";
+import {UOSE} from "../foundry/uose.js"
 
 console.log(`Loaded: ${import.meta.url}`);
 
@@ -305,12 +306,12 @@ _rawConstants = {
     // },
     // POLYMORPHIC_TYPES: {
     //     EFFECTS: {
-    //         BASE: EffectDataModel,
+    //         BASE: UOSEEffectDataModel,
     //         CLASSES: [
     //             ApplyConditionEffectDataModel,
     //             ChangeRollEffectDataModel,
     //             ConsumeResourceEffectDataModel,
-    //             DamageEffectDataModel,
+    //             UOSEDamageEffectDataModel,
     //             DamageResistanceEffectDataModel,
     //             HealEffectDataModel,
     //             RemoveConditionEffectDataModel,
@@ -349,8 +350,8 @@ _rawConstants = {
 //
 // _rawConstants.DATA_MODELS.ITEMS = {
 //     [_rawConstants.ITEM_TYPES.ANCESTRY]: AncestryDataModel,
-//     [_rawConstants.ITEM_TYPES.ARMOR]: ArmorDataModel,
-//     [_rawConstants.ITEM_TYPES.CLASS]: ClassDataModel,
+//     [_rawConstants.ITEM_TYPES.ARMOR]: UOSEArmorDataModel,
+//     [_rawConstants.ITEM_TYPES.CLASS]: UOSEClassDataModel,
 //     [_rawConstants.ITEM_TYPES.COMMON_ITEM]: CommonItemDataModel,
 //     [_rawConstants.ITEM_TYPES.COMMUNITY]: CommunityDataModel,
 //     [_rawConstants.ITEM_TYPES.CONSUMABLE]: ConsumableDataModel,
@@ -359,9 +360,9 @@ _rawConstants = {
 //     [_rawConstants.ITEM_TYPES.FEATURE]: FeatureDataModel,
 //     [_rawConstants.ITEM_TYPES.MAGIC_ITEM]: MagicItemDataModel,
 //     [_rawConstants.ITEM_TYPES.MATERIA]: MateriaDataModel,
-//     [_rawConstants.ITEM_TYPES.SPELL]: SpellDataModel,
+//     [_rawConstants.ITEM_TYPES.SPELL]: UOSESpellDataModel,
 //     [_rawConstants.ITEM_TYPES.SUBCLASS]: SubClassDataModel,
-//     [_rawConstants.ITEM_TYPES.WEAPON]: WeaponDataModel,
+//     [_rawConstants.ITEM_TYPES.WEAPON]: UOSEWeaponDataModel,
 // };
 
 //Choices
@@ -446,3 +447,5 @@ for(const [settingKey, settingValue] of Object.entries(_rawConstants.SETTINGS)) 
 // }, {});
 
 export const CONSTANTS = _rawConstants;
+
+UOSE.publicView().constants = _rawConstants;

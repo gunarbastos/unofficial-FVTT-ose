@@ -17,6 +17,58 @@
   "styles": [
     "main.css"
   ],
+  "packs": [
+    {
+      "name": "monsters",
+      "label": "Monsters",
+      "type": "Actor"
+    },
+    {
+      "name": "animals",
+      "label": "Animals",
+      "type": "Actor"
+    },
+    {
+      "name": "vehicles",
+      "label": "Vehicles",
+      "type": "Actor"
+    },
+    {
+      "name": "classes",
+      "label": "Classes",
+      "type": "Item"
+    },
+    {
+      "name": "races",
+      "label": "Races",
+      "type": "Item"
+    },
+    {
+      "name": "equipment",
+      "label": "Equipment",
+      "type": "Item"
+    },
+    {
+      "name": "adventuringGear",
+      "label": "Adventuring Gear",
+      "type": "Item"
+    },
+    {
+      "name": "spells",
+      "label": "Spells",
+      "type": "Item"
+    },
+    {
+      "name": "abilities",
+      "label": "Abilities",
+      "type": "Item"
+    },
+    {
+      "name": "others",
+      "label": "Others",
+      "type": "Item"
+    }
+  ],
   "languages": [
     {
       "lang": "en",
@@ -25,6 +77,36 @@
       "flags": {}
     }
   ],
+  "documentTypes": {
+    "Actor": {
+      "Character": {},
+      "Monster": {},
+      "Animal": {},
+      "Retainer": {},
+      "LandVehicle": {},
+      "WaterVehicle": {}
+    },
+    "Item": {
+      "Weapon": {},
+      "Ammunition": {},
+      "Armor": {},
+      "Adventuring Gear": {},
+      "Container": {},
+      "Poison": {},
+      "Spell": {},
+      "Class": {},
+      "Race": {},
+      "Animal": {},
+      "LandVehicle": {},
+      "WaterVehicle": {},
+      "Service": {}
+    }
+  },
+  "socket": true,
+  "grid": {
+    "distance": 5,
+    "units": "ft"
+  },
   "url": "https://github.com/gunarbastos/daggerheart_tg",
   "readme": "https://raw.githubusercontent.com/gunarbastos/daggerheart_tg/stable/README.md",
   "changelog": "https://raw.githubusercontent.com/gunarbastos/daggerheart_tg/stable/CHANGELOG.md",

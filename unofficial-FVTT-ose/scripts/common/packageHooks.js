@@ -1,5 +1,6 @@
 import {Utils} from "./utils.js";
 import {CONSTANTS} from "./constants.js";
+import {UOSE} from "../foundry/uose.js";
 
 
 console.log(`Loaded: ${import.meta.url}`);
@@ -27,22 +28,23 @@ export class PackageHooks {
         Utils.deepFreeze(CONSTANTS);
 
         Utils.log('defining global objects');
-        game.uose ??= {
-            utils: Utils,
-            constants: CONSTANTS,
-            documents: {
-                //document Class references
-            },
-            rolls: {
-                //roll functions
-            },
-            apps: {
-                //app instances
-            },
-            settings: {
-                //settings with setter and getters to make things easier to access
-            }
-        };
+        game.uose = UOSE.publicView();
+        // game.uose ??= {
+        //     utils: Utils,
+        //     constants: CONSTANTS,
+        //     documents: {
+        //         //document Class references
+        //     },
+        //     rolls: {
+        //         //roll functions
+        //     },
+        //     apps: {
+        //         //app instances
+        //     },
+        //     settings: {
+        //         //settings with setter and getters to make things easier to access
+        //     }
+        // };
 
         // Utils.log('registering Document Classes');
         // game.dtg.documents = {};
@@ -73,8 +75,8 @@ export class PackageHooks {
         // CONFIG.Item.documentClass = DTGItemDocument;
         //
         // //Not sure if needed
-        // // CONFIG.Actor.DataModel = BaseDataModel;
-        // // CONFIG.Item.DataModel = BaseDataModel;
+        // // CONFIG.Actor.DataModel = UOSEBaseDataModel;
+        // // CONFIG.Item.DataModel = UOSEBaseDataModel;
         //
         // Utils.log('registering data models');
         // // Data Model registrations

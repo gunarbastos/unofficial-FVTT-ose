@@ -1,19 +1,19 @@
 // File generated automatically.
-// Last Updated: 26/06/2026 18:51:29.046 UTC-3
+// Last Updated: 02/07/2026 22:23:03.942 UTC-3
 
 console.log(`Loaded: ${import.meta.url}`);
 
-export {PolymorphicEmbeddedField} from './polymorphicDataType.js';
-export {BaseDataModel, EmbedBaseDataModel} from './baseDataModel.js';
-export {ValueRangeDataModel} from './valueRangeDataModel.js';
-export {EffectDataModel} from './effectDataModel.js';
-export {AbilityDataModel} from './abilityDataModel.js';
-export {ArmorClassDataModel} from './armorClassDataModel.js';
-export {AttackDataModel} from './attackDataModel.js';
-export {HitDiceDataModel} from './hitdiceDataModel.js';
-export {MovementDataModel} from './movementDataModel.js';
-export {NumberAppearingDataModel} from './numberappearingDataModel.js';
-export {RangeDataModel} from './rangeDataModel.js';
-export {SavesDataModel} from './savesDataModel.js';
-export {ToHitDataModel} from './tohitDataModel.js';
-export {TokenBarEligibleAttribute} from './tokenBarEligibleAttribute.js';
+export {TGLPolymorphicEmbeddedField} from './TGLPolymorphicDataType.js';
+export {UOSEAbilityDataModel} from './UOSEAbilityDataModel.js';
+export {UOSEArmorClassDataModel} from './UOSEArmorClassDataModel.js';
+export {UOSEAttackDataModel} from './UOSEAttackDataModel.js';
+export {UOSEBaseDataModel, UOSEEmbedBaseDataModel} from './UOSEBaseDataModel.js';
+export {UOSEEffectDataModel} from './UOSEEffectDataModel.js';
+export {UOSEHitDiceDataModel} from './UOSEHitDiceDataModel.js';
+export {UOSEMovementDataModel} from './UOSEMovementDataModel.js';
+export {UOSENumberAppearingDataModel} from './UOSENumberAppearingDataModel.js';
+export {UOSERangeDataModel} from './UOSERangeDataModel.js';
+export {UOSESavesDataModel} from './UOSESavesDataModel.js';
+export {UOSEToHitDataModel} from './UOSEToHitDataModel.js';
+export {UOSETokenBarEligibleAttribute} from './UOSETokenBarEligibleAttribute.js';
+export {UOSEValueRangeDataModel} from './UOSEValueRangeDataModel.js';

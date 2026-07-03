@@ -1,4 +1,5 @@
 node_modules
 __pycache__
 /releases
-/dtg/packs
+/unofficial-FVTT-ose/packs
+/dtg-old

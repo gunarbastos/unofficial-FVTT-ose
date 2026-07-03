@@ -3,4 +3,4 @@
 
 console.log(`Loaded: ${import.meta.url}`);
 
-export {DamageEffectDataModel} from './damageEffectDataModel.js';
+export {UOSEDamageEffectDataModel} from './UOSEDamageEffectDataModel.js';
