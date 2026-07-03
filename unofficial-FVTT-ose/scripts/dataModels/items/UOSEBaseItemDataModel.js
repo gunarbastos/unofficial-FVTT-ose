@@ -1,4 +1,5 @@
 import {UOSEEmbedBaseDataModel, UOSEBaseDataModel} from "../index.js";
+import {UOSE} from "../../foundry/index.js";
 
 console.log(`Loaded: ${import.meta.url}`);
 
@@ -38,3 +39,5 @@ export class UOSEEmbedBaseItemDataModel extends UOSEEmbedBaseDataModel {
         }
     }
 }
+
+UOSE.registerBaseClass(UOSEBaseItemDataModel);

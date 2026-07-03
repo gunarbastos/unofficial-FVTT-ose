@@ -1,4 +1,5 @@
 import {Utils} from "../common/utils.js";
+import {UOSE} from "../foundry/index.js";
 
 console.log(`Loaded: ${import.meta.url}`);
 
@@ -48,3 +49,5 @@ export class UOSEEmbedBaseDataModel extends foundry.abstract.DataModel {
         return map;
     }
 }
+
+UOSE.registerBaseClass(UOSEBaseDataModel);

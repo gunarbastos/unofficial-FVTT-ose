@@ -1,4 +1,5 @@
 import {UOSEArmorClassDataModel, UOSEBaseDataModel, UOSEMovementDataModel} from "../index.js";
+import {UOSE} from "../../foundry/index.js";
 
 console.log(`Loaded: ${import.meta.url}`);
 
@@ -18,3 +19,5 @@ export class UOSEBaseActorDataModel extends UOSEBaseDataModel {
         }
     }
 }
+
+UOSE.registerBaseClass(UOSEBaseActorDataModel);

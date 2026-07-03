@@ -2,6 +2,7 @@ console.log(`Loaded: ${import.meta.url}`);
 
 const _uose = {
     classes: {
+        base: {},
         documents: {actors: {}, items: {}},
         dataModels: {actors: {}, items: {}},
         sheets: {actors: {}, items: {}},
@@ -90,5 +91,14 @@ export class UOSE {
                 collectionName: 'apps'
             }
         );
+    }
+
+    static registerBaseClass(cls) {
+        if(!cls) return;
+        this.#register({
+            collection: _uose.classes.base,
+            name: cls.prototype.constructor.name.replace(/^UOSE/, ''),
+            cls: cls,
+        })
     }
 }
