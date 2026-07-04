@@ -1,26 +1,8 @@
-import {UOSEEmbedMarketItemDataModel, UOSEMarketItemDataModel} from "./UOSEMarketItemDataModel.js"; //UOSEMarketItemDataModel
+import {UOSEMarketItemDataModel} from "./UOSEMarketItemDataModel.js"; //UOSEMarketItemDataModel
 import {UOSEMovementDataModel} from "../index.js"
 import {UOSE} from "../../foundry/index.js";
 
 console.log(`Loaded: ${import.meta.url}`);
-
-const fields = foundry.data.fields;
-
-function _commonAttributes() {
-    return {
-        subtype: new fields.StringField({required: true}), //todo: choices
-        unencumbered: new fields.SchemaField({
-            maxLoad: new fields.NumberField({required: true, integer: true}),
-            milesPerDay: new fields.NumberField({required: true, integer: true}),
-            movement: new fields.EmbeddedDataField(UOSEMovementDataModel()),
-        }),
-        encumbered: new fields.SchemaField({
-            maxLoad: new fields.NumberField({required: true, integer: true}),
-            milesPerDay: new fields.NumberField({required: true, integer: true}),
-            movement: new fields.EmbeddedDataField(UOSEMovementDataModel()),
-        }),
-    }
-}
 
 export class UOSEAnimalItemDataModel extends UOSEMarketItemDataModel {
 
@@ -30,14 +12,26 @@ export class UOSEAnimalItemDataModel extends UOSEMarketItemDataModel {
     /** @inheritDoc */
     static defineSchema() {
         const base = super.defineSchema();
+        const fields = foundry.data.fields;
         return {
             ...base,
-            ..._commonAttributes(),
+            subtype: new fields.StringField({required: true}), //todo: choices
+            unencumbered: new fields.SchemaField({
+                maxLoad: new fields.NumberField({required: true, integer: true}),
+                milesPerDay: new fields.NumberField({required: true, integer: true}),
+                movement: new fields.EmbeddedDataField(UOSEMovementDataModel()),
+            }),
+            encumbered: new fields.SchemaField({
+                maxLoad: new fields.NumberField({required: true, integer: true}),
+                milesPerDay: new fields.NumberField({required: true, integer: true}),
+                movement: new fields.EmbeddedDataField(UOSEMovementDataModel()),
+            }),
+            embed: new fields.EmbeddedDataField(UOSEEmbedAnimalItemDataModel, {required: false, nullable: true, initial: null}),
         }
     }
 }
 
-export class UOSEEmbedAnimalItemDataModel extends UOSEEmbedMarketItemDataModel {
+export class UOSEEmbedAnimalItemDataModel extends foundry.abstract.DataModel {
 
     /** @inheritDoc */
     static _enableV10Validation = true;
@@ -45,9 +39,9 @@ export class UOSEEmbedAnimalItemDataModel extends UOSEEmbedMarketItemDataModel {
     /** @inheritDoc */
     static defineSchema() {
         const base = super.defineSchema();
+        const fields = foundry.data.fields;
         return {
             ...base,
-            ..._commonAttributes(),
             actor: new fields.DocumentUUIDField({required: false}),
         }
     }

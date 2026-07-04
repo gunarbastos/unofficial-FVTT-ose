@@ -1,14 +1,8 @@
-import {UOSEEmbedBaseDataModel, UOSEBaseDataModel} from "../index.js";
+import {UOSEBaseDataModel} from "../index.js";
 import {UOSE} from "../../foundry/index.js";
 
 console.log(`Loaded: ${import.meta.url}`);
 
-const fields = foundry.data.fields;
-function _commonAttributes(){
-    return {
-        description: new fields.HTMLField({required: false}),
-    }
-}
 
 export class UOSEBaseItemDataModel extends UOSEBaseDataModel {
 
@@ -18,24 +12,10 @@ export class UOSEBaseItemDataModel extends UOSEBaseDataModel {
     /** @inheritDoc */
     static defineSchema() {
         const base = super.defineSchema();
+        const fields = foundry.data.fields;
         return {
             ...base,
-            ..._commonAttributes(),
-        }
-    }
-}
-
-export class UOSEEmbedBaseItemDataModel extends UOSEEmbedBaseDataModel {
-
-    /** @inheritDoc */
-    static _enableV10Validation = true;
-
-    /** @inheritDoc */
-    static defineSchema() {
-        const base = super.defineSchema();
-        return {
-            ...base,
-            ..._commonAttributes(),
+            description: new fields.HTMLField({required: false}),
         }
     }
 }
