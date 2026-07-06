@@ -66,7 +66,6 @@ class UOSEEmbedWaterVehicleItemDataModel extends foundry.abstract.DataModel {
 
     /** @inheritDoc */
     static defineSchema() {
-        const base = super.defineSchema();
         const fields = foundry.data.fields;
         return {
             actor: new fields.DocumentUUIDField({required: false}),

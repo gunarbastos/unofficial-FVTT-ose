@@ -24,11 +24,11 @@ export class UOSERaceDataModel extends UOSEBaseItemDataModel {
                 value: new fields.NumberField({required: true, integer: true}),
             }), {initial: []}),
             classes: new fields.ArrayField(new fields.SchemaField({
-                name: fields.StringField({required: true}),
+                name: new fields.StringField({required: true}),
                 maxLevel: new fields.NumberField({required: true, integer: true}),
             }), {initial: []}),
             languages: new fields.ArrayField(new fields.StringField({required: true})), //Todo: Choices
-            abilities: new fields.ArrayField(new fields.EmbeddedDataField(UOSEAbilityDataModel), { initial: [] }), //Todo: define abilities thingy
+            abilities: new fields.ArrayField(new fields.EmbeddedDataField(UOSEAbilityDataModel), { initial: [] }),
             titles: new fields.ArrayField(new fields.StringField({required: true})),
         }
     }

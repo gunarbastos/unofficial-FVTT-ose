@@ -18,8 +18,8 @@ export class UOSESpellDataModel extends UOSEBaseItemDataModel {
             level: new fields.NumberField({required: true, integer: true, initial: 1}),
             spellLists: new fields.ArrayField(new fields.StringField({required: true})), //TODO: Choices
             effects: new fields.SchemaField({
-                activation: new fields.ArrayField(new fields.EmbeddedDataField(UOSEAbilityDataModel), { initial: [] }), //Todo: define abilities thingy
-                reverse: new fields.ArrayField(new fields.EmbeddedDataField(UOSEAbilityDataModel), { initial: [] }), //Todo: define abilities thingy
+                activation: new fields.ArrayField(new fields.EmbeddedDataField(UOSEAbilityDataModel), { initial: [] }),
+                reverse: new fields.ArrayField(new fields.EmbeddedDataField(UOSEAbilityDataModel), { initial: [] }),
             }),
             targets: new fields.StringField({required: false}),
             concentration: new fields.BooleanField({required: true, initial: false}),

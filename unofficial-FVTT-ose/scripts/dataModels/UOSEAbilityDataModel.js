@@ -20,7 +20,7 @@ export class UOSEAbilityDataModel extends foundry.abstract.DataModel {
                 {
                     [UOSEDamageEffectDataModel.type]: UOSEDamageEffectDataModel,
                 },
-                {}), {initial: []}), //Todo: Define each Effect Type, and the required Base and Map info, hopefully without need for CONSTANTS
+                {}), {initial: []}), //Todo: Define each Effect Type, and the required Base and Map info, hopefully without need for UOSEConstants
         }
     }
 

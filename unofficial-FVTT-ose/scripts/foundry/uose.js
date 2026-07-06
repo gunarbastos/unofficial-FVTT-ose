@@ -10,12 +10,15 @@ const _uose = {
         actors: {},
         items: {},
         effects: {},
+        replacements: {},
     },
-    constants: {},
-    api: null,
-    utils: null,
-    settings: {},
-    lang: null,
+    foundryConfig: CONFIG,
+    constants: {}, //object with UOSE constants
+    //api: null, //pointer to object with functions to do things in the system, INCLUDING ROLLS
+    utils: null, //pointer to UOSEUtils class, that eventually will become an extension of TGLUtils class
+    settings: null, //pointer to system settings object
+    lang: null, //pointer to i18n uose language entry
+    apps: {}, //object with name -> obj
 };
 
 export class UOSE {
@@ -86,7 +89,7 @@ export class UOSE {
         this.#register(
             {
                 collection: _uose.classes.apps,
-                name: cls.prototype.constructor.name.replace(/App$/, ''),
+                name: cls.prototype.constructor.name.replace(/^UOSE(?<name>.*?)App$/, '$<name>'),
                 cls: cls,
                 collectionName: 'apps'
             }
@@ -101,4 +104,38 @@ export class UOSE {
             cls: cls,
         })
     }
+
+    static registerEffect(cls) {
+        if(!cls || !cls.type) return;
+        this.#register({
+            collection: _uose.classes.effects,
+            name: cls.type,
+            cls: cls,
+        })
+    }
+
+    static registerSettings(instance) {
+        if(!instance) return;
+        _uose.settings = instance;
+    }
+
+    static registerConstants(instance) {
+        if(!instance) return;
+        _uose.constants = instance;
+    }
+
+    static registerLanguage(instance) {
+        if(!instance) return;
+        _uose.lang = instance;
+    }
+
+    static registerReplacement(cls) {
+        if(!cls) return;
+        this.#register({
+            collection: _uose.classes.replacements,
+            name: cls.prototype.constructor.name.replace(/^UOSE/, ''),
+            cls: cls,
+        })
+    }
+
 }

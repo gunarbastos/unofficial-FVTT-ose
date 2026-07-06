@@ -45,7 +45,7 @@ export class UOSEClassDataModel extends UOSEBaseItemDataModel {
                 }), {initial: []}),
             }),
             languages: new fields.ArrayField(new fields.StringField({required: true})), //Todo: Choices
-            abilities: new fields.ArrayField(new fields.EmbeddedDataField(UOSEAbilityDataModel), { initial: [] }), //Todo: define abilities thingy
+            abilities: new fields.ArrayField(new fields.EmbeddedDataField(UOSEAbilityDataModel), { initial: [] }),
             titles: new fields.ArrayField(new fields.StringField({required: true})),
             extraSkills: new fields.ArrayField(new fields.SchemaField({
                 name: new fields.StringField({required: true}),
@@ -58,17 +58,15 @@ export class UOSEClassDataModel extends UOSEBaseItemDataModel {
     }
 }
 
-export class UOSEEmbedClassDataModel extends foundry.abstract.DataModel {
+class UOSEEmbedClassDataModel extends foundry.abstract.DataModel {
 
     /** @inheritDoc */
     static _enableV10Validation = true;
 
     /** @inheritDoc */
     static defineSchema() {
-        const base = super.defineSchema();
         const fields = foundry.data.fields;
         return {
-            ...base,
             xp: new fields.NumberField({required: true, integer: true, initial: 0}),
             hpGained: new fields.ArrayField(new fields.SchemaField({
                 level: new fields.NumberField({required: true, integer: true}),

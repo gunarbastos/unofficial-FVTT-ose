@@ -53,6 +53,16 @@ export class UOSEBaseItemDocument extends Item {
         }
     }
 
+    _fillEmbedData(clone) {}
+
+    produceEmbedData(){
+        /** @type UOSEBaseItemDocument */
+        const result = this.toObject();
+        this._fillEmbedData(result);
+        delete result._id;
+        return result;
+    }
+
 }
 
 UOSE.registerBaseClass(UOSEBaseItemDocument);

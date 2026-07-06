@@ -19,7 +19,7 @@ export class UOSEWeaponDataModel extends UOSEEquipableItemDataModel {
             qualities: new fields.ArrayField(new fields.StringField({required: true, blank: true}), {initial: []}), //todo: figure out choices in this system
             range: new fields.EmbeddedDataField(UOSERangeDataModel),
             subtype: new fields.StringField({required: true, blank: true}), //todo: figure out choices in this system
-            abilities: new fields.ArrayField(new fields.EmbeddedDataField(UOSEAbilityDataModel), { initial: [] }), //Todo: define abilities thingy
+            abilities: new fields.ArrayField(new fields.EmbeddedDataField(UOSEAbilityDataModel), { initial: [] }),
         }
     }
 }

@@ -19,8 +19,8 @@ export class UOSEPoisonDataModel extends UOSEInventoryItemDataModel {
             chanceOfDetection: new fields.NumberField({required: true, integer: true, initial: 0, min: 0, max: 100}),
             onsetTime: new fields.StringField({required: true, blank: false, initial: 'instant'}), //Todo: review validation for formula or instant
             effects: new fields.SchemaField({
-                onSave: new fields.ArrayField(new fields.EmbeddedDataField(UOSEAbilityDataModel), { initial: [] }), //Todo: define abilities thingy
-                onFail: new fields.ArrayField(new fields.EmbeddedDataField(UOSEAbilityDataModel), { initial: [] }), //Todo: define abilities thingy
+                onSave: new fields.ArrayField(new fields.EmbeddedDataField(UOSEAbilityDataModel), { initial: [] }),
+                onFail: new fields.ArrayField(new fields.EmbeddedDataField(UOSEAbilityDataModel), { initial: [] }),
             }),
             deliveryMethod: new fields.StringField({required: true, blank: false}), //Todo: Default/initial and choices,
         }

@@ -1,4 +1,5 @@
 import {UOSELivingDataModel} from "./UOSELivingDataModel.js";
+import {UOSEAttackDataModel, UOSEAbilityDataModel} from "../index.js";
 
 console.log(`Loaded: ${import.meta.url}`);
 
@@ -15,8 +16,8 @@ export class UOSENpcDataModel extends UOSELivingDataModel {
             ...base,
             morale: new fields.NumberField({required: true, integer: true, initial: 0}),
             xp: new fields.NumberField({required: true, integer: true, initial: 0}),
-            attacks: new fields.ArrayField(new fields.ArrayField(new fields.EmbeddedDataField(AtttackDataModel), { initial: [] })),
-            // abilities: new fields.ArrayField(new fields.EmbeddedDataField(, {initial: []})) //TODO: Define Ability DataModel
+            attacks: new fields.ArrayField(new fields.ArrayField(new fields.EmbeddedDataField(UOSEAttackDataModel), { initial: [] })),
+            abilities: new fields.ArrayField(new fields.EmbeddedDataField(UOSEAbilityDataModel, {initial: []}))
         }
     }
 }

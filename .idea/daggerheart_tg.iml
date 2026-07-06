@@ -11,6 +11,7 @@
       <excludeFolder url="file://$MODULE_DIR$/dtg-old" />
       <excludeFolder url="file://$MODULE_DIR$/releases" />
       <excludeFolder url="file://$MODULE_DIR$/tools" />
+      <excludeFolder url="file://$MODULE_DIR$/.idea" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Foundry VTT" level="application" />

@@ -31,17 +31,15 @@ export class UOSEAnimalItemDataModel extends UOSEMarketItemDataModel {
     }
 }
 
-export class UOSEEmbedAnimalItemDataModel extends foundry.abstract.DataModel {
+class UOSEEmbedAnimalItemDataModel extends foundry.abstract.DataModel {
 
     /** @inheritDoc */
     static _enableV10Validation = true;
 
     /** @inheritDoc */
     static defineSchema() {
-        const base = super.defineSchema();
         const fields = foundry.data.fields;
         return {
-            ...base,
             actor: new fields.DocumentUUIDField({required: false}),
         }
     }

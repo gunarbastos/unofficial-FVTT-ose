@@ -16,7 +16,7 @@ export class UOSEArmorDataModel extends UOSEEquipableItemDataModel {
         return {
             ...base,
             armorClass: new fields.EmbeddedDataField(UOSEArmorClassDataModel),
-            abilities: new fields.ArrayField(new fields.EmbeddedDataField(UOSEAbilityDataModel), { initial: [] }), //Todo: define abilities thingy
+            abilities: new fields.ArrayField(new fields.EmbeddedDataField(UOSEAbilityDataModel), { initial: [] }),
             type: new fields.StringField({required: true, initial: 'armor'}), //Todo: choices
         }
     }

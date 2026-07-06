@@ -1,4 +1,4 @@
-import {Utils} from "../common/utils.js";
+import {UOSEUtils} from "../foundry/UOSEUtils.js";
 import {UOSE} from "../foundry/index.js";
 
 console.log(`Loaded: ${import.meta.url}`);
@@ -25,7 +25,7 @@ export class UOSEBaseDataModel extends foundry.abstract.TypeDataModel {
     _buildCacheMap(setOfUUIDs) {
         const map = new Map();
         for (const uuid of setOfUUIDs)
-            map.set(uuid, Utils.getCachedDocument(uuid));
+            map.set(uuid, UOSEUtils.getCachedDocument(uuid));
         return map;
     }
 }
@@ -45,7 +45,7 @@ export class UOSEEmbedBaseDataModel extends foundry.abstract.DataModel {
     _buildCacheMap(setOfUUIDs) {
         const map = new Map();
         for (const uuid of setOfUUIDs)
-            map.set(uuid, Utils.getCachedDocument(uuid));
+            map.set(uuid, UOSEUtils.getCachedDocument(uuid));
         return map;
     }
 }

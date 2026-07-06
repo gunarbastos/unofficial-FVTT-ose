@@ -1,4 +1,5 @@
 import {UOSEEffectDataModel} from "../UOSEEffectDataModel.js";
+import {UOSE} from "../../foundry/index.js";
 
 console.log(`Loaded: ${import.meta.url}`);
 
@@ -23,3 +24,5 @@ export class UOSEDamageEffectDataModel extends UOSEEffectDataModel {
     }
 
 }
+
+UOSE.registerEffect(UOSEDamageEffectDataModel);

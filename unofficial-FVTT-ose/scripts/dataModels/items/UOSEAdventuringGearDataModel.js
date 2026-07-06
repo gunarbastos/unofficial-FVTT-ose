@@ -15,7 +15,7 @@ export class UOSEAdventuringGearDataModel extends UOSEInventoryItemDataModel {
         const fields = foundry.data.fields;
         return {
             ...base,
-            abilities: new fields.ArrayField(new fields.EmbeddedDataField(UOSEAbilityDataModel), { initial: [] }), //Todo: define abilities thingy
+            abilities: new fields.ArrayField(new fields.EmbeddedDataField(UOSEAbilityDataModel), { initial: [] }),
             numberOfUses: new fields.NumberField({required: false, integer: true}),
             tags: new fields.ArrayField(new fields.StringField({required: true}), { initial: [] }),
             embed: new fields.EmbeddedDataField(UOSEEmbedAdventuringGearDataModel, {required: false, nullable: true, initial: null}),

@@ -1,8 +1,10 @@
-import {UOSE} from "../foundry/uose.js"
+import {UOSE} from "./uose.js"
 
 console.log(`Loaded: ${import.meta.url}`);
 
-export class Utils {
+export class UOSEUtils {
+
+    static foundry = foundry.utils;
 
     static _document_cache = new Map();
     static #flatTranslation = undefined;
@@ -148,7 +150,7 @@ export class Utils {
     static async fromUuid(uuid){
         return await fromUuid(uuid);
     }
-
+aa
     static fromUuidSync(uuid){
         return fromUuidSync(uuid);
     }
@@ -165,21 +167,21 @@ export class Utils {
     };
 
     static getGameSetting(setting){
-        let value = game.settings.get(game.dtg.constants.SYSTEM_ID, setting.id);
-        if (Utils.isBoxedPrimitive(value)) {
-            ui.notifications.error(`Setting ${setting.id} is a boxed primitive.`);
+        let value = game.settings.get(game.uose.constants.PACKAGE_ID, setting.key);
+        if (UOSEUtils.isBoxedPrimitive(value)) {
+            ui.notifications.error(`Setting ${setting.key} is a boxed primitive.`);
             value = undefined;
         }
-        if((value === undefined || value === null) && setting.hasOwnProperty('default')) value = Utils.deepClone(setting.default);
+        if((value === undefined || value === null) && setting.hasOwnProperty('default')) value = UOSEUtils.deepClone(setting.default);
         return value;
     }
 
     static async setGameSetting(setting, value){
-        if (Utils.isBoxedPrimitive(value)) {
-            ui.notifications.error(`Value passed to setting ${setting.id} is a boxed primitive.`);
+        if (UOSEUtils.isBoxedPrimitive(value)) {
+            ui.notifications.error(`Value passed to setting ${setting.key} is a boxed primitive.`);
             return;
         }
-        await game.settings.set(game.dtg.constants.SYSTEM_ID, setting.id, value);
+        await game.settings.set(game.uose.constants.PACKAGE_ID, setting.key, value);
     }
 
     static deepClone(original, {strict=false}={}) {
@@ -187,7 +189,7 @@ export class Utils {
     }
 
     static getTemplateUrl(templateUrlFromProjectRoot){
-        return `${game.dtg.constants.TEMPLATES.ROOT_DIR}/${templateUrlFromProjectRoot}`;
+        return `${game.uose.constants.TEMPLATES.ROOT_DIR}/${templateUrlFromProjectRoot}`;
     }
 
     static JSON(object) {
@@ -200,8 +202,8 @@ export class Utils {
 
     static #getFinalArgs(...data){
         let opts = {};
-        if (data.length && Utils.#isLogOpts(data[0])) opts = data.shift();
-        else if (data.length && Utils.#isLogOpts(data[data.length - 1])) opts = data.pop();
+        if (data.length && UOSEUtils.#isLogOpts(data[0])) opts = data.shift();
+        else if (data.length && UOSEUtils.#isLogOpts(data[data.length - 1])) opts = data.pop();
         return { opts: opts, args: data };
     }
 
@@ -218,7 +220,7 @@ export class Utils {
     }
 
     static log(...data){
-        const {opts, args} = Utils.#getFinalArgs(...data);
+        const {opts, args} = UOSEUtils.#getFinalArgs(...data);
 
         // Log everything else
         console.log(...this.#logPrefixes, ...args);
@@ -227,13 +229,13 @@ export class Utils {
         if (opts.showUiNotification) {
             const msg = typeof opts.uiMessage === "string"
                 ? opts.uiMessage
-                : Utils.#buildUiMessage(...args);
+                : UOSEUtils.#buildUiMessage(...args);
             ui.notifications.info(msg);
         }
     }
 
     static info(...data){
-        const {opts, args} = Utils.#getFinalArgs(...data);
+        const {opts, args} = UOSEUtils.#getFinalArgs(...data);
 
         // Log everything else
         console.info(...this.#logPrefixes, ...args);
@@ -242,13 +244,13 @@ export class Utils {
         if (opts.showUiNotification) {
             const msg = typeof opts.uiMessage === "string"
                 ? opts.uiMessage
-                : Utils.#buildUiMessage(...args);
+                : UOSEUtils.#buildUiMessage(...args);
             ui.notifications.info(msg);
         }
     }
 
     static warn(...data){
-        const {opts, args} = Utils.#getFinalArgs(...data);
+        const {opts, args} = UOSEUtils.#getFinalArgs(...data);
 
         // Log everything else
         console.warn(...this.#logPrefixes, ...args);
@@ -257,13 +259,13 @@ export class Utils {
         if (opts.showUiNotification) {
             const msg = typeof opts.uiMessage === "string"
                 ? opts.uiMessage
-                : Utils.#buildUiMessage(...args);
+                : UOSEUtils.#buildUiMessage(...args);
             ui.notifications.warn(msg);
         }
     }
 
     static error(...data){
-        const {opts, args} = Utils.#getFinalArgs(...data);
+        const {opts, args} = UOSEUtils.#getFinalArgs(...data);
 
         // Log everything else
         console.error(...this.#logPrefixes, ...args);
@@ -272,7 +274,7 @@ export class Utils {
         if (opts.showUiNotification) {
             const msg = typeof opts.uiMessage === "string"
                 ? opts.uiMessage
-                : Utils.#buildUiMessage(...args);
+                : UOSEUtils.#buildUiMessage(...args);
             ui.notifications.error(msg);
         }
     }
@@ -329,7 +331,7 @@ export class Utils {
     }
 
     static getCachedDocument(uuid) {
-        if (!this._document_cache.has(uuid)) { this._document_cache.set(uuid, Utils.fromUuidSync(uuid)); }
+        if (!this._document_cache.has(uuid)) { this._document_cache.set(uuid, UOSEUtils.fromUuidSync(uuid)); }
         return this._document_cache.get(uuid);
     }
 
@@ -347,7 +349,7 @@ export class Utils {
         for (const key of Object.keys(obj)) {
             const value = obj[key];
             if (value && typeof value === "object" && !Object.isFrozen(value)) {
-                Utils.deepFreeze(value);
+                UOSEUtils.deepFreeze(value);
             }
         }
 
@@ -557,17 +559,17 @@ export class Utils {
      * Registers helper functions into Handlebars
      */
     static registerCommonHelpers() {
-        Utils.registerHandlebarHelper('capitalize', this.capitalizeHelper);
-        Utils.registerHandlebarHelper('currency', this.currencyHelper);
-        Utils.registerHandlebarHelper('ifEquals', this.ifEqualsHelper);
-        Utils.registerHandlebarHelper('formatDate', this.formatDateHelper);
-        Utils.registerHandlebarHelper('formatTime', this.formatTimeHelper);
-        Utils.registerHandlebarHelper('relativeTime', this.relativeTimeHelper);
-        Utils.registerHandlebarHelper('ifAll', this.ifAllHelper);
-        Utils.registerHandlebarHelper('ifAny', this.ifAnyHelper);
-        Utils.registerHandlebarHelper('json', this.hbsJSON);
-        Utils.registerHandlebarHelper('absolute', this.absolute);
+        UOSEUtils.registerHandlebarHelper('capitalize', this.capitalizeHelper);
+        UOSEUtils.registerHandlebarHelper('currency', this.currencyHelper);
+        UOSEUtils.registerHandlebarHelper('ifEquals', this.ifEqualsHelper);
+        UOSEUtils.registerHandlebarHelper('formatDate', this.formatDateHelper);
+        UOSEUtils.registerHandlebarHelper('formatTime', this.formatTimeHelper);
+        UOSEUtils.registerHandlebarHelper('relativeTime', this.relativeTimeHelper);
+        UOSEUtils.registerHandlebarHelper('ifAll', this.ifAllHelper);
+        UOSEUtils.registerHandlebarHelper('ifAny', this.ifAnyHelper);
+        UOSEUtils.registerHandlebarHelper('json', this.hbsJSON);
+        UOSEUtils.registerHandlebarHelper('absolute', this.absolute);
     }
 }
 
-UOSE.publicView().utils = Utils;
+UOSE.publicView().utils = UOSEUtils;

@@ -1,5 +1,5 @@
 import {UOSEBaseActorDataModel} from "./UOSEBaseActorDataModel.js";
-import {UOSEAbilityDataModel, UOSEHitDiceDataModel, UOSESavesDataModel, UOSEToHitDataModel} from "../index.js";
+import {UOSEAbilityDataModel, UOSEHitDiceDataModel, UOSESavesDataModel, UOSEToHitDataModel, UOSETokenBarEligibleAttribute} from "../index.js";
 
 console.log(`Loaded: ${import.meta.url}`);
 
@@ -19,7 +19,7 @@ export class UOSELivingDataModel extends UOSEBaseActorDataModel {
             hd: new fields.EmbeddedDataField(UOSEHitDiceDataModel),
             alignment: new fields.StringField({required: false}), //TODO: Define if I'm going to use choices for this one or not.
             saves: new fields.EmbeddedDataField(UOSESavesDataModel),
-            abilities: new fields.ArrayField(new fields.EmbeddedDataField(UOSEAbilityDataModel), { initial: [] }), //Todo: define abilities thingy
+            abilities: new fields.ArrayField(new fields.EmbeddedDataField(UOSEAbilityDataModel), { initial: [] }),
         }
     }
 }
