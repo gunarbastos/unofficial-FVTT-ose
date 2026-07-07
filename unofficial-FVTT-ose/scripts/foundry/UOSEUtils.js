@@ -285,7 +285,7 @@ aa
     //     return JSON.stringify(text);
     // }
 
-    static localize(text, data, depth = 20) {
+    static localize(text, data = {}, depth = 20) {
         if (!this.#flatTranslation && game.i18n.translations) {
             this.#flatTranslation = foundry.utils.flattenObject(game.i18n.translations);
         }
@@ -301,6 +301,10 @@ aa
         } while ((currDepth <= depth) || (previous !== result));
 
         return result;
+    }
+
+    static hbsLocalize(value, options) {
+        return UOSEUtils.localize(value.string ? value.string : value, options);
     }
 
     static createLangObject() {
@@ -569,6 +573,7 @@ aa
         UOSEUtils.registerHandlebarHelper('ifAny', this.ifAnyHelper);
         UOSEUtils.registerHandlebarHelper('json', this.hbsJSON);
         UOSEUtils.registerHandlebarHelper('absolute', this.absolute);
+        UOSEUtils.registerHandlebarHelper('localize', this.hbsLocalize);
     }
 }
 

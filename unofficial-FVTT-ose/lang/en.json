@@ -1,16 +1,35 @@
 {
   "UOSE": {
+    "SYSTEM": {
+      "NAME": "Unofficial Old-School Essentials",
+      "SHORT": "UOSE"
+    },
+    "SETTINGS": {
+      "LAUNCHER_BTN": "{UOSE.SYSTEM.SHORT} Settings"
+    },
     "ATTRIBUTES": {
       "STR": "Strength",
+      "INT": "Intelligence",
+      "WIS": "Wisdom",
+      "CHA": "Charisma",
+      "DEX": "Dexterity",
+      "CON": "Constitution",
       "SHORT": {
-        "STR": "STR"
+        "STR": "STR",
+        "INT": "INT",
+        "WIS": "WIS",
+        "CHA": "CHA",
+        "DEX": "DEX",
+        "CON": "CON"
       },
       "FULL": {
-        "STR": "{UOSE.ATTRIBUTES.STR} ({UOSE.ATTRIBUTES.SHORT.STR})"
+        "STR": "{UOSE.ATTRIBUTES.STR} ({UOSE.ATTRIBUTES.SHORT.STR})",
+        "INT": "{UOSE.ATTRIBUTES.INT} ({UOSE.ATTRIBUTES.SHORT.INT})",
+        "WIS": "{UOSE.ATTRIBUTES.WIS} ({UOSE.ATTRIBUTES.SHORT.WIS})",
+        "CHA": "{UOSE.ATTRIBUTES.CHA} ({UOSE.ATTRIBUTES.SHORT.CHA})",
+        "DEX": "{UOSE.ATTRIBUTES.DEX} ({UOSE.ATTRIBUTES.SHORT.DEX})",
+        "CON": "{UOSE.ATTRIBUTES.CON} ({UOSE.ATTRIBUTES.SHORT.CON})"
       }
-    },
-    "SALUTATIONS": "Greetings and Salutations, hope you have enough {UOSE.ATTRIBUTES.STR} ({UOSE.ATTRIBUTES.SHORT.STR})",
-    "YADDA": "Greetings and Salutations, hope you have enough {UOSE.ATTRIBUTES.FULL.STR}",
-    "YEDDE": "Greetings and Salutations {name}, hope you have enough {UOSE.ATTRIBUTES.FULL.STR}"
+    }
   }
 }
