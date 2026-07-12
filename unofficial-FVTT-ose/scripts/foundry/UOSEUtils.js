@@ -189,7 +189,7 @@ aa
     }
 
     static getTemplateUrl(templateUrlFromProjectRoot){
-        return `${game.uose.constants.TEMPLATES.ROOT_DIR}/${templateUrlFromProjectRoot}`;
+        return `${game.uose.constants.TEMPLATES.DIR.ROOT}/${templateUrlFromProjectRoot}`;
     }
 
     static JSON(object) {
@@ -278,12 +278,6 @@ aa
             ui.notifications.error(msg);
         }
     }
-
-    // static localize(text, lang = (game?.i18n?.lang ?? "en")) {
-    //     if (typeof text === "string") return text;
-    //     if (text && typeof text === "object" && !Array.isArray(text) && Object.prototype.hasOwnProperty.call(text, "en") && typeof text.en === "string") return text.en;
-    //     return JSON.stringify(text);
-    // }
 
     static localize(text, data = {}, depth = 20) {
         if (!this.#flatTranslation && game.i18n.translations) {
@@ -526,36 +520,24 @@ aa
         }
     }
 
-    /*
-     * Block helper: Renders content if **all** arguments are truthy.
-     * Usage: {{#ifAll cond1 cond2 ...}} true block {{else}} false block {{/ifAll}}
-     */
     static ifAllHelper(...args) {
-        const options = args.pop();
-        const allTrue = args.every(Boolean);
-        return allTrue ? options.fn(this) : options.inverse(this);
+        return args.every(Boolean);
     }
 
-    /*
-     * Block helper: Renders content if **any** argument is truthy.
-     * Usage: {{#ifAny cond1 cond2 ...}} true block {{else}} false block {{/ifAny}}
-     */
     static ifAnyHelper(...args) {
         const options = args.pop();
-        const anyTrue = args.some(Boolean);
-        return anyTrue ? options.fn(this) : options.inverse(this);
+        UOSEUtils.log('ifAny', args, options, args.some(Boolean));
+        return args.some(Boolean);
     }
 
     /*
      * Format Helper: Prints an object as string
      */
     static hbsJSON(...args) {
-        args.pop();
         return JSON.stringify(args, null, 2);
     }
 
     static absolute(...args) {
-        args.pop();
         return Math.abs(args.pop());
     }
 
@@ -574,6 +556,9 @@ aa
         UOSEUtils.registerHandlebarHelper('json', this.hbsJSON);
         UOSEUtils.registerHandlebarHelper('absolute', this.absolute);
         UOSEUtils.registerHandlebarHelper('localize', this.hbsLocalize);
+        UOSEUtils.registerHandlebarHelper("array", (...args) => args.slice(0, -1));
+        UOSEUtils.registerHandlebarHelper("hash", options => options.hash);
+        UOSEUtils.registerHandlebarHelper("join", value => value.join(', '));
     }
 }
 

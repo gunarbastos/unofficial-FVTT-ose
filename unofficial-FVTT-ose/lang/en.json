@@ -4,8 +4,69 @@
       "NAME": "Unofficial Old-School Essentials",
       "SHORT": "UOSE"
     },
+    "ALIGNMENTS": {
+      "LAWFUL": "Lawful",
+      "NEUTRAL": "Neutral",
+      "EVIL": "Evil"
+    },
     "SETTINGS": {
-      "LAUNCHER_BTN": "{UOSE.SYSTEM.SHORT} Settings"
+      "LANGUAGES": {"LABEL": "Languages", "HINT": "Set the languages available to the Players", "PH": "List of Languages separated by ,"},
+      "ALIGNMENT": {"LABEL": "Alignments", "HINT": "Set the alignments of the game, and their correlation to {UOSE.ALIGNMENTS.LAWFUL}, {UOSE.ALIGNMENTS.NEUTRAL} and {UOSE.ALIGNMENTS.EVIL}", "PH": "List of Alignments separated by ,"},
+
+      "ADVANCED_CHARACTER_CREATION": {"LABEL": "Advanced character creation", "HINT": "Enables selection of race and class, instead of just class", "SOURCE": "Advanced Fantasy Player's Tome, Pg. 14"},
+      "MULTICLASS": {"LABEL":  "Multiclass", "HINT":  "Allow for more than one class to be picked at character creation.", "SOURCE":  "Advanced Fantasy Player's Tome, Pg. 15"},
+      "INDIVIDUAL_INITIATIVE": {"LABEL": "Individual Initiative", "HINT": "Rolls initiative for each each actor instead of 1 for players and 1 for adversary group", "SOURCE": "Advanced Fantasy Player's Tome, Pg. 222"},
+      "ASCENDING_AC": {"LABEL": "Ascending AC", "HINT": "Use ascending AC instead of Descending AC", "SOURCE": "Advanced Fantasy Player's Tome, Pg. 223"},
+      "ATTACK_ROLL_USING_THAC0": {"LABEL": "Attack roll using Thac0 (instead of matrix)", "HINT": "Adds the Thac0 bonus to the attack roll instead of consulting the Thac0 result matrix. Alters slightly the hit probability.", "SOURCE": "Advanced Fantasy Player's Tome, Pg. 229"},
+      "MORALE": {"LABEL": "Morale", "HINT": "Retainers and Adversaries roll morale on certain events.", "SOURCE": "Advanced Fantasy Player's Tome, Pg. 226"},
+      "ENCUMBRANCE": {"LABEL": "Encumbrance", "HINT": "Defines Encumbrance rules", "SOURCE": "Advanced Fantasy Player's Tome, Pg. 203; Carcass Crawler 2"},
+      "ADD_STR_TO_ITEM_BASED_ENCUMBRANCE": {"LABEL": "Add {UOSE.ATTRIBUTES.SHORT.STR} to Item Based Encumbrance", "HINT": "Adds extra slots to player inventory based on {UOSE.ATTRIBUTES.SHORT.STR} field", "SOURCE": "Carcass Crawler 2"},
+      "RETURNING_FROM_DEATH": {"LABEL": "Returning from death", "HINT": "Permanence reduction in {UOSE.ATTRIBUTES.CON} when reviving.", "SOURCE": "Advanced Fantasy Player's Tome, Pg. 207"},
+      "RELOAD": {"LABEL": "Reload", "HINT": "Enforces reload on weapons with Reload tag", "SOURCE": "Advanced Fantasy Player's Tome, Pg. 97"},
+      "DAMAGE_PER_WEAPON": {"LABEL": "Damage per weapon", "HINT": "Weapons deal damage described in weapon table instead of default 1d8 damage.", "SOURCE": "Advanced Fantasy Player's Tome, Pg. 223"},
+      "SECONDARY_SKILL": {"LABEL": "Secondary Skill", "HINT": "Enables selection of Secondary Skills on Characters", "SOURCE": "Advanced Fantasy Player's Tome, Pg. 25"},
+      "WEAPON_PROFICIENCY": {"LABEL": "Weapon Proficiency", "HINT": "Player selects proficiency on available class and race weapons instead of having all of them, in exchange they get bonus to hit", "SOURCE": "Advanced Fantasy Player's Tome, Pg. 23"},
+      "REROLL_1_AND_2_ON_1ST_LEVEL_HD": {"LABEL": "Reroll 1 and 2 on 1st level HD Rolls", "HINT": "On 1st level HD roll, reroll results of 1 and 2", "SOURCE": "Advanced Fantasy Player's Tome, Pg. 17 and 19"},
+      "ALLOW_ILLUSIONIST_TO_WIELD_STAVES": {"LABEL": "Allow Illusionists to wield staves", "HINT": "Adds staves to the Illusionist class", "SOURCE": "Advanced Fantasy Player's Tome, Pg. 62"},
+      "ALLOW_MAGIC_USERS_TO_WIELD_STAVES": {"LABEL": "Allow Magic Users to wield staves", "HINT": "Adds staves to the Magic User class", "SOURCE": "Advanced Fantasy Player's Tome, Pg. 66"},
+      "IGNORE_RACE_CLASS_RESTRICTIONS": {"LABEL": "Ignore race class restrictions", "HINT": "Allows selection of any class, regardless of race restrictions. Only relevant if Advanced character creation is used", "SOURCE": "Advanced Fantasy Player's Tome, Pg. 78"},
+      "IGNORE_RACE_MAX_LEVEL_RESTRICTION": {"LABEL": "Ignore race max level restrictions", "HINT": "Allows for all races to reach max class level. Only relevant if Advanced character creation is used", "SOURCE": "Advanced Fantasy Player's Tome, Pg. 78"},
+      "LIMIT_TURN_UNDEAD": {"LABEL": "Limit turn Undead", "HINT": "Adds limitations on use of Turn Undead for the cleric class", "SOURCE": "Advanced Fantasy Player's Tome, Pg. 111"},
+      "ADVANCED_SPELL_BOOK": {"LABEL": "Advanced Spell Book", "HINT": "Enables the Advanced Spell Book under the Character Sheet", "SOURCE": "Advanced Fantasy Player's Tome, Pg. 112"},
+      "VARIABLE_WIND_CONDITIONS": {"LABEL": "Variable wind conditions", "HINT": "Uses Variable Wind Conditions table instead of only having events on 2 and 12 in the 2d6 roll.", "SOURCE": "Advanced Fantasy Player's Tome, Pg. 215"},
+      "ATTACKING_WITH_TWO_WEAPONS": {"LABEL": "Attacking with two weapons", "HINT": "Characters with {UOSE.ATTRIBUTES.SHORT.STR} and {UOSE.ATTRIBUTES.SHORT.DEX} as prime requisite may choose to wield a small size weapon on offhand making all attacks on main hand at -2, and allowing for one extra attack at -4 with the off-hand.", "SOURCE": "Advanced Fantasy Player's Tome, Pg. 224"},
+      "CHARGING_INTO_MELEE": {"LABEL": "Charging into Melee", "HINT": "Once per combat, a character may charge into melee and attack by moving at least 20 feet with no obstacles before the Attack. The attack is at +2 and AC is at -1. Weapons that can be braced agains charging monsters are also effective defense against this attack.", "SOURCE": "Advanced Fantasy Player's Tome, Pg. 224"},
+      "INVULNERABILITIES": {"LABEL": "Invulnerabilities", "HINT": "Allow monsters that can only be harmed by magical or silver weapons to be harmed by another monster with same attributes or a monster 5 HD higher than itself.", "SOURCE": "Advanced Fantasy Player's Tome, Pg. 224"},
+      "MISSILE_ATTACKS_ON_TARGETS_IN_MELEE": {"LABEL": "Missile attacks on targets in melee", "HINT": "When firing into characters in melee the target is random between the participants of the engagement. Large creatures count as 2 and thus have higher chance of being targeted.", "SOURCE": "Advanced Fantasy Player's Tome, Pg. 224"},
+      "PARRYING": {"LABEL": "Parrying", "HINT": "Characters with {UOSE.ATTRIBUTES.SHORT.STR} 13 or above can choose to act defensively forfeiting their attacks and add their bonus to melee to their AC as a bonus on that turn.", "SOURCE": "Advanced Fantasy Player's Tome, Pg. 225"},
+      "SPLASH_WEAPONS": {"LABEL": "Splash Weapons", "HINT": "Enables attack action on Items with Splash Tag, allowing them to deal damage in a small area.", "SOURCE": "Advanced Fantasy Player's Tome, Pg. 225"},
+      "SUBDUING": {"LABEL": "Subduing", "HINT": "Players can announce a subduing attack. Only blunt damage is allowed with exception of bladed weapons whose side of the blade can be used. Subdual damage is tracked separately, if an adversary reaches 0 HP due to subdual damage, it will surrender and realize that the opponent could have killed it.", "SOURCE": "Advanced Fantasy Player's Tome, Pg. 225"},
+      "THIEF_D6_SKILLS": {"LABEL": "Thief d6 skills", "HINT": "Rolls Thief skills as D6 rolls instead of the original percentile die", "SOURCE": "Carcass Crawler 1"},
+      "COMBAT_TALENTS": {"LABEL": "Combat talents", "HINT": "Allow for Fighters to pick combat talents at levels 1, 5 and 10", "SOURCE": "Carcass Crawler 1"},
+      "TREASURE_SHARE_XP": {"LABEL": "Treasure share xp", "HINT": "XP awarded is no longer shared between all members of party, but decided based on gp value of items and gold shares, plus equal shares of defeated monsters.", "SOURCE": "Carcass Crawler 2"},
+      "CANTRIPS": {"LABEL": "Cantrips", "HINT": "Enable Cantrips for dedicated spell casters.", "SOURCE": "Carcass Crawler 5"},
+      "SPECIAL_MATERIALS": {"LABEL": "Special Materials", "HINT": "Adds weaker and Enhanced materials for armor and weapons.", "SOURCE": "Carcass Crawler 5"}
+
+    },
+    "APPS": {
+      "SETTINGS_EDITOR": {
+        "NAME": "Settings Editor",
+        "TITLE": "Settings Editor",
+        "SECTIONS": {
+          "OVERRIDES": "System Overrides",
+          "OPTIONAL": "Optional Rules",
+          "AUTOMATION": "Automation",
+          "HOOKS": "System Hooks"
+        },
+        "UI": {
+          "FILTER": {
+            "LABEL": "Search:",
+            "PH": "Filter..."
+          },
+          "SOURCE": "Source",
+          "LAUNCHER_BTN": "{UOSE.SYSTEM.SHORT} Settings"
+        }
+      }
     },
     "ATTRIBUTES": {
       "STR": "Strength",

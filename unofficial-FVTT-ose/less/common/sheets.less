@@ -1,9 +1,9 @@
-.dtg {
+.uose {
   form,
   .sheet-body {
-    flex: 1 1 auto;      // take remaining height
-    min-height: 0;       // critical for scroll within flex
-    overflow: auto;      // <-- scrolls when content exceeds height
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow: auto;
   }
 
   form {
@@ -11,7 +11,7 @@
     --my-random-prop: 12px;
     flex-direction: column;
     height: 100%;
-    min-height: 0;       // critical: allow child to shrink
+    min-height: 0;
   }
 
   .items-button-row {
@@ -77,7 +77,7 @@
   }
 
   .field-editor {
-    border: solid 1px var(--color-border, #8882);;
+    border: solid 1px var(--color-border, #8882);
     border-radius: 6px;
     min-height: 400px;
     width: 100%;
@@ -143,107 +143,6 @@
 
   .section-body {
     margin-top: 0.2em;
-  }
-
-  .dmg-threshold {
-    position: relative;
-    display: grid;
-    grid-template-columns: 6em 7em 6em;
-    align-items: center;
-    justify-items: center;
-    justify-self: center;
-    border: none;                 /* border will be drawn by ::before */
-    border-radius: 8px;
-    height: 1.5em;
-    margin: 1em 0;
-
-    /* geometry vars */
-    --input-w: 2.5em;             /* width of the numeric inputs */
-    --x1: calc(100% / 3);         /* center of first divider (Minor/Major) */
-    --x2: calc(100% / 3 * 2);     /* center of second divider (Major/Severe) */
-
-    /* draw the frame and punch two vertical “holes” */
-    &::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      border: 1px solid var(--color-border, #8882);
-      border-radius: 8px;
-      pointer-events: none;
-
-      /* one mask with two transparent windows where the inputs overlap */
-      -webkit-mask: linear-gradient(
-              to right,
-              #000 0,
-              #000 calc(var(--x1) - (var(--input-w) / 2 + 1px)),
-              transparent calc(var(--x1) - (var(--input-w) / 2 + 1px)) calc(var(--x1) + (var(--input-w) / 2 + 1px)),
-              #000 calc(var(--x1) + (var(--input-w) / 2 + 1px)) calc(var(--x2) - (var(--input-w) / 2 + 1px)),
-              transparent calc(var(--x2) - (var(--input-w) / 2 + 1px)) calc(var(--x2) + (var(--input-w) / 2 + 1px)),
-              #000 calc(var(--x2) + (var(--input-w) / 2 + 1px)) 100%
-      );
-      mask: linear-gradient(
-              to right,
-              #000 0,
-              #000 calc(var(--x1) - (var(--input-w) / 2 + 1px)),
-              transparent calc(var(--x1) - (var(--input-w) / 2 + 1px)) calc(var(--x1) + (var(--input-w) / 2 + 1px)),
-              #000 calc(var(--x1) + (var(--input-w) / 2 + 1px)) calc(var(--x2) - (var(--input-w) / 2 + 1px)),
-              transparent calc(var(--x2) - (var(--input-w) / 2 + 1px)) calc(var(--x2) + (var(--input-w) / 2 + 1px)),
-              #000 calc(var(--x2) + (var(--input-w) / 2 + 1px)) 100%
-      );
-    }
-
-    .field-input {
-      width: 2.5em;
-      height: 2.5em;
-      text-align: center;
-      border: 1px solid var(--color-border, #8882);
-    }
-
-    .minor-major-threshold {
-      position: absolute;
-      left: calc(((100% / 3) * 1) - (2.5em / 2));
-    }
-
-    .major-severe-threshold {
-      position: absolute;
-      left: calc(((100% / 3) * 2) - (2.5em / 2));
-    }
-  }
-
-  .resource-row {
-    display: grid;
-    grid-template-columns: 45px 1fr;
-  }
-
-  .resource-title {
-    align-content: center;
-  }
-
-  .resource-line {
-    display: flex;
-  }
-
-  .resource-button {
-    cursor: pointer;
-    background: rgb(from var(--color-warm-1, #8882) r g b / 0.25);
-    border: 1px solid var(--color-warm-1, #8882);
-    margin: 2px;
-  }
-
-  .experience {
-    display: flex;
-    gap: 4px;
-    align-items: center;
-    margin-right: 0.2em;
-
-    .typable {
-      border-bottom: 1px solid var(--color-border, #8882);
-    }
-
-    .bonus {
-      width: 40px;
-      flex: none;
-    }
   }
 
   .item-row {

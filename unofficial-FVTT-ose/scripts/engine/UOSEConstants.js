@@ -4,7 +4,10 @@ console.log(`Loaded: ${import.meta.url}`);
 
 let _rawConstants = {
     PACKAGE_ID: "unofficial-FVTT-ose",
+    SHORT_ID: "uose",
+    CSS_ROOT_CLASS: "uose",
     PACKAGE_TYPE: "system",
+    VERSION: "0.0.1",
     FOUNDRY: CONST,
 }
 
@@ -24,49 +27,60 @@ _rawConstants = {
     },
 
     TEMPLATES: {
+        DIR: {},
+        PREFIXES: {},
+        PARTIALS: [],
     },
 
     ASSETS: {
+        ICONS: {
+
+        },
+        ICONLIB: {
+            PREFIX: 'fa',
+            DEFAULT_STYLE: 'regular',
+            UNDEFINED_ICON: 'notdef',
+            FAMILY: {
+                DUOTONE: 'duotone',
+                SHARP: 'sharp',
+                SHARP_DUOTONE: 'sharp-duotone',
+            },
+            STYLES: {
+                SOLID: 'solid',
+                REGULAR: 'regular',
+                LIGHT: 'light',
+                THIN: 'thin',
+            },
+            ROTATE: {
+                BY_90: 'rotate-90',
+                BY_180: 'rotate-180',
+                BY_270: 'rotate-270',
+                BY_ANGLE: 'rotate-by',
+            },
+            TRANSFORM: {
+                FLIP_HORIZONTAL: 'flip-horizontal',
+                FLIP_VERTICAL: 'flip-vertical',
+                FLIP_BOTH: 'flip-both',
+            },
+            SIZE: {
+                XXS: '2xs',
+                XS: 'xs',
+                SM: 'sm',
+                LG: 'lg',
+                XL: 'xl',
+                XXL: '2xl'
+            },
+            CSS_VARS: {
+                ROTATE_ANGLE: '--fa-rotate-angle',
+                PRIMARY_COLOR: '--fa-primary-color',
+                SECONDARY_COLOR: '--fa-secondary-color',
+            },
+        }
     },
 
     //Enums
 
     //Defaults
-
-    APPS: {
-    //     CHARACTER_HUD: {
-    //         ID: "dtg.characterHud",
-    //         SOCKET_ID: "dtg.characterHud",
-    //     },
-    //     CHARACTER_MANAGER: {
-    //         ID: "dtg.characterManager",
-    //         SOCKET_ID: "dtg.characterManager",
-    //     },
-    //     COMBAT_TRACKER: {
-    //         ID: "dtg.combatTracker",
-    //         SOCKET_ID: "dtg.combatTracker",
-    //     },
-    //     DEATH_MOVE_HANDLER: {
-    //         ID: "dtg.deathMoveHandler",
-    //         SOCKET_ID: "dtg.deathMoveHandler",
-    //     },
-    //     FEAR_TRACKER: {
-    //         ID: "dtg.fearTracker",
-    //         SOCKET_ID: "dtg.fearTracker",
-    //     },
-    //     FEATURE_EDITOR: {
-    //         ID: "dtg.featureEditor",
-    //         SOCKET_ID: "dtg.featureEditor",
-    //     },
-    //     PROGRESS_TRACKER: {
-    //         ID: "dtg.progressTracker",
-    //         SOCKET_ID: "dtg.progressTracker",
-    //     },
-    //     SETTINGS_MANAGER: {
-    //         ID: "dtg.settingsManager",
-    //         SOCKET_ID: "dtg.settingsManager",
-    //     }
-    },
 }
 
 //Sheets
@@ -90,45 +104,54 @@ _rawConstants = {
 // _rawConstants.SHEETS.ITEMS.push({class: WeaponSheet, label: _rawConstants.LANG.ITEM_TYPES.WEAPON, types: [_rawConstants.ITEM_TYPES.WEAPON], default: true});
 
 //Templates to preload
-_rawConstants.TEMPLATES.ROOT_DIR = `${_rawConstants.PACKAGE_ROOT_FOLDER}/template`;
+_rawConstants.TEMPLATES.DIR.ROOT_DIR = `${_rawConstants.PACKAGE_ROOT_FOLDER}/template`;
+_rawConstants.TEMPLATES.DIR.HBSPARTIALS = `${_rawConstants.PACKAGE_ROOT_FOLDER}/template/partials`;
+_rawConstants.TEMPLATES.DIR.APPV2PARTS = `${_rawConstants.PACKAGE_ROOT_FOLDER}/template/parts`;
 //#region Fields
-// _rawConstants.TEMPLATES.NUMBER_FIELD = { PATH: `${_rawConstants.TEMPLATES.ROOT_DIR}/common/numberField.hbs`, PRELOAD: true, ALIAS: "numberField" };
-// _rawConstants.TEMPLATES.TEXT_FIELD = { PATH: `${_rawConstants.TEMPLATES.ROOT_DIR}/common/textField.hbs`, PRELOAD: true, ALIAS: "textField" };
-// _rawConstants.TEMPLATES.HTML_FIELD = { PATH: `${_rawConstants.TEMPLATES.ROOT_DIR}/common/htmlField.hbs`, PRELOAD: true, ALIAS: "htmlField" };
-// _rawConstants.TEMPLATES.DESCRIPTION_FIELD = { PATH: `${_rawConstants.TEMPLATES.ROOT_DIR}/sheet/common/descriptionField.hbs`, PRELOAD: true, ALIAS: "descriptionField" };
+_rawConstants.TEMPLATES.PARTIALS = [
+    { PATH: `${_rawConstants.TEMPLATES.DIR.HBSPARTIALS}/common/blockButton.hbs`, PRELOAD: true, ALIAS: "bbutton" },
+    { PATH: `${_rawConstants.TEMPLATES.DIR.HBSPARTIALS}/common/button.hbs`, PRELOAD: true, ALIAS: "button" },
+    { PATH: `${_rawConstants.TEMPLATES.DIR.HBSPARTIALS}/common/numberField.hbs`, PRELOAD: true, ALIAS: "numberField" },
+    { PATH: `${_rawConstants.TEMPLATES.DIR.HBSPARTIALS}/common/textField.hbs`, PRELOAD: true, ALIAS: "textField" },
+    { PATH: `${_rawConstants.TEMPLATES.DIR.HBSPARTIALS}/common/stringField.hbs`, PRELOAD: true, ALIAS: "stringField" },
+    { PATH: `${_rawConstants.TEMPLATES.DIR.HBSPARTIALS}/common/htmlField.hbs`, PRELOAD: true, ALIAS: "htmlField" },
+    { PATH: `${_rawConstants.TEMPLATES.DIR.HBSPARTIALS}/common/switchField.hbs`, PRELOAD: true, ALIAS: "switchField" },
+    { PATH: `${_rawConstants.TEMPLATES.DIR.HBSPARTIALS}/common/comboField.hbs`, PRELOAD: true, ALIAS: "comboField" },
+];
+
 //#endregion
 //#region Buttons
-// _rawConstants.TEMPLATES.BTN_ACTIVATE = { PATH: `${_rawConstants.TEMPLATES.ROOT_DIR}/common/btnActivate.hbs`, PRELOAD: true, ALIAS: "btnActivate" };
-// _rawConstants.TEMPLATES.BTN_ATTACH = { PATH: `${_rawConstants.TEMPLATES.ROOT_DIR}/common/btnAttach.hbs`, PRELOAD: true, ALIAS: "btnAttach" };
-// _rawConstants.TEMPLATES.BTN_CONSUME = { PATH: `${_rawConstants.TEMPLATES.ROOT_DIR}/common/btnConsume.hbs`, PRELOAD: true, ALIAS: "btnConsume" };
-// _rawConstants.TEMPLATES.BTN_DELETE = { PATH: `${_rawConstants.TEMPLATES.ROOT_DIR}/common/btnDelete.hbs`, PRELOAD: true, ALIAS: "btnDelete" };
-// _rawConstants.TEMPLATES.BTN_EQUIP = { PATH: `${_rawConstants.TEMPLATES.ROOT_DIR}/common/btnEquip.hbs`, PRELOAD: true, ALIAS: "btnEquip" };
-// _rawConstants.TEMPLATES.BTN_OPEN = { PATH: `${_rawConstants.TEMPLATES.ROOT_DIR}/common/btnOpen.hbs`, PRELOAD: true, ALIAS: "btnOpen" };
-// _rawConstants.TEMPLATES.BTN_HIT_ROLL = { PATH: `${_rawConstants.TEMPLATES.ROOT_DIR}/common/btnHitRoll.hbs`, PRELOAD: true, ALIAS: "btnHitRoll" };
-// _rawConstants.TEMPLATES.BTN_DMG_ROLL = { PATH: `${_rawConstants.TEMPLATES.ROOT_DIR}/common/btnDmgRoll.hbs`, PRELOAD: true, ALIAS: "btnDmgRoll" };
-// _rawConstants.TEMPLATES.BTN_SETTINGS = { PATH: `${_rawConstants.TEMPLATES.ROOT_DIR}/common/btnSettings.hbs`, PRELOAD: true, ALIAS: "btnSettings" };
+// _rawConstants.TEMPLATES.BTN_ACTIVATE = { PATH: `${_rawConstants.TEMPLATES.DIR.ROOT_DIR}/common/btnActivate.hbs`, PRELOAD: true, ALIAS: "btnActivate" };
+// _rawConstants.TEMPLATES.BTN_ATTACH = { PATH: `${_rawConstants.TEMPLATES.DIR.ROOT_DIR}/common/btnAttach.hbs`, PRELOAD: true, ALIAS: "btnAttach" };
+// _rawConstants.TEMPLATES.BTN_CONSUME = { PATH: `${_rawConstants.TEMPLATES.DIR.ROOT_DIR}/common/btnConsume.hbs`, PRELOAD: true, ALIAS: "btnConsume" };
+// _rawConstants.TEMPLATES.BTN_DELETE = { PATH: `${_rawConstants.TEMPLATES.DIR.ROOT_DIR}/common/btnDelete.hbs`, PRELOAD: true, ALIAS: "btnDelete" };
+// _rawConstants.TEMPLATES.BTN_EQUIP = { PATH: `${_rawConstants.TEMPLATES.DIR.ROOT_DIR}/common/btnEquip.hbs`, PRELOAD: true, ALIAS: "btnEquip" };
+// _rawConstants.TEMPLATES.BTN_OPEN = { PATH: `${_rawConstants.TEMPLATES.DIR.ROOT_DIR}/common/btnOpen.hbs`, PRELOAD: true, ALIAS: "btnOpen" };
+// _rawConstants.TEMPLATES.BTN_HIT_ROLL = { PATH: `${_rawConstants.TEMPLATES.DIR.ROOT_DIR}/common/btnHitRoll.hbs`, PRELOAD: true, ALIAS: "btnHitRoll" };
+// _rawConstants.TEMPLATES.BTN_DMG_ROLL = { PATH: `${_rawConstants.TEMPLATES.DIR.ROOT_DIR}/common/btnDmgRoll.hbs`, PRELOAD: true, ALIAS: "btnDmgRoll" };
+// _rawConstants.TEMPLATES.BTN_SETTINGS = { PATH: `${_rawConstants.TEMPLATES.DIR.ROOT_DIR}/common/btnSettings.hbs`, PRELOAD: true, ALIAS: "btnSettings" };
 //#endregion
 //#region Chat Messages
-// _rawConstants.TEMPLATES.DUALITY_DICE_ROLL = { PATH: `${_rawConstants.TEMPLATES.ROOT_DIR}/chat/dualityDiceRoll.hbs` };
-// _rawConstants.TEMPLATES.DUALITY_DICE_ROLL_DETAILS =  { PATH: `${_rawConstants.TEMPLATES.ROOT_DIR}/chat/partials/dualityDiceRollDetails.hbs`, PRELOAD: true, ALIAS: "dualityDiceRollDetails" };
+// _rawConstants.TEMPLATES.DUALITY_DICE_ROLL = { PATH: `${_rawConstants.TEMPLATES.DIR.ROOT_DIR}/chat/dualityDiceRoll.hbs` };
+// _rawConstants.TEMPLATES.DUALITY_DICE_ROLL_DETAILS =  { PATH: `${_rawConstants.TEMPLATES.DIR.ROOT_DIR}/chat/partials/dualityDiceRollDetails.hbs`, PRELOAD: true, ALIAS: "dualityDiceRollDetails" };
 //#endregion
 //#region UI
-// _rawConstants.TEMPLATES.COMBAT_TRACKER_ADVERSARY_ROW = { PATH: `${_rawConstants.TEMPLATES.ROOT_DIR}/app/dtgCombatTracker/partial/adversary.hbs`, PRELOAD: true, ALIAS: "CTAdversary" };
-// _rawConstants.TEMPLATES.COMBAT_TRACKER_PLAYER_ROW = { PATH: `${_rawConstants.TEMPLATES.ROOT_DIR}/app/dtgCombatTracker/partial/player.hbs`, PRELOAD: true, ALIAS: "CTPlayer" };
-// _rawConstants.TEMPLATES.RULER = { PATH: `${_rawConstants.TEMPLATES.ROOT_DIR}/canvas/ruler-waypoint-label.hbs` };
+// _rawConstants.TEMPLATES.COMBAT_TRACKER_ADVERSARY_ROW = { PATH: `${_rawConstants.TEMPLATES.DIR.ROOT_DIR}/app/dtgCombatTracker/partial/adversary.hbs`, PRELOAD: true, ALIAS: "CTAdversary" };
+// _rawConstants.TEMPLATES.COMBAT_TRACKER_PLAYER_ROW = { PATH: `${_rawConstants.TEMPLATES.DIR.ROOT_DIR}/app/dtgCombatTracker/partial/player.hbs`, PRELOAD: true, ALIAS: "CTPlayer" };
+// _rawConstants.TEMPLATES.RULER = { PATH: `${_rawConstants.TEMPLATES.DIR.ROOT_DIR}/canvas/ruler-waypoint-label.hbs` };
 //#endregion
 //#region All Apps
-// _rawConstants.TEMPLATES.RESOURCE_ROW = { PATH: `${_rawConstants.TEMPLATES.ROOT_DIR}/common/resourceRow.hbs`, PRELOAD: true, ALIAS: "resourceRow" };
+// _rawConstants.TEMPLATES.RESOURCE_ROW = { PATH: `${_rawConstants.TEMPLATES.DIR.ROOT_DIR}/common/resourceRow.hbs`, PRELOAD: true, ALIAS: "resourceRow" };
 //#endregion
 //#region Sheets
-// _rawConstants.TEMPLATES.SHEET_DOCUMENT_ROW = { PATH: `${_rawConstants.TEMPLATES.ROOT_DIR}/sheet/common/documentRow.hbs`, PRELOAD: true, ALIAS: "sheetDocumentRow" };
-// _rawConstants.TEMPLATES.SHEET_RESOURCE_ROW = { PATH: `${_rawConstants.TEMPLATES.ROOT_DIR}/sheet/common/resourceRow.hbs`, PRELOAD: true, ALIAS: "sheetResourceRow" };
-// _rawConstants.TEMPLATES.SHEET_EXPERIENCE_ROW = { PATH: `${_rawConstants.TEMPLATES.ROOT_DIR}/sheet/common/experienceRow.hbs`, PRELOAD: true, ALIAS: "sheetExperienceRow" };
-// _rawConstants.TEMPLATES.PLAYER_SHEET_TRAIT = { PATH: `${_rawConstants.TEMPLATES.ROOT_DIR}/sheet/player/partial/trait.hbs`, PRELOAD: true, ALIAS: "playerSheetTrait" };
-// _rawConstants.TEMPLATES.PLAYER_SHEET_BACKPACK_ROW = { PATH: `${_rawConstants.TEMPLATES.ROOT_DIR}/sheet/player/partial/backpackRow.hbs`};
-// _rawConstants.TEMPLATES.PLAYER_SHEET_QUICKACTION_ROW = { PATH: `${_rawConstants.TEMPLATES.ROOT_DIR}/sheet/player/partial/actionRow.hbs`, PRELOAD: true, ALIAS: "playerSheetActionRow" };
-// _rawConstants.TEMPLATES.SHEET_THRESHOLDS = { PATH: `${_rawConstants.TEMPLATES.ROOT_DIR}/sheet/common/thresholds.hbs`, PRELOAD: true, ALIAS: "sheetThresholds" }
-// _rawConstants.TEMPLATES.SHEET_SECTION = { PATH: `${_rawConstants.TEMPLATES.ROOT_DIR}/sheet/common/section.hbs`, PRELOAD: true, ALIAS: "sheetSection" }
+// _rawConstants.TEMPLATES.SHEET_DOCUMENT_ROW = { PATH: `${_rawConstants.TEMPLATES.DIR.ROOT_DIR}/sheet/common/documentRow.hbs`, PRELOAD: true, ALIAS: "sheetDocumentRow" };
+// _rawConstants.TEMPLATES.SHEET_RESOURCE_ROW = { PATH: `${_rawConstants.TEMPLATES.DIR.ROOT_DIR}/sheet/common/resourceRow.hbs`, PRELOAD: true, ALIAS: "sheetResourceRow" };
+// _rawConstants.TEMPLATES.SHEET_EXPERIENCE_ROW = { PATH: `${_rawConstants.TEMPLATES.DIR.ROOT_DIR}/sheet/common/experienceRow.hbs`, PRELOAD: true, ALIAS: "sheetExperienceRow" };
+// _rawConstants.TEMPLATES.PLAYER_SHEET_TRAIT = { PATH: `${_rawConstants.TEMPLATES.DIR.ROOT_DIR}/sheet/player/partial/trait.hbs`, PRELOAD: true, ALIAS: "playerSheetTrait" };
+// _rawConstants.TEMPLATES.PLAYER_SHEET_BACKPACK_ROW = { PATH: `${_rawConstants.TEMPLATES.DIR.ROOT_DIR}/sheet/player/partial/backpackRow.hbs`};
+// _rawConstants.TEMPLATES.PLAYER_SHEET_QUICKACTION_ROW = { PATH: `${_rawConstants.TEMPLATES.DIR.ROOT_DIR}/sheet/player/partial/actionRow.hbs`, PRELOAD: true, ALIAS: "playerSheetActionRow" };
+// _rawConstants.TEMPLATES.SHEET_THRESHOLDS = { PATH: `${_rawConstants.TEMPLATES.DIR.ROOT_DIR}/sheet/common/thresholds.hbs`, PRELOAD: true, ALIAS: "sheetThresholds" }
+// _rawConstants.TEMPLATES.SHEET_SECTION = { PATH: `${_rawConstants.TEMPLATES.DIR.ROOT_DIR}/sheet/common/section.hbs`, PRELOAD: true, ALIAS: "sheetSection" }
 //#endregion
 
 //Asset dirs

@@ -6,14 +6,18 @@ console.log(`Loaded: ${import.meta.url}`);
 export class UOSEBaseApp extends foundry.applications.api.HandlebarsApplicationMixin(foundry.applications.api.ApplicationV2) {
 
     static settingsClass = UOSEBaseAppSettings;
+    static id = '';
+    static useSockets = false;
+    static socketId = '';
 
     /** @type UOSEBaseAppSettings */
     #settings = null;
 
+    static PARTIALS = undefined;
+
     static get PARTS() {
-        UOSEUtils.log('UOSEBaseApp', this.name, `${game.uose.constants.TEMPLATES.ROOT_DIR}/missing.hbs`);
         return {
-            content: { template: `${game.uose.constants.TEMPLATES.ROOT_DIR}/missing.hbs` },
+            content: { template: `${game.uose.constants.TEMPLATES.DIR.ROOT_DIR}/missing.hbs` },
         };
     }
 
@@ -21,6 +25,18 @@ export class UOSEBaseApp extends foundry.applications.api.HandlebarsApplicationM
         super(...args);
         this.#settings = new this.constructor.settingsClass();
         this.#settings.register();
+
+        if(this.constructor.PARTIALS) {
+            UOSEUtils.log('loading templates for App');
+            for(const template of Object.values(this.constructor.PARTIALS) ) {
+                if( typeof template !== 'object' || Array.isArray(template)) { continue; }
+                foundry.applications.handlebars.getTemplate(template.template).then( result => {
+                    UOSEUtils.log('loaded ', template.template);
+                    Handlebars.registerPartial(`${game.uose.constants.SHORT_ID}/${this.constructor.id}/${template.alias}`, result);
+                    UOSEUtils.log(`Alias ${template.alias} created for ${template.template}`);
+                });
+            }
+        }
     }
 
     _onPosition(position) {
@@ -28,20 +44,28 @@ export class UOSEBaseApp extends foundry.applications.api.HandlebarsApplicationM
         super._onPosition(position);
     }
 
-    static get DEFAULT_OPTIONS() {
+    static baseDefaultOptions() {
+        game.uose.utils.log('UOSEBaseApp', 'baseDefaultOptions', this);
         return {
-            id: `${game.uose.constants.PACKAGE_ID}-${this.name}`,
-            classes: [game.uose.constants.PACKAGE_ID],
+            id: `${game.uose.constants.PACKAGE_ID}-${this.id}`,
+            classes: [game.uose.constants.CSS_ROOT_CLASS, this.id],
             tag: 'div',
             positioned: true,
             window: {
-                contentClasses: ['standard-form'],
+                contentClasses: ['standard-form', `${this.id}-window`],
                 frame: true,
                 title: 'Missing Title',
                 resizable: true,
             },
+            form :{
+                handler: this.formSubmitHandler,
+                submitOnChange: true,
+                closeOnSubmit: false,
+            }
         };
     }
+
+    static async formSubmitHandler(event, form, formData){}
 
     get title(){
         return game.uose.utils.localize(this.options.window.title ?? 'Missing Title');
@@ -52,6 +76,9 @@ export class UOSEBaseApp extends foundry.applications.api.HandlebarsApplicationM
         return {
             ...base,
             CONSTANTS: game.uose.constants,
+            ICL: game.uose.constants.ASSETS.ICONLIB,
+            TEMPLATES: game.uose.constants.TEMPLATES,
+            LANG: game.uose.lang,
         };
     }
 

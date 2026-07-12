@@ -1,0 +1,28 @@
+<div class="settings-row"
+     data-tooltip-direction="CENTER">
+    <label class="settings-label" for="{{name}}">
+        {{~#if hint~}}
+            <button type="button"
+                    popovertarget="{{name}}-setting-popover"
+                    class="settings-popover-trigger"
+                    tabindex="-1">
+                <i class="fa-duotone fa-regular fa-circle-question fa-lg"
+                   style="--fa-primary-color: var(--color-text-primary);
+                          --fa-secondary-color: var(--color-cool-4);
+                          --fa-secondary-opacity: 1;"></i>
+            </button>
+        {{~/if~}}
+        {{localize label~}}:
+    </label>
+    <div class="settings-control{{~#if controlClasses}} {{controlClasses}}{{/if~}}">
+        {{~> @partial-block ~}}
+    </div>
+    {{~#if hint~}}
+        <div popover
+             id="{{name}}-setting-popover"
+             class="setting-popover-container">
+            <span>{{~localize hint~}}</span>
+            {{~#if source~}}<span>{{localize "UOSE.APPS.SETTINGS_EDITOR.UI.SOURCE"}}: {{localize source}}</span>{{~/if~}}
+        </div>
+    {{~/if~}}
+</div>

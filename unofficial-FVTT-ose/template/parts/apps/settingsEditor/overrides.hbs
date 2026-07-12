@@ -1,0 +1,31 @@
+{{#> uose/SettingsEditorApp/settingsSection icon=ICONS.OVERRIDES title="UOSE.APPS.SETTINGS_EDITOR.SECTIONS.OVERRIDES"}}
+    {{#> uose/SettingsEditorApp/setting
+            hint="UOSE.SETTINGS.LANGUAGES.HINT"
+            label="UOSE.SETTINGS.LANGUAGES.LABEL"
+            ph="UOSE.SETTINGS.LANGUAGES.PH"
+            name="languages"
+            controlClasses="full-width"
+    }}
+        {{#> uose/common/textField  value=(join SETTINGS.languages)}}
+            name="languages"
+            id="languages"
+            placeholder="{{localize "UOSE.SETTINGS.LANGUAGES.PH"}}"
+            class="full-width"
+        {{/uose/common/textField}}
+    {{/uose/SettingsEditorApp/setting}}
+
+    {{#> uose/SettingsEditorApp/setting
+            hint="UOSE.SETTINGS.ALIGNMENT.HINT"
+            label="UOSE.SETTINGS.ALIGNMENT.LABEL"
+            ph="UOSE.SETTINGS.ALIGNMENT.PH"
+            name="alignment"
+            controlClasses="full-width"
+    }}
+        {{#> uose/common/textField  value=(join SETTINGS.alignment)}}
+            name="alignment"
+            id="alignment"
+            placeholder="{{localize "UOSE.SETTINGS.ALIGNMENT.PH"}}"
+            class="full-width"
+        {{/uose/common/textField}}
+    {{/uose/SettingsEditorApp/setting}}
+{{/uose/SettingsEditorApp/settingsSection}}

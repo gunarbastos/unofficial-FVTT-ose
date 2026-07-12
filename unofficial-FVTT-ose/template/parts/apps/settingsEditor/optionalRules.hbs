@@ -1,0 +1,303 @@
+{{#> uose/SettingsEditorApp/settingsSection icon=ICONS.OPTIONAL title="UOSE.APPS.SETTINGS_EDITOR.SECTIONS.OPTIONAL"}}
+
+    {{#> uose/SettingsEditorApp/setting
+            hint="UOSE.SETTINGS.ENCUMBRANCE.HINT"
+            label="UOSE.SETTINGS.ENCUMBRANCE.LABEL"
+            source="UOSE.SETTINGS.ENCUMBRANCE.SOURCE"
+            name="encumbrance"
+            controlClasses="full-width"
+    }}
+        {{> uose/common/comboField value=SETTINGS.encumbrance options=SETTINGS._definitions.encumbrance.options classes="full-width"}}
+    {{/uose/SettingsEditorApp/setting}}
+
+    <div class="sea-optional-3rows">
+        {{#> uose/SettingsEditorApp/setting
+                hint="UOSE.SETTINGS.ADVANCED_CHARACTER_CREATION.HINT"
+                label="UOSE.SETTINGS.ADVANCED_CHARACTER_CREATION.LABEL"
+                source="UOSE.SETTINGS.ADVANCED_CHARACTER_CREATION.SOURCE"
+                name="advancedCharacterCreation"
+        }}
+            {{> uose/common/switchField label=false id="advancedCharacterCreation" value=SETTINGS.advancedCharacterCreation}}
+        {{/uose/SettingsEditorApp/setting}}
+
+        {{#> uose/SettingsEditorApp/setting
+                hint="UOSE.SETTINGS.MULTICLASS.HINT"
+                label="UOSE.SETTINGS.MULTICLASS.LABEL"
+                source="UOSE.SETTINGS.MULTICLASS.SOURCE"
+                name="multiclass"
+        }}
+            {{> uose/common/switchField label=false id="multiclass" value=SETTINGS.multiclass}}
+        {{/uose/SettingsEditorApp/setting}}
+
+        {{#> uose/SettingsEditorApp/setting
+                hint="UOSE.SETTINGS.INDIVIDUAL_INITIATIVE.HINT"
+                label="UOSE.SETTINGS.INDIVIDUAL_INITIATIVE.LABEL"
+                source="UOSE.SETTINGS.INDIVIDUAL_INITIATIVE.SOURCE"
+                name="individualInitiative"
+        }}
+            {{> uose/common/switchField label=false id="individualInitiative" value=SETTINGS.individualInitiative}}
+        {{/uose/SettingsEditorApp/setting}}
+
+        {{#> uose/SettingsEditorApp/setting
+                hint="UOSE.SETTINGS.ASCENDING_AC.HINT"
+                label="UOSE.SETTINGS.ASCENDING_AC.LABEL"
+                source="UOSE.SETTINGS.ASCENDING_AC.SOURCE"
+                name="ascendingAC"
+        }}
+            {{> uose/common/switchField label=false id="ascendingAC" value=SETTINGS.ascendingAC}}
+        {{/uose/SettingsEditorApp/setting}}
+
+        {{#> uose/SettingsEditorApp/setting
+                hint="UOSE.SETTINGS.ATTACK_ROLL_USING_THAC0.HINT"
+                label="UOSE.SETTINGS.ATTACK_ROLL_USING_THAC0.LABEL"
+                source="UOSE.SETTINGS.ATTACK_ROLL_USING_THAC0.SOURCE"
+                name="attackRollUsingThac0"
+        }}
+            {{> uose/common/switchField label=false id="attackRollUsingThac0" value=SETTINGS.attackRollUsingThac0}}
+        {{/uose/SettingsEditorApp/setting}}
+
+        {{#> uose/SettingsEditorApp/setting
+                hint="UOSE.SETTINGS.MORALE.HINT"
+                label="UOSE.SETTINGS.MORALE.LABEL"
+                source="UOSE.SETTINGS.MORALE.SOURCE"
+                name="morale"
+        }}
+            {{> uose/common/switchField label=false id="morale" value=SETTINGS.morale}}
+        {{/uose/SettingsEditorApp/setting}}
+
+        {{#> uose/SettingsEditorApp/setting
+                hint="UOSE.SETTINGS.MORALE.HINT"
+                label="UOSE.SETTINGS.MORALE.LABEL"
+                source="UOSE.SETTINGS.MORALE.SOURCE"
+                name="addStrToItemBasedEncumbrance"
+        }}
+            {{> uose/common/switchField label=false id="addStrToItemBasedEncumbrance" value=SETTINGS.addStrToItemBasedEncumbrance}}
+        {{/uose/SettingsEditorApp/setting}}
+
+        {{#> uose/SettingsEditorApp/setting
+                hint="UOSE.SETTINGS.RETURNING_FROM_DEATH.HINT"
+                label="UOSE.SETTINGS.RETURNING_FROM_DEATH.LABEL"
+                source="UOSE.SETTINGS.RETURNING_FROM_DEATH.SOURCE"
+                name="returningFromDeath"
+        }}
+            {{> uose/common/switchField label=false id="returningFromDeath" value=SETTINGS.returningFromDeath}}
+        {{/uose/SettingsEditorApp/setting}}
+
+        {{#> uose/SettingsEditorApp/setting
+                hint="UOSE.SETTINGS.RELOAD.HINT"
+                label="UOSE.SETTINGS.RELOAD.LABEL"
+                source="UOSE.SETTINGS.RELOAD.SOURCE"
+                name="reload"
+        }}
+            {{> uose/common/switchField label=false id="reload" value=SETTINGS.reload}}
+        {{/uose/SettingsEditorApp/setting}}
+
+        {{#> uose/SettingsEditorApp/setting
+                hint="UOSE.SETTINGS.DAMAGE_PER_WEAPON.HINT"
+                label="UOSE.SETTINGS.DAMAGE_PER_WEAPON.LABEL"
+                source="UOSE.SETTINGS.DAMAGE_PER_WEAPON.SOURCE"
+                name="damagePerWeapon"
+        }}
+            {{> uose/common/switchField label=false id="damagePerWeapon" value=SETTINGS.damagePerWeapon}}
+        {{/uose/SettingsEditorApp/setting}}
+
+        {{#> uose/SettingsEditorApp/setting
+                hint="UOSE.SETTINGS.SECONDARY_SKILL.HINT"
+                label="UOSE.SETTINGS.SECONDARY_SKILL.LABEL"
+                source="UOSE.SETTINGS.SECONDARY_SKILL.SOURCE"
+                name="secondarySkill"
+        }}
+            {{> uose/common/switchField label=false id="secondarySkill" value=SETTINGS.secondarySkill}}
+        {{/uose/SettingsEditorApp/setting}}
+
+        {{#> uose/SettingsEditorApp/setting
+                hint="UOSE.SETTINGS.WEAPON_PROFICIENCY.HINT"
+                label="UOSE.SETTINGS.WEAPON_PROFICIENCY.LABEL"
+                source="UOSE.SETTINGS.WEAPON_PROFICIENCY.SOURCE"
+                name="weaponProficiency"
+        }}
+            {{> uose/common/switchField label=false id="weaponProficiency" value=SETTINGS.weaponProficiency}}
+        {{/uose/SettingsEditorApp/setting}}
+
+        {{#> uose/SettingsEditorApp/setting
+                hint="UOSE.SETTINGS.REROLL_1_AND_2_ON_1ST_LEVEL_HD.HINT"
+                label="UOSE.SETTINGS.REROLL_1_AND_2_ON_1ST_LEVEL_HD.LABEL"
+                source="UOSE.SETTINGS.REROLL_1_AND_2_ON_1ST_LEVEL_HD.SOURCE"
+                name="reroll1And2On1stLevelHD"
+        }}
+            {{> uose/common/switchField label=false id="reroll1And2On1stLevelHD" value=SETTINGS.reroll1And2On1stLevelHD}}
+        {{/uose/SettingsEditorApp/setting}}
+
+        {{#> uose/SettingsEditorApp/setting
+                hint="UOSE.SETTINGS.ALLOW_ILLUSIONIST_TO_WIELD_STAVES.HINT"
+                label="UOSE.SETTINGS.ALLOW_ILLUSIONIST_TO_WIELD_STAVES.LABEL"
+                source="UOSE.SETTINGS.ALLOW_ILLUSIONIST_TO_WIELD_STAVES.SOURCE"
+                name="allowIllusionistToWieldStaves"
+        }}
+            {{> uose/common/switchField label=false id="allowIllusionistToWieldStaves" value=SETTINGS.allowIllusionistToWieldStaves}}
+        {{/uose/SettingsEditorApp/setting}}
+
+        {{#> uose/SettingsEditorApp/setting
+                hint="UOSE.SETTINGS.ALLOW_MAGIC_USERS_TO_WIELD_STAVES.HINT"
+                label="UOSE.SETTINGS.ALLOW_MAGIC_USERS_TO_WIELD_STAVES.LABEL"
+                source="UOSE.SETTINGS.ALLOW_MAGIC_USERS_TO_WIELD_STAVES.SOURCE"
+                name="allowMagicUsersToWieldStaves"
+        }}
+            {{> uose/common/switchField label=false id="allowMagicUsersToWieldStaves" value=SETTINGS.allowMagicUsersToWieldStaves}}
+        {{/uose/SettingsEditorApp/setting}}
+
+        {{#> uose/SettingsEditorApp/setting
+                hint="UOSE.SETTINGS.IGNORE_RACE_CLASS_RESTRICTIONS.HINT"
+                label="UOSE.SETTINGS.IGNORE_RACE_CLASS_RESTRICTIONS.LABEL"
+                source="UOSE.SETTINGS.IGNORE_RACE_CLASS_RESTRICTIONS.SOURCE"
+                name="ignoreRaceClassRestrictions"
+        }}
+            {{> uose/common/switchField label=false id="ignoreRaceClassRestrictions" value=SETTINGS.ignoreRaceClassRestrictions}}
+        {{/uose/SettingsEditorApp/setting}}
+
+        {{#> uose/SettingsEditorApp/setting
+                hint="UOSE.SETTINGS.IGNORE_RACE_MAX_LEVEL_RESTRICTION.HINT"
+                label="UOSE.SETTINGS.IGNORE_RACE_MAX_LEVEL_RESTRICTION.LABEL"
+                source="UOSE.SETTINGS.IGNORE_RACE_MAX_LEVEL_RESTRICTION.SOURCE"
+                name="ignoreRaceMaxLevelRestriction"
+        }}
+            {{> uose/common/switchField label=false id="ignoreRaceMaxLevelRestriction" value=SETTINGS.ignoreRaceMaxLevelRestriction}}
+        {{/uose/SettingsEditorApp/setting}}
+
+        {{#> uose/SettingsEditorApp/setting
+                hint="UOSE.SETTINGS.LIMIT_TURN_UNDEAD.HINT"
+                label="UOSE.SETTINGS.LIMIT_TURN_UNDEAD.LABEL"
+                source="UOSE.SETTINGS.LIMIT_TURN_UNDEAD.SOURCE"
+                name="limitTurnUndead"
+        }}
+            {{> uose/common/switchField label=false id="limitTurnUndead" value=SETTINGS.limitTurnUndead}}
+        {{/uose/SettingsEditorApp/setting}}
+
+        {{#> uose/SettingsEditorApp/setting
+                hint="UOSE.SETTINGS.ADVANCED_SPELL_BOOK.HINT"
+                label="UOSE.SETTINGS.ADVANCED_SPELL_BOOK.LABEL"
+                source="UOSE.SETTINGS.ADVANCED_SPELL_BOOK.SOURCE"
+                name="advancedSpellBook"
+        }}
+            {{> uose/common/switchField label=false id="advancedSpellBook" value=SETTINGS.advancedSpellBook}}
+        {{/uose/SettingsEditorApp/setting}}
+
+        {{#> uose/SettingsEditorApp/setting
+                hint="UOSE.SETTINGS.VARIABLE_WIND_CONDITIONS.HINT"
+                label="UOSE.SETTINGS.VARIABLE_WIND_CONDITIONS.LABEL"
+                source="UOSE.SETTINGS.VARIABLE_WIND_CONDITIONS.SOURCE"
+                name="variableWindConditions"
+        }}
+            {{> uose/common/switchField label=false id="variableWindConditions" value=SETTINGS.variableWindConditions}}
+        {{/uose/SettingsEditorApp/setting}}
+
+        {{#> uose/SettingsEditorApp/setting
+                hint="UOSE.SETTINGS.ATTACKING_WITH_TWO_WEAPONS.HINT"
+                label="UOSE.SETTINGS.ATTACKING_WITH_TWO_WEAPONS.LABEL"
+                source="UOSE.SETTINGS.ATTACKING_WITH_TWO_WEAPONS.SOURCE"
+                name="attackingWithTwoWeapons"
+        }}
+            {{> uose/common/switchField label=false id="attackingWithTwoWeapons" value=SETTINGS.attackingWithTwoWeapons}}
+        {{/uose/SettingsEditorApp/setting}}
+
+        {{#> uose/SettingsEditorApp/setting
+                hint="UOSE.SETTINGS.CHARGING_INTO_MELEE.HINT"
+                label="UOSE.SETTINGS.CHARGING_INTO_MELEE.LABEL"
+                source="UOSE.SETTINGS.CHARGING_INTO_MELEE.SOURCE"
+                name="chargingIntoMelee"
+        }}
+            {{> uose/common/switchField label=false id="chargingIntoMelee" value=SETTINGS.chargingIntoMelee}}
+        {{/uose/SettingsEditorApp/setting}}
+
+        {{#> uose/SettingsEditorApp/setting
+                hint="UOSE.SETTINGS.INVULNERABILITIES.HINT"
+                label="UOSE.SETTINGS.INVULNERABILITIES.LABEL"
+                source="UOSE.SETTINGS.INVULNERABILITIES.SOURCE"
+                name="invulnerabilities"
+        }}
+            {{> uose/common/switchField label=false id="invulnerabilities" value=SETTINGS.invulnerabilities}}
+        {{/uose/SettingsEditorApp/setting}}
+
+        {{#> uose/SettingsEditorApp/setting
+                hint="UOSE.SETTINGS.MISSILE_ATTACKS_ON_TARGETS_IN_MELEE.HINT"
+                label="UOSE.SETTINGS.MISSILE_ATTACKS_ON_TARGETS_IN_MELEE.LABEL"
+                source="UOSE.SETTINGS.MISSILE_ATTACKS_ON_TARGETS_IN_MELEE.SOURCE"
+                name="missileAttacksOnTargetsInMelee"
+        }}
+            {{> uose/common/switchField label=false id="missileAttacksOnTargetsInMelee" value=SETTINGS.missileAttacksOnTargetsInMelee}}
+        {{/uose/SettingsEditorApp/setting}}
+
+        {{#> uose/SettingsEditorApp/setting
+                hint="UOSE.SETTINGS.PARRYING.HINT"
+                label="UOSE.SETTINGS.PARRYING.LABEL"
+                source="UOSE.SETTINGS.PARRYING.SOURCE"
+                name="parrying"
+        }}
+            {{> uose/common/switchField label=false id="parrying" value=SETTINGS.parrying}}
+        {{/uose/SettingsEditorApp/setting}}
+
+        {{#> uose/SettingsEditorApp/setting
+                hint="UOSE.SETTINGS.SPLASH_WEAPONS.HINT"
+                label="UOSE.SETTINGS.SPLASH_WEAPONS.LABEL"
+                source="UOSE.SETTINGS.SPLASH_WEAPONS.SOURCE"
+                name="splashWeapons"
+        }}
+            {{> uose/common/switchField label=false id="splashWeapons" value=SETTINGS.splashWeapons}}
+        {{/uose/SettingsEditorApp/setting}}
+
+        {{#> uose/SettingsEditorApp/setting
+                hint="UOSE.SETTINGS.SUBDUING.HINT"
+                label="UOSE.SETTINGS.SUBDUING.LABEL"
+                source="UOSE.SETTINGS.SUBDUING.SOURCE"
+                name="subduing"
+        }}
+            {{> uose/common/switchField label=false id="subduing" value=SETTINGS.subduing}}
+        {{/uose/SettingsEditorApp/setting}}
+
+        {{#> uose/SettingsEditorApp/setting
+                hint="UOSE.SETTINGS.THIEF_D6_SKILLS.HINT"
+                label="UOSE.SETTINGS.THIEF_D6_SKILLS.LABEL"
+                source="UOSE.SETTINGS.THIEF_D6_SKILLS.SOURCE"
+                name="thiefD6Skills"
+        }}
+            {{> uose/common/switchField label=false id="thiefD6Skills" value=SETTINGS.thiefD6Skills}}
+        {{/uose/SettingsEditorApp/setting}}
+
+        {{#> uose/SettingsEditorApp/setting
+                hint="UOSE.SETTINGS.COMBAT_TALENTS.HINT"
+                label="UOSE.SETTINGS.COMBAT_TALENTS.LABEL"
+                source="UOSE.SETTINGS.COMBAT_TALENTS.SOURCE"
+                name="combatTalents"
+        }}
+            {{> uose/common/switchField label=false id="combatTalents" value=SETTINGS.combatTalents}}
+        {{/uose/SettingsEditorApp/setting}}
+
+        {{#> uose/SettingsEditorApp/setting
+                hint="UOSE.SETTINGS.TREASURE_SHARE_XP.HINT"
+                label="UOSE.SETTINGS.TREASURE_SHARE_XP.LABEL"
+                source="UOSE.SETTINGS.TREASURE_SHARE_XP.SOURCE"
+                name="treasureShareXp"
+        }}
+            {{> uose/common/switchField label=false id="treasureShareXp" value=SETTINGS.treasureShareXp}}
+        {{/uose/SettingsEditorApp/setting}}
+
+        {{#> uose/SettingsEditorApp/setting
+                hint="UOSE.SETTINGS.CANTRIPS.HINT"
+                label="UOSE.SETTINGS.CANTRIPS.LABEL"
+                source="UOSE.SETTINGS.CANTRIPS.SOURCE"
+                name="cantrips"
+        }}
+            {{> uose/common/switchField label=false id="cantrips" value=SETTINGS.cantrips}}
+        {{/uose/SettingsEditorApp/setting}}
+
+        {{#> uose/SettingsEditorApp/setting
+                hint="UOSE.SETTINGS.SPECIAL_MATERIALS.HINT"
+                label="UOSE.SETTINGS.SPECIAL_MATERIALS.LABEL"
+                source="UOSE.SETTINGS.SPECIAL_MATERIALS.SOURCE"
+                name="specialMaterials"
+        }}
+            {{> uose/common/switchField label=false id="specialMaterials" value=SETTINGS.specialMaterials}}
+        {{/uose/SettingsEditorApp/setting}}
+    </div>
+
+{{/uose/SettingsEditorApp/settingsSection}}

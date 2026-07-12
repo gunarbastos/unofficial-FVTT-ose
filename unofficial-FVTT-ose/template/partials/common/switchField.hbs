@@ -1,0 +1,8 @@
+<div class="switch-control">
+    <label class="switch{{#if classes}} {{classes}}{{/if}}"
+        {{~#if tooltip}}data-tooltip="{{tooltip}}" {{/if~}}>
+        <input id="{{#if id}}{{id}}{{else}}switch{{name}}{{/if}}" type="checkbox" class="switch-input" name="{{name}}"{{checked value}}{{~#if skipTab}} tabindex="-1"{{/if~}}>
+        <span class="switch-track" aria-hidden="true"></span>
+    </label>
+    {{~#if label}}<label for="{{#if id}}{{id}}{{else}}switch{{name}}{{/if}}">{{localize label}}</label>{{/if~}}
+</div>

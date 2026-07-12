@@ -1,0 +1,5 @@
+<select name="{{name}}" id="{{name}}"{{#if classes}} class="{{classes}}"{{/if}}>
+    {{#each options as |opt|}}
+        <option value="{{opt.value}}"{{#if (eq opt.value ../value)}} selected{{/if}}>{{#if opt.description}}{{opt.description}}{{else}}{{opt.value}}{{/if}}</option>
+    {{/each}}
+</select>

@@ -1,0 +1,24 @@
+<button type="button"
+    {{~#if classes}}class="{{classes}}" {{/if~}}
+    {{~#if action}}data-action="{{action}}" {{/if~}}
+    {{~#if dataAttributes}}
+        {{#each dataAttributes}}data-{{name}}="{{value}}" {{/each}}
+    {{/if~}}
+    {{~#if tooltip}}data-tooltip="{{tooltip}}" {{/if~}}
+    {{~#if skipTab}}tabindex="-1" {{/if}}>
+    <i {{#if icon}}
+        class="{{ICL.PREFIX}}-{{#if style}}{{style}} {{else}}{{ICL.DEFAULT_STYLE}} {{/if~}}
+            {{ICL.PREFIX}}-{{#if icon}}{{icon}} {{else}}{{ICL.UNDEFINED_ICON}} {{/if~}}
+            {{~#if family}}{{ICL.PREFIX}}-{{family}} {{/if~}}
+            {{~#if size}}{{ICL.PREFIX}}-{{size}} {{/if~}}
+            {{~#if rotate}}{{ICL.PREFIX}}-{{rotate}} {{/if~}}
+            {{~#if transform}}{{ICL.PREFIX}}-{{transform}} {{/if~}}"
+            {{~#if (ifAny rotate color color2)}}
+                style="{{#if color2}}{{ICL.CSS_VARS.PRIMARY_COLOR}}: {{color}}; {{ICL.CSS_VARS.SECONDARY_COLOR}}: {{color2}}; {{else}}{{#if color}}color: {{color}}; {{/if}}{{/if~}}
+                    {{#if angle}}{{ICL.CSS_VARS.ROTATE_ANGLE}}: {{angle}}deg{{/if~}}"
+            {{/if}}
+        {{/if}}
+    ></i>
+    {{~#if caption}}{{localize caption}} {{/if}}
+    {{~> @partial-block~}}
+</button>

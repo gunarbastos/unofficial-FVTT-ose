@@ -13,11 +13,13 @@ export class UOSESystemSettings extends UOSEBaseSettings {
 
         //OPTIONAL RULES
         advancedCharacterCreation: {scope: 'world', config: false, type: Boolean, default: false},
+        multiclass: {scope: 'world', config: false, type: Boolean, default: false},
         individualInitiative: {scope: 'world', config: false, type: Boolean, default: false},
         ascendingAC: {scope: 'world', config: false, type: Boolean, default: false},
         attackRollUsingThac0: {scope: 'world', config: false, type: Boolean, default: false},
         morale: {scope: 'world', config: false, type: Boolean, default: false},
-        encumbrance: {scope: 'world', config: false, type: String, choices: ['Disabled', 'Basic', 'Detailed', 'Item'], default: 'Disabled'},
+        encumbrance: {scope: 'world', config: false, type: String, options: [{value:'Disabled'}, {value:'Basic'}, {value:'Detailed'}, {value:'Item',description:'Item Based'}], default: 'Disabled'},
+        addStrToItemBasedEncumbrance: {scope: 'world', config: false, type: Boolean, default: false},
         returningFromDeath: {scope: 'world', config: false, type: Boolean, default: false},
         reload: {scope: 'world', config: false, type: Boolean, default: false},
         damagePerWeapon: {scope: 'world', config: false, type: Boolean, default: false},

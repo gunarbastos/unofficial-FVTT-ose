@@ -1,0 +1,123 @@
+.uose.SettingsEditorApp {
+    .sea-content {
+      display: grid;
+      grid-template-columns: 20% minmax(0, 1fr);
+      grid-auto-rows: max-content;
+      height: 100%;
+      min-height: 0;
+      padding: 0;
+      overflow-y: auto;
+      overflow-x: hidden;
+      align-items: start;
+      row-gap: 1rem;
+
+      .sidebar {
+        grid-column: 1;
+        position: absolute;
+        height: calc(100% - (var(--spacer-16) * 2));
+        overflow-y: auto;
+        overflow-x: hidden;
+        width: calc(20% - var(--spacer-16));
+        box-sizing: border-box;
+        align-content: start;
+        display: grid;
+        gap: 1rem;
+        margin-top: 1rem;
+      }
+
+      .filter {
+        grid-column: 2;
+        grid-row: 1;
+        position: sticky;
+        top: 0;
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+      }
+
+      .settings-section {
+        grid-column: 2;
+        padding: 1rem;
+
+        .settings-header {
+          gap: 1rem;
+        }
+
+        .settings-body {
+          gap: 0.2rem;
+          display: grid;
+
+          .sea-optional-3rows {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+          }
+
+          .settings-row {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            align-items: center;
+
+            .settings-label {
+              display: flex;
+              align-items: center;
+              color: var(--color-text-secondary);
+
+              &:hover {
+                color: var(--color-form-label-hover);
+              }
+            }
+
+            .setting-popover-container {
+              border: 1px solid;
+              border-radius: 0.75rem;
+              padding: var(--spacer-16);
+              color: var(--color-text-primary);
+              box-shadow: 0 8px 32px hsl(0 0% 0% / 0.12);
+              inline-size: min(90vw, 28rem);
+              gap: 1rem;
+
+              opacity: 0;
+              translate: 30px 0;
+
+              transition-property: display, overlay, opacity, translate;
+              transition-duration: 1s;
+              transition-behavior: allow-discrete;
+
+              @supports (anchor-name: --anchor) {
+                margin: 0;
+                inset: auto;
+                position-area: right;
+                position-try: top;
+              }
+
+              &:popover-open {
+                display: grid;
+                gap: 1rem;
+                opacity: 1;
+                translate: 0 0;
+
+                @starting-style {
+                  opacity: 0;
+                  translate: -30px 0;
+                  display: grid;
+                }
+              }
+            }
+
+            .settings-popover-trigger {
+              background: transparent;
+              border: none;
+
+              &:focus,
+              &:focus-visible {
+                box-shadow: none;
+                outline-style: none;
+              }
+            }
+          }
+        }
+      }
+    }
+  }

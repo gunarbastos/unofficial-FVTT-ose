@@ -1,0 +1,40 @@
+<div class="sidebar">
+    {{> uose/common/button
+            classes="full-width"
+            icon=ICONS.OVERRIDES
+            caption="UOSE.APPS.SETTINGS_EDITOR.SECTIONS.OVERRIDES"
+            action="navigateTo"
+            dataAttributes=(array
+                    (hash name="section" value="overrides")
+            )
+    }}
+    {{> uose/common/button
+            classes="full-width"
+            icon=ICONS.OPTIONAL
+            caption="UOSE.APPS.SETTINGS_EDITOR.SECTIONS.OPTIONAL"
+            action="navigateTo"
+            style=ICL.STYLES.LIGHT
+            dataAttributes=(array
+                    (hash name="section" value="optional")
+            )
+    }}
+    {{> uose/common/button
+            classes="full-width"
+            icon=ICONS.AUTOMATION
+            caption="UOSE.APPS.SETTINGS_EDITOR.SECTIONS.AUTOMATION"
+            action="navigateTo"
+            style=ICL.STYLES.LIGHT
+            dataAttributes=(array
+                    (hash name="section" value="automation")
+            )
+    }}
+    {{> uose/common/button
+            classes="full-width"
+            icon=ICONS.HOOKS
+            caption="UOSE.APPS.SETTINGS_EDITOR.SECTIONS.HOOKS"
+            action="navigateTo"
+            dataAttributes=(array
+                    (hash name="section" value="hooks")
+            )
+    }}
+</div>

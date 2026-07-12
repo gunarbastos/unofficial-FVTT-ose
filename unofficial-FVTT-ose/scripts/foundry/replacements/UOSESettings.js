@@ -22,7 +22,7 @@ export class UOSESettings extends CONFIG.ui.settings {
             const sibling = this.element.querySelector('[data-app="configure"]');
             if(!sibling) return;
 
-            const hbsReturn = await foundry.applications.handlebars.renderTemplate(`${game.uose.constants.TEMPLATES.ROOT_DIR}/partials/ui/UOSESettingsButton.hbs`, {
+            const hbsReturn = await foundry.applications.handlebars.renderTemplate(`${game.uose.constants.TEMPLATES.DIR.ROOT_DIR}/partials/ui/UOSESettingsButton.hbs`, {
                 id: 'uoseSettingsAppLauncher',
                 action: 'openUOSESettings',
                 style: 'solid',

@@ -18,16 +18,11 @@ export class UOSEPackageHooks {
         UOSEUtils.log(`#onInit`);
         //Internal Setup
         UOSEUtils.log('initializing internal data');
-        //UOSEConstants.foundry = CONST;
-        //UOSEUtils.deepFreeze(UOSEConstants);
 
         UOSEUtils.log('defining global objects');
         game.uose = UOSE.publicView();
-        //game.uose.foundryConfig = CONFIG;
 
-        //
         // UOSEPackageHooks.#registerCustomChatCommands();
-        //
 
         UOSEUtils.log('defining document classes');
         // Document overrides
@@ -49,30 +44,24 @@ export class UOSEPackageHooks {
         UOSEUtils.log(`registering handlebar helpers`);
         UOSEUtils.registerCommonHelpers();
 
-        // UOSEUtils.log('preloading templates');
-        // for(const template of Object.values(UOSEConstants.TEMPLATES) ) {
-        //     if( typeof template !== 'object' || Array.isArray(template)) { continue; }
-        //     if(template.hasOwnProperty('PRELOAD') && template.PRELOAD === true) {
-        //         foundry.applications.handlebars.getTemplate(template.PATH).then( result => {
-        //             UOSEUtils.log('preloaded ', template.PATH);
-        //             if(template.hasOwnProperty('ALIAS')) {
-        //                 Handlebars.registerPartial(template.ALIAS, result);
-        //                 UOSEUtils.log(`Alias ${template.ALIAS} created for ${template.PATH}`);
-        //             }
-        //         });
-        //     }
-        // }
-        //
+        UOSEUtils.log('preloading templates');
+        for(const template of Object.values(game.uose.constants.TEMPLATES.PARTIALS) ) {
+            if( typeof template !== 'object' || Array.isArray(template)) { continue; }
+            if(template.hasOwnProperty('PRELOAD') && template.PRELOAD === true) {
+                foundry.applications.handlebars.getTemplate(template.PATH).then( result => {
+                    UOSEUtils.log('preloaded ', template.PATH);
+                    if(template.hasOwnProperty('ALIAS')) {
+                        Handlebars.registerPartial(`${game.uose.constants.SHORT_ID}/${template.GROUP ? template.GROUP : 'common'}/${template.ALIAS}`, result);
+                        UOSEUtils.log(`Alias ${template.ALIAS} created for ${template.PATH}`);
+                    }
+                });
+            }
+        }
 
         game.uose.apps.settingsEditor = new game.uose.classes.apps.SettingsEditor();
 
         CONFIG.ui.settings = game.uose.classes.replacements.Settings;
-        // CONFIG.ui.combat = DTGCombatTracker;
-        // CONFIG.Token.documentClass = DTGTokenDocument;
-        // CONFIG.Canvas.rulerClass = DTGRuler;
-        // CONFIG.Token.rulerClass = DTGTokenRuler;
-        // CONFIG.MeasuredTemplate.objectClass = DTGMeasuredTemplate;
-        // CONFIG.ui.controls = DTGSceneControls;
+        // CONFIG.ui.actors = game.uose.classes.replacements.Actors;
         UOSEUtils.log(`#onInit end`);
     }
 
