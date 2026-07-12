@@ -66,6 +66,13 @@
           "SOURCE": "Source",
           "LAUNCHER_BTN": "{UOSE.SYSTEM.SHORT} Settings"
         }
+      },
+      "PARTY_MANAGER": {
+        "NAME": "Party Manager",
+        "TITLE": "Party Manager",
+        "UI": {
+          "LAUNCHER_BTN": "{UOSE.SYSTEM.SHORT} {UOSE.APPS.PARTY_MANAGER.NAME}"
+        }
       }
     },
     "ATTRIBUTES": {

@@ -59,9 +59,10 @@ export class UOSEPackageHooks {
         }
 
         game.uose.apps.settingsEditor = new game.uose.classes.apps.SettingsEditor();
+        game.uose.apps.partyManager = new game.uose.classes.apps.PartyManager();
 
         CONFIG.ui.settings = game.uose.classes.replacements.Settings;
-        // CONFIG.ui.actors = game.uose.classes.replacements.Actors;
+        CONFIG.ui.actors = game.uose.classes.replacements.Actors;
         UOSEUtils.log(`#onInit end`);
     }
 

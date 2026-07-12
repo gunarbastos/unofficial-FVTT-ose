@@ -1,5 +1,4 @@
 import {UOSE} from "../uose.js";
-import {UOSEConstants} from "../../engine/index.js";
 
 console.log(`Loaded: ${import.meta.url}`);
 
@@ -32,9 +31,6 @@ export class UOSESettings extends CONFIG.ui.settings {
             const button = document.createElement('button');
             sibling.closest('section').insertBefore(button, sibling);
             button.outerHTML = hbsReturn;
-            // button.outerHTML = '<button id="uoseSettingsAppLauncher" type="button" data-action="openUOSESettings" style="">\n' +
-            //     '        <i class="fa-solid fa-screwdriver-wrench" inert=""></i> UOSE Settings\n' +
-            //     '</button>';
         }
     }
 
