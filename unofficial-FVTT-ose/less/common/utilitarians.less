@@ -7,24 +7,12 @@
   .uose-util(preserve-width; { flex: none; });
   .uose-util(center-items; { align-items: center; });
 
-  /*.full-width, &.full-width {
-    width: 100%;
-  }
-
-  .preserve-width, &.preserve-width {
-    flex: none;
-  }
-
-  .center-items, &.center-items {
-    align-items: center;
-  }*/
-
-  .small-input {
+  .uose-util(small-input; {
     width: 3em;
     text-align: center;
-  }
+  });
 
-  .visually-hidden {
+  .uose-util(visually-hidden; {
     position: absolute !important;
     width: 1px;
     height: 1px;
@@ -34,43 +22,43 @@
     clip: rect(0, 0, 0, 0);
     white-space: nowrap;
     border: 0;
-  }
+  });
 
-  .isShiny {
+  .uose-util(isShiny; {
     box-shadow:
             0 0 0 1px #5ed6ff inset,
             0 0 10px 2px rgba(94,214,255,.75),
             0 0 24px 8px rgba(94,214,255,.45);
     border-radius: 10px;
-  }
+  });
 
-  .shine {
+  .uose-util(shine; {
     box-shadow: 0 0 0 1px var(--borderColor, var(--button-border-color)) inset,
     0 0 10px 2px rgb(from var(--borderColor, var(--button-border-color)) r g b / 0.45);
-  }
+  });
 
-  .small-icon {
+  .uose-util(small-icon; {
     height: 24px;
     width: 24px;
-  }
+  });
 
-  .medium-smaller-icon {
+  .uose-util(medium-smaller-icon; {
     height: 36px;
     width: 36px;
-  }
+  });
 
-  .medium-small-icon {
+  .uose-util(medium-small-icon; {
     height: 48px;
     width: 48px;
-  }
+  });
 
-  .medium-icon {
+  .uose-util(medium-icon; {
     height: 64px;
     width: 64px;
-  }
+  });
 
-  .large-icon {
+  .uose-util(large-icon; {
     height: 128px;
     width: 128px;
-  }
+  });
 }

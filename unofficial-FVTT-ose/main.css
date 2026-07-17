@@ -254,19 +254,6 @@
   outline-offset: 2px;
   margin-left: var(--margin);
 }
-.uose {
-  /*.full-width, &.full-width {
-    width: 100%;
-  }
-
-  .preserve-width, &.preserve-width {
-    flex: none;
-  }
-
-  .center-items, &.center-items {
-    align-items: center;
-  }*/
-}
 .uose button {
   border-radius: 8px;
 }
@@ -282,11 +269,13 @@
 .uose.center-items {
   align-items: center;
 }
-.uose .small-input {
+.uose .small-input,
+.uose.small-input {
   width: 3em;
   text-align: center;
 }
-.uose .visually-hidden {
+.uose .visually-hidden,
+.uose.visually-hidden {
   position: absolute !important;
   width: 1px;
   height: 1px;
@@ -297,30 +286,37 @@
   white-space: nowrap;
   border: 0;
 }
-.uose .isShiny {
+.uose .isShiny,
+.uose.isShiny {
   box-shadow: 0 0 0 1px #5ed6ff inset, 0 0 10px 2px rgba(94, 214, 255, 0.75), 0 0 24px 8px rgba(94, 214, 255, 0.45);
   border-radius: 10px;
 }
-.uose .shine {
+.uose .shine,
+.uose.shine {
   box-shadow: 0 0 0 1px var(--borderColor, var(--button-border-color)) inset, 0 0 10px 2px rgb(from var(--borderColor, var(--button-border-color)) r g b / 0.45);
 }
-.uose .small-icon {
+.uose .small-icon,
+.uose.small-icon {
   height: 24px;
   width: 24px;
 }
-.uose .medium-smaller-icon {
+.uose .medium-smaller-icon,
+.uose.medium-smaller-icon {
   height: 36px;
   width: 36px;
 }
-.uose .medium-small-icon {
+.uose .medium-small-icon,
+.uose.medium-small-icon {
   height: 48px;
   width: 48px;
 }
-.uose .medium-icon {
+.uose .medium-icon,
+.uose.medium-icon {
   height: 64px;
   width: 64px;
 }
-.uose .large-icon {
+.uose .large-icon,
+.uose.large-icon {
   height: 128px;
   width: 128px;
 }
