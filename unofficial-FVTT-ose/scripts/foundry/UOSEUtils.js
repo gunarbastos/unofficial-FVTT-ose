@@ -150,7 +150,7 @@ export class UOSEUtils {
     static async fromUuid(uuid){
         return await fromUuid(uuid);
     }
-aa
+
     static fromUuidSync(uuid){
         return fromUuidSync(uuid);
     }
