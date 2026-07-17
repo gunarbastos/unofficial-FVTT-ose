@@ -1,9 +1,13 @@
-import sys, subprocess
+import sys, subprocess, time
 from tools import common
 from pathlib import Path
-#from tools import common
-#from typing import List, Iterable, Tuple, Set, Optional
 from typing import List, Tuple, Optional
+from dataclasses import dataclass
+
+@dataclass
+class LessFile:
+    path: Path
+    options: List[str]
 
 def _partition_children(folder: Path) -> Tuple[List[Path], List[Path]]:
     """
@@ -36,11 +40,7 @@ def _name_matches(entry: str, candidate: Path) -> bool:
         return True
     return False
 
-def _consume_in_order(
-        entries: List[str],
-        dirs: List[Path],
-        files: List[Path],
-) -> Tuple[List[Path], List[Path], List[Path], List[Path]]:
+def _consume_in_order(entries: List[str], dirs: List[Path], files: List[Path], order_file_mtime=None,  grace_seconds=5) -> Tuple[List[Path], List[LessFile], List[Path], List[Path]]:
     """
     Given desired 'entries' and the current immediate 'dirs' and 'files',
     pick the ones that match (preserving order) and return:
@@ -56,20 +56,28 @@ def _consume_in_order(
                 return items.pop(i)
         return None
 
+    recently_edited = (
+        order_file_mtime is not None
+        and (time.time() - order_file_mtime) < grace_seconds
+    )
+
     for entry in entries:
-        hit = pop_first_match(entry, remaining_dirs)
+        parts = entry.split(" ")
+        file = parts.pop(0)
+        hit = pop_first_match(file, remaining_dirs)
         if hit:
             ordered_dirs.append(hit)
             continue
-        hit = pop_first_match(entry, remaining_files)
+        hit = pop_first_match(file, remaining_files)
         if hit:
-            ordered_files.append(hit)
+            ordered_files.append(LessFile(hit, parts))
             continue
-        # Unknown entry in 'order' -> ignore silently (you can log if desired)
+        if not recently_edited:
+            common.fail(f"Error: order entry '{file}' not found", file=sys.stderr)
 
     return ordered_dirs, ordered_files, remaining_dirs, remaining_files
 
-def _walk_less_in_folder(folder: Path, base: Path) -> List[Path]:
+def _walk_less_in_folder(folder: Path, base: Path) -> List[str]:
     """
     Depth-first traversal of `folder`:
       - obey 'order' file for immediate children
@@ -83,7 +91,7 @@ def _walk_less_in_folder(folder: Path, base: Path) -> List[Path]:
 
     # Partition by 'order' first
     ordered_dirs, ordered_files, remaining_dirs, remaining_files = _consume_in_order(
-        order_entries, dirs, files
+        order_entries, dirs, files, (folder / "order").stat().st_mtime if order_entries else None
     )
 
     # Sort remaining (dirs first, then files)
@@ -92,16 +100,18 @@ def _walk_less_in_folder(folder: Path, base: Path) -> List[Path]:
 
     # Final immediate sequence in this folder: dirs (ordered), files (ordered), dirs (remaining), files (remaining)
     seq_dirs = ordered_dirs + remaining_dirs
-    seq_files = ordered_files + remaining_files
 
-    out: List[Path] = []
+    out: List[str] = []
 
     # Recurse into dirs (each will apply its own 'order')
     for d in seq_dirs:
         out.extend(_walk_less_in_folder(d, base))
 
     # Then add files in this folder
-    out.extend(seq_files)
+    for file in ordered_files:
+        out.append(f'@import {'('+", ".join(s for s in file.options)+') ' if file.options else ''}"{file.path.relative_to(base).as_posix()}";')
+    for file in remaining_files:
+        out.append(f'@import "{file.relative_to(base).as_posix()}";')
 
     return out
 
@@ -123,7 +133,7 @@ def _build_main_less_content(less_dir: Path) -> str:
             + now.strftime(f"%d/%m/%Y %H:%M:%S.{now.microsecond // 1000:03d} UTC{offset_hours:+.0f}")
             + "\n\n"
     )
-    imports = "\n".join(f'@import "{p.relative_to(less_dir).as_posix()}";' for p in ordered)
+    imports = "\n".join(s for s in ordered)
     return header + imports + ("\n" if imports else "")
 
 def _write_if_body_changed(target: Path, new_content: str) -> bool:

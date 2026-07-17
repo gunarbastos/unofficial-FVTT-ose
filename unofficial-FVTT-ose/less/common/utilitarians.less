@@ -3,17 +3,21 @@
     border-radius: 8px;
   }
 
-  .full-width {
+  .uose-util(full-width; { width: 100%; });
+  .uose-util(preserve-width; { flex: none; });
+  .uose-util(center-items; { align-items: center; });
+
+  /*.full-width, &.full-width {
     width: 100%;
   }
 
-  .preserve-width {
+  .preserve-width, &.preserve-width {
     flex: none;
   }
 
-  .center-items {
+  .center-items, &.center-items {
     align-items: center;
-  }
+  }*/
 
   .small-input {
     width: 3em;

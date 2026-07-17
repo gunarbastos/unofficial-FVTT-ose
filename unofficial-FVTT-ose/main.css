@@ -254,16 +254,32 @@
   outline-offset: 2px;
   margin-left: var(--margin);
 }
+.uose {
+  /*.full-width, &.full-width {
+    width: 100%;
+  }
+
+  .preserve-width, &.preserve-width {
+    flex: none;
+  }
+
+  .center-items, &.center-items {
+    align-items: center;
+  }*/
+}
 .uose button {
   border-radius: 8px;
 }
-.uose .full-width {
+.uose .full-width,
+.uose.full-width {
   width: 100%;
 }
-.uose .preserve-width {
+.uose .preserve-width,
+.uose.preserve-width {
   flex: none;
 }
-.uose .center-items {
+.uose .center-items,
+.uose.center-items {
   align-items: center;
 }
 .uose .small-input {
