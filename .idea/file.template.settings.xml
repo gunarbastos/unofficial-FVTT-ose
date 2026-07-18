@@ -3,6 +3,7 @@
   <component name="ExportableFileTemplateSettings">
     <default_templates>
       <template name="UOSE Actor Document.js" reformat="true" live-template-enabled="true" />
+      <template name="UOSE Actor Sheet.js" reformat="true" live-template-enabled="true" />
       <template name="UOSE Item Document.js" reformat="true" live-template-enabled="true" />
     </default_templates>
   </component>

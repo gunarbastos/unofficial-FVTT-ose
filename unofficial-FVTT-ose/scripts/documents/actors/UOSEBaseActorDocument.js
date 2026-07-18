@@ -95,6 +95,23 @@ export class UOSEBaseActorDocument extends Actor {
         this._updateApps({'items': {operation: 'update', documents: documents}}, userId,  false, undefined);
     }
 
+    #filterItems(type) { return this.items.filter(item => item.type === type); }
+
+    get adventuringGearItems() { return this.#filterItems(game.uose.classes.items.AdventuringGear.type) }
+    get ammunitionItems() { return this.#filterItems(game.uose.classes.items.Ammunition.type) }
+    get animalItems() { return this.#filterItems(game.uose.classes.items.Animal.type) }
+    get armorItems() { return this.#filterItems(game.uose.classes.items.Armor.type) }
+    get classItems() { return this.#filterItems(game.uose.classes.items.Class.type) }
+    get containerItems() { return this.#filterItems(game.uose.classes.items.Container.type) }
+    get landVehicleItems() { return this.#filterItems(game.uose.classes.items.LandVehicle.type) }
+    get poisonItems() { return this.#filterItems(game.uose.classes.items.Poison.type) }
+    get raceItems() { return this.#filterItems(game.uose.classes.items.Race.type) }
+    get serviceItems() { return this.#filterItems(game.uose.classes.items.Service.type) }
+    get spellItems() { return this.#filterItems(game.uose.classes.items.Spell.type) }
+    get vehicleItems() { return {...this.landVehicleItems, ...this.waterVehicleItems} }
+    get waterVehicleItems() { return this.#filterItems(game.uose.classes.items.WaterVehicle.type) }
+    get weaponItems() { return this.#filterItems(game.uose.classes.items.Weapon.type) }
+
 }
 
 UOSE.registerBaseClass(UOSEBaseActorDocument)

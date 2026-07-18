@@ -16,12 +16,12 @@ export class UOSECharacterDataModel extends UOSELivingDataModel {
         return {
             ...base,
             attributes: new fields.SchemaField({
-                str: new fields.NumberField({required: true, integer: true, initial: 0, min: 3, max: 18}),
-                int: new fields.NumberField({required: true, integer: true, initial: 0, min: 3, max: 18}),
-                wis: new fields.NumberField({required: true, integer: true, initial: 0, min: 3, max: 18}),
-                dex: new fields.NumberField({required: true, integer: true, initial: 0, min: 3, max: 18}),
-                con: new fields.NumberField({required: true, integer: true, initial: 0, min: 3, max: 18}),
-                cha: new fields.NumberField({required: true, integer: true, initial: 0, min: 3, max: 18}),
+                str: new fields.NumberField({required: false, integer: true, min: 3, max: 18}),
+                int: new fields.NumberField({required: false, integer: true, min: 3, max: 18}),
+                wis: new fields.NumberField({required: false, integer: true, min: 3, max: 18}),
+                dex: new fields.NumberField({required: false, integer: true, min: 3, max: 18}),
+                con: new fields.NumberField({required: false, integer: true, min: 3, max: 18}),
+                cha: new fields.NumberField({required: false, integer: true, min: 3, max: 18}),
             }),
             xp: new fields.SchemaField({
                 total: new fields.NumberField({required: true, integer: true, initial: 0}),

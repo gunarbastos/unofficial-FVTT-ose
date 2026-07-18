@@ -15,6 +15,10 @@ export class UOSERetainerActorDocument extends UOSEBaseActorDocument {
         };
     }
 
+    grantXP(amount) {
+        game.uose.utils.log('UOSERetainerActorDocument', 'grantXP', amount);
+    }
+
 }
 
 UOSE.registerDocument(UOSE.actor, UOSERetainerActorDocument);

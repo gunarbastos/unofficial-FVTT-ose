@@ -10,6 +10,8 @@ import './scripts/dataModels/actors/index.js';
 import './scripts/dataModels/items/index.js';
 import './scripts/documents/actors/index.js';
 import './scripts/documents/items/index.js';
+import './scripts/sheets/actors/index.js';
+import './scripts/sheets/items/index.js';
 import './scripts/apps/index.js';
 
 UOSEUtils.log('Starting...');

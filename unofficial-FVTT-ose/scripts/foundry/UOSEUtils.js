@@ -521,24 +521,23 @@ export class UOSEUtils {
     }
 
     static ifAllHelper(...args) {
-        return args.every(Boolean);
+        return args.slice(0, -1).every(Boolean);
     }
 
     static ifAnyHelper(...args) {
-        const options = args.pop();
-        UOSEUtils.log('ifAny', args, options, args.some(Boolean));
-        return args.some(Boolean);
+        // const options = args.pop();
+        return args.slice(0, -1).some(Boolean);
     }
 
     /*
      * Format Helper: Prints an object as string
      */
     static hbsJSON(...args) {
-        return JSON.stringify(args, null, 2);
+        return JSON.stringify(args[0], null, 2);
     }
 
     static absolute(...args) {
-        return Math.abs(args.pop());
+        return Math.abs(args[0]);
     }
 
     /*

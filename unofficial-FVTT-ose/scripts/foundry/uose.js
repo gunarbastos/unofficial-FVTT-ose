@@ -39,7 +39,7 @@ export class UOSE {
         collection[name] = cls;
 
         if(!typeCollection) return;
-        if(!typeCollection[name]) typeCollection[name] = {};
+        if(!typeCollection[name]) typeCollection[name] = { type: name };
         const singularCollectionName = collectionName.endsWith('s') ? collectionName.slice(0, -1) : collectionName;
         if(typeCollection[name][singularCollectionName]) _uose.utils.log('#register', singularCollectionName, `${name} already have entry ${singularCollectionName}, replacing ${typeCollection[name][singularCollectionName]} with ${cls}`);
         typeCollection[name][singularCollectionName] = cls;

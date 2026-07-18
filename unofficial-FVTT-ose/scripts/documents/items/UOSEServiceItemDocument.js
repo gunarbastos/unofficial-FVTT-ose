@@ -5,8 +5,8 @@ console.log(`Loaded: ${import.meta.url}`);
 
 export class UOSEServiceItemDocument extends UOSEBaseItemDocument {
 
-    _fillEmbedData(clone) {
-        clone.embed ??= {
+    static _fillEmbedData(clone) {
+        clone.system.embed ??= {
             actor: null
         }
     }

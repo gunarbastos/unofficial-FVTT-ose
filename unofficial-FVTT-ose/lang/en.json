@@ -75,6 +75,29 @@
         }
       }
     },
+    "SHEETS": {
+      "ACTORS": {
+        "ANIMAL": {
+          "TITLE": ""
+        },
+        "CHARACTER": {
+          "TITLE": ""
+        },
+        "LANDVEHICLE": {
+          "TITLE": ""
+        },
+        "MONSTER": {
+          "TITLE": ""
+        },
+        "RETAINER": {
+          "TITLE": ""
+        },
+        "WATERVEHICLE": {
+          "TITLE": ""
+        }
+      },
+      "ITEMS": {}
+    },
     "ATTRIBUTES": {
       "STR": "Strength",
       "INT": "Intelligence",

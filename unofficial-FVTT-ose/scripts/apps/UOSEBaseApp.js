@@ -11,7 +11,7 @@ export class UOSEBaseApp extends foundry.applications.api.HandlebarsApplicationM
     static socketId = '';
 
     /** @type UOSEBaseAppSettings */
-    #settings = null;
+    settings = null;
 
     static PARTIALS = undefined;
 
@@ -23,8 +23,9 @@ export class UOSEBaseApp extends foundry.applications.api.HandlebarsApplicationM
 
     constructor(...args) {
         super(...args);
-        this.#settings = new this.constructor.settingsClass();
-        this.#settings.register();
+        this.settings = new this.constructor.settingsClass();
+        this.settings.register();
+        game.uose.utils.deepFreeze(this.settings);
 
         if(this.constructor.PARTIALS) {
             UOSEUtils.log('loading templates for App');
@@ -84,8 +85,8 @@ export class UOSEBaseApp extends foundry.applications.api.HandlebarsApplicationM
 
     async _onFirstRender(context, options) {
         super._onFirstRender(context, options);
-        if(this.#settings && this.#settings.position) {
-            const appPosition = this.#settings.position;
+        if(this.settings && this.settings.position) {
+            const appPosition = this.settings.position;
             if (appPosition && typeof appPosition === 'object' && Object.prototype.toString.call(appPosition) === "[object Object]") {
                 this.setPosition(appPosition);
             }
@@ -93,11 +94,11 @@ export class UOSEBaseApp extends foundry.applications.api.HandlebarsApplicationM
     }
 
     async _setConfigs({show = undefined, position = undefined}){
-        if(this.#settings) {
-            if (this.#settings.isOpened && typeof show === 'boolean')
-                await UOSEUtils.setGameSetting(this.#settings._definitions.isOpened, show);
-            if (this.#settings.position && position)
-                await UOSEUtils.setGameSetting(this.#settings._definitions.position, position);
+        if(this.settings) {
+            if (this.settings.isOpened && typeof show === 'boolean')
+                await UOSEUtils.setGameSetting(this.settings._definitions.isOpened, show);
+            if (this.settings.position && position)
+                await UOSEUtils.setGameSetting(this.settings._definitions.position, position);
         }
     }
 

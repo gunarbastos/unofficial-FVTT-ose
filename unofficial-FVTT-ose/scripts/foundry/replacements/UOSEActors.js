@@ -29,7 +29,6 @@ export class UOSEActors extends CONFIG.ui.actors {
             });
 
             const button = document.createElement('button');
-            //parent.appendChild(button);
             parent.insertBefore(button, parent.firstElementChild);
             button.outerHTML = hbsReturn;
         }

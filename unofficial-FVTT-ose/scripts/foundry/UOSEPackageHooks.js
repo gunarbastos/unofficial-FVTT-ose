@@ -36,8 +36,8 @@ export class UOSEPackageHooks {
 
         UOSEUtils.log('registering sheets');
         // Sheet registrations
-        UOSEPackageHooks.#registerSheets(foundry.documents.collections.Actors, game.uose.classes.sheets.actors);
-        UOSEPackageHooks.#registerSheets(foundry.documents.collections.Items, game.uose.classes.sheets.items);
+        UOSEPackageHooks.#registerSheets(foundry.documents.collections.Actors, 'ACTORS', Object.values(game.uose.classes.actors));
+        UOSEPackageHooks.#registerSheets(foundry.documents.collections.Items, 'ITEMS', Object.values(game.uose.classes.items));
 
         if(game.uose.settings) game.uose.settings.register();
 
@@ -188,84 +188,22 @@ export class UOSEPackageHooks {
     //     await ui.combat.render({parts:['players', 'adversaries']});
     // }
 
-    static #registerSheets(collection, sheetList) {
-        // if(collection.sheetClasses && collection.sheetClasses[UOSEConstants.CORE_ID]){
-        //     for (const sheetId in collection.sheetClasses[UOSEConstants.CORE_ID]) {
-        //         collection.unregisterSheet(UOSEConstants.CORE_ID, collection.sheetClasses[UOSEConstants.CORE_ID][sheetId].cls);
-        //     }
-        // }
-        // for(const sheet of sheetList ?? []){
-        //     collection.registerSheet(UOSEConstants.SYSTEM_ID, sheet.class, {
-        //         types: sheet.types,
-        //         label: sheet.label.en,
-        //         makeDefault: sheet.default,
-        //     });
-        // }
-    }
+    static #registerSheets(collection, documentType, documentList) {
+        if(collection.sheetClasses && collection.sheetClasses[game.uose.constants.CORE_ID]){
+            for (const sheetId in collection.sheetClasses[game.uose.constants.CORE_ID]) {
+                collection.unregisterSheet(game.uose.constants.CORE_ID, collection.sheetClasses[game.uose.constants.CORE_ID][sheetId].cls);
+            }
+        }
 
-    static async #getSceneControlButtons(controls = []){
-        // if (!game?.user) return;
-        //
-        // controls[UOSEConstants.SYSTEM_ID] = {
-        //     name: UOSEConstants.SYSTEM_ID,
-        //     title: UOSEConstants.SYSTEM_ID,
-        //     activeTool: 'doNothing',
-        //     icon: "fas fa-dragon",
-        //     tools: {
-        //         resourceManager: {
-        //             name: "resourceManager",
-        //             title: "Resource Manager",
-        //             icon: "fas fa-address-card",
-        //             toggle: true,
-        //             visible: true,
-        //             active: ResourceManagerApp.SETTINGS_NAME.IS_OPENED ? UOSEUtils.getGameSetting(ResourceManagerApp.SETTINGS_NAME.IS_OPENED) === true : false,
-        //             onChange: (event, active) => {
-        //                 UOSEUtils.log(`tool`, event, active);
-        //                 const app = game.dtg.apps.resourceManager;
-        //                 if (active) {
-        //                     app.render({force: true}, {});
-        //                 } else {
-        //                     app.close({});
-        //                 }
-        //             },
-        //             order: 0,
-        //         },
-        //         rest: {
-        //             name: "rest",
-        //             title: "rest",
-        //             icon: "fas fa-tent",
-        //             visible: true,
-        //             onChange: (event, active) => {
-        //                 UOSEUtils.actionNotYetImplemented(event);
-        //             },
-        //             order: 2,
-        //         },
-        //         countdownProgress: {
-        //             name: "countdownProgress",
-        //             title: "countdown / progress",
-        //             icon: "fas fa-hourglass-start",
-        //             toggle: true,
-        //             visible: true,
-        //             active: false,
-        //             onChange: (event, active) => {
-        //                 UOSEUtils.actionNotYetImplemented(event);
-        //             },
-        //             order: 3,
-        //         }
-        //
-        //     },
-        //     order: 1,
-        //     onChange: (event, active) => {
-        //     }
-        // };
-        // controls[UOSEConstants.SYSTEM_ID].tools.doNothing = {
-        //     name: "doNothing",
-        //     title: "gambiarra",
-        //     icon: "fas fa-empty",
-        //     visible: true,
-        //     order: 66,
-        // };
-
+        for(const item of documentList ?? []){
+            if(!item.sheet) continue;
+            game.uose.utils.log('UOSEPackageHooks', '#registerSheets', 'registering sheet for', documentType, item.type);
+            collection.registerSheet(game.uose.constants.SHORT_ID, item.sheet, {
+                types: [item.type],
+                label: `UOSE.SHEETS.${documentType.toUpperCase()}${!documentType.toLowerCase().endsWith('s') ? 'S' : ''}.${item.type.toUpperCase()}.LABEL`,
+                makeDefault: true,
+            });
+        }
     }
     //#endregion
 }

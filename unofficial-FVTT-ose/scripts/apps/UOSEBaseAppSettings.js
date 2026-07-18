@@ -4,9 +4,11 @@ console.log(`Loaded: ${import.meta.url}`);
 
 export class UOSEBaseAppSettings extends UOSEBaseSettings {
 
-    _definitions = {
-        isOpened: {scope: 'user', config: false, type: Boolean, default: true},
-        position: {scope: 'user', config: false, type: Object, default: {}},
+    _buildDefinitions() {
+        return {
+            isOpened: {scope: 'user', config: false, type: Boolean, default: true},
+            position: {scope: 'user', config: false, type: Object, default: {}},
+        }
     }
 
 }
