@@ -21,10 +21,25 @@ function safeClassTypeRef(name) {
     return name && /^UOSE/.test(name) ? name : '*';
 }
 
+/**
+ * Same as safeClassTypeRef, but wrapped in JSDoc's `typeof` operator - i.e.
+ * "the class/constructor value itself", not an instance of it. This is what
+ * every `UOSE.register*(...)` call actually stores (the class, e.g.
+ * `UOSE.publicView().utils = UOSEUtils`), so referencing it as a bare
+ * `{UOSEUtils}` type (meaning "an instance of UOSEUtils") is wrong and
+ * causes WebStorm to flag calls to the class's `static` members as
+ * inaccessible instance-member access.
+ * @param {string|null} name
+ */
+function classTypeofRef(name) {
+    const ref = safeClassTypeRef(name);
+    return ref === '*' ? '*' : `typeof ${ref}`;
+}
+
 function inlineTypeFromStringMap(map) {
     const entries = Object.entries(map);
     if (!entries.length) return 'object';
-    return `{${entries.map(([k, v]) => `${keyOut(k)}: ${v}`).join(', ')}}`;
+    return `{${entries.map(([k, v]) => `${keyOut(k)}: ${classTypeofRef(v)}`).join(', ')}}`;
 }
 
 function inlineTypeFromTypedEntryMap(map) {
@@ -32,9 +47,9 @@ function inlineTypeFromTypedEntryMap(map) {
     if (!entries.length) return 'object';
     return `{${entries.map(([k, entry]) => {
         const parts = [`type: string`];
-        if (entry.document) parts.push(`document?: ${entry.document}`);
-        if (entry.dataModel) parts.push(`dataModel?: ${entry.dataModel}`);
-        if (entry.sheet) parts.push(`sheet?: ${entry.sheet}`);
+        if (entry.document) parts.push(`document?: ${classTypeofRef(entry.document)}`);
+        if (entry.dataModel) parts.push(`dataModel?: ${classTypeofRef(entry.dataModel)}`);
+        if (entry.sheet) parts.push(`sheet?: ${classTypeofRef(entry.sheet)}`);
         return `${keyOut(k)}: {${parts.join(', ')}}`;
     }).join(', ')}}`;
 }
@@ -99,18 +114,6 @@ export function buildLangTypedef(langJsonPath) {
 export function renderUoseFile(registry, headerTimestamp, langTypedef) {
     const c = registry.classes;
 
-    const classesType = [
-        `base: ${inlineTypeFromStringMap(c.base)}`,
-        `documents: {actors: ${inlineTypeFromStringMap(c.documents.actors)}, items: ${inlineTypeFromStringMap(c.documents.items)}}`,
-        `dataModels: {actors: ${inlineTypeFromStringMap(c.dataModels.actors)}, items: ${inlineTypeFromStringMap(c.dataModels.items)}}`,
-        `sheets: {actors: ${inlineTypeFromStringMap(c.sheets.actors)}, items: ${inlineTypeFromStringMap(c.sheets.items)}}`,
-        `apps: ${inlineTypeFromStringMap(c.apps)}`,
-        `actors: ${inlineTypeFromTypedEntryMap(c.actors)}`,
-        `items: ${inlineTypeFromTypedEntryMap(c.items)}`,
-        `effects: ${inlineTypeFromStringMap(c.effects)}`,
-        `replacements: ${inlineTypeFromStringMap(c.replacements)}`,
-    ].join(', ');
-
     const lines = [
         '// File generated automatically by `tools jsdocs`. Do not edit by hand.',
         `// Last Updated: ${headerTimestamp}`,
@@ -155,7 +158,7 @@ export function renderUoseFile(registry, headerTimestamp, langTypedef) {
         `    /** @type {${safeClassTypeRef(registry.constants)}} */`,
         '    constants;',
         '',
-        `    /** @type {${safeClassTypeRef(registry.utils)}} */`,
+        `    /** @type {${classTypeofRef(registry.utils)}} */`,
         '    utils;',
         '',
         `    /** @type {${safeClassTypeRef(registry.settings)}} */`,
