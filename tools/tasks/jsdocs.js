@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import * as common from '../common.js';
-import {analyzeScripts, groupByDirectory} from '../lib/jsdocsAnalyze.js';
+import {analyzeScripts, groupByDirectory, buildClassIndex} from '../lib/jsdocsAnalyze.js';
 import {buildRegistry} from '../lib/jsdocsRegistry.js';
 import {renderDirectoryFile} from '../lib/jsdocsRender.js';
 import {renderUoseFile, buildLangTypedef} from '../lib/jsdocsUoseGen.js';
@@ -60,6 +60,7 @@ export async function generateJsdocs(file, dir) {
     const parsedFiles = analyzeScripts(scriptsRoot);
     const byDir = groupByDirectory(parsedFiles);
     const registry = buildRegistry(parsedFiles);
+    const classIndex = buildClassIndex(parsedFiles);
     const headerTimestamp = common.formatHeaderTimestamp(common.nowTmz());
 
     // Determine which directories' output files need to be (re)written.
@@ -75,6 +76,7 @@ export async function generateJsdocs(file, dir) {
     }
 
     let written = 0;
+    const expectedFiles = new Set();
     for (const [dirRelPath, filesInDir] of byDir) {
         if (targetDirs && !targetDirs.has(dirRelPath)) continue;
 
@@ -94,10 +96,11 @@ export async function generateJsdocs(file, dir) {
             orderedFiles.sort((a, b) => a.relPath.localeCompare(b.relPath));
         }
 
-        const content = renderDirectoryFile(dirRelPath, orderedFiles, registry, headerTimestamp);
+        const content = renderDirectoryFile(dirRelPath, orderedFiles, registry, classIndex, headerTimestamp);
         if (!content) continue; // e.g. a directory with only helper functions and no classes
 
         const outFile = path.join(jsdocsRoot, dirToOutputFileName(dirRelPath));
+        expectedFiles.add(outFile);
         const changed = writeIfBodyChanged(outFile, content, 2);
         if (changed) {
             console.log(`Updated ${outFile}`);
@@ -111,9 +114,31 @@ export async function generateJsdocs(file, dir) {
     const langTypedef = buildLangTypedef(langJsonPath);
     const uoseContent = renderUoseFile(registry, headerTimestamp, langTypedef);
     const uoseOutFile = path.join(jsdocsRoot, '_uose.js');
+    expectedFiles.add(uoseOutFile);
     if (writeIfBodyChanged(uoseOutFile, uoseContent, 2)) {
         console.log(`Updated ${uoseOutFile}`);
         written++;
+    }
+
+    // Remove stale generated files (e.g. a directory that used to produce output
+    // but no longer does). Only runs on a full, unscoped regeneration - a
+    // --file/--dir run only examines a subset of directories, so it can't safely
+    // know which *other* files are still valid. Guarded to only ever delete files
+    // that carry our own generated-file marker, so hand-authored files placed in
+    // /jsdocs are never touched.
+    if (!targetDirs && fs.existsSync(jsdocsRoot)) {
+        const MARKER = '// File generated automatically by `tools jsdocs`.';
+        for (const entry of fs.readdirSync(jsdocsRoot, {withFileTypes: true})) {
+            if (!entry.isFile() || !entry.name.endsWith('.js')) continue;
+            const full = path.join(jsdocsRoot, entry.name);
+            if (expectedFiles.has(full)) continue;
+            const firstLine = fs.readFileSync(full, 'utf-8').split('\n', 1)[0];
+            if (firstLine.startsWith(MARKER)) {
+                fs.rmSync(full);
+                console.log(`Removed stale ${full}`);
+                written++;
+            }
+        }
     }
 
     console.log(`jsdocs: ${written} file(s) updated.`);

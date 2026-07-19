@@ -26,142 +26,150 @@ export function buildPairingMaps(registry) {
     return {docToDataModel, sheetToDoc};
 }
 
-function literalRender(node) {
-    if (!node || node.type !== 'Literal') return null;
-    if (typeof node.value === 'string') return {jsType: 'string', text: JSON.stringify(node.value)};
-    if (typeof node.value === 'number') return {jsType: 'number', text: String(node.value)};
-    if (typeof node.value === 'boolean') return {jsType: 'boolean', text: String(node.value)};
-    if (node.value === null) return {jsType: '*', text: 'null'};
-    return null;
-}
-
-function indent(text, spaces = 4) {
-    const pad = ' '.repeat(spaces);
-    return text.split('\n').map(l => (l ? pad + l : l)).join('\n');
-}
-
 /**
- * Render a single class (or factory-produced class) as an ambient stub.
- * @param {object} classInfo - from jsdocsParser
- * @param {{source: string, topLevelFunctions: Map}} fileCtx
- * @param {{role: string, pairing: {docToDataModel: Map, sheetToDoc: Map}}} opts
+ * Resolve a class's OWN schema properties (via jsdocsSchema), given its
+ * classInfo/file context.
  */
-export function renderClass(classInfo, fileCtx, opts) {
-    const lines = [];
-    const bodyLines = [];
-    const notes = [];
-
-    // --- header doc / extends ---
-    const extendsClause = classInfo.superClass.raw ? ` extends ${classInfo.superClass.raw}` : '';
-    const headerDocParts = [];
-    if (classInfo.doc) headerDocParts.push(classInfo.doc);
-    if (classInfo.isFactory) {
-        lines.push(`// Produced by calling the \`${classInfo.name}(${(classInfo.factoryParams ?? []).join(', ')})\` factory function.`);
-        lines.push('// Declared here as a plain class purely for type-completion purposes.');
-    }
-
-    // --- schema-derived instance properties (DataModel role only) ---
-    if (opts.role === 'dataModel' && classInfo.hasDefineSchema) {
-        const {properties, notes: schemaNotes} = resolveOwnSchemaProperties(classInfo.schemaObjectNode, {
-            source: fileCtx.source,
-            topLevelFunctions: fileCtx.topLevelFunctions,
-            superAliasNames: new Set(classInfo.schemaSuperAliases ?? []),
-            parserModule,
-        });
-        if (properties.length) {
-            bodyLines.push('// --- Resolved from static defineSchema() ---');
-            for (const prop of properties) {
-                bodyLines.push(`/** @type {${prop.type}} */`);
-                bodyLines.push(`${prop.name};`);
-            }
-        }
-        for (const n of schemaNotes) bodyLines.push(`// NOTE: ${n}`);
-        notes.push(...schemaNotes);
-    }
-
-    // --- document <-> dataModel / sheet <-> document pairing ---
-    if (opts.role === 'document' && opts.pairing.docToDataModel.has(classInfo.name)) {
-        const dm = opts.pairing.docToDataModel.get(classInfo.name);
-        bodyLines.push('// --- Foundry document/data-model pairing (via UOSE.register*) ---');
-        bodyLines.push(`/** @type {${dm}} */`);
-        bodyLines.push('system;');
-    }
-    if (opts.role === 'sheet' && opts.pairing.sheetToDoc.has(classInfo.name)) {
-        const doc = opts.pairing.sheetToDoc.get(classInfo.name);
-        bodyLines.push('// --- Foundry sheet/document pairing (via UOSE.register*) ---');
-        bodyLines.push(`/** @type {${doc}} */`);
-        bodyLines.push('document;');
-    }
-
-    if (bodyLines.length) bodyLines.push('');
-
-    // --- real members, in source order ---
-    for (const m of classInfo.members) {
-        if (m.kind === 'field') {
-            const lit = literalRender(m.valueNode);
-            if (m.doc) bodyLines.push(m.doc);
-            if (lit) {
-                if (!m.doc) bodyLines.push(`/** @type {${lit.jsType}} */`);
-                bodyLines.push(`${m.static ? 'static ' : ''}${m.name} = ${lit.text};`);
-            } else {
-                if (!m.doc) bodyLines.push('/** @type {*} */');
-                bodyLines.push(`${m.static ? 'static ' : ''}${m.name};`);
-            }
-        } else {
-            // constructor | method | get | set
-            const kindPrefix = m.kind === 'get' ? 'get ' : m.kind === 'set' ? 'set ' : '';
-            const asyncPrefix = m.isAsync ? 'async ' : '';
-            const genStar = m.isGenerator ? '*' : '';
-            const staticPrefix = m.static ? 'static ' : '';
-            const nameOut = m.kind === 'constructor' ? 'constructor' : m.name;
-            if (m.doc) bodyLines.push(m.doc);
-            bodyLines.push(`${staticPrefix}${asyncPrefix}${kindPrefix}${genStar}${nameOut}(${m.params.join(', ')}) {}`);
-        }
-    }
-
-    const classHeader = headerDocParts.length ? headerDocParts.join('\n') + '\n' : '';
-    lines.push(`${classHeader}class ${classInfo.name}${extendsClause} {`);
-    lines.push(indent(bodyLines.join('\n')));
-    lines.push('}');
-
-    return {text: lines.join('\n'), notes};
+function ownSchemaProperties(classInfo, file) {
+    if (!classInfo.hasDefineSchema) return {properties: [], notes: []};
+    return resolveOwnSchemaProperties(classInfo.schemaObjectNode, {
+        source: file.source,
+        topLevelFunctions: file.topLevelFunctions,
+        superAliasNames: new Set(classInfo.schemaSuperAliases ?? []),
+        parserModule,
+    });
 }
 
 /**
- * Order a directory's files according to its `order` file (matching by
- * filename, `.js`-enforced), falling back to alphabetical for the rest.
- * @param {string[]} orderEntries - from common.readOrderFile(dir, 'js')
- * @param {Array<{relPath: string}>} files
+ * Recursively flatten a DataModel class's defineSchema() fields, walking the
+ * real `extends` chain (parent-first, own fields override by name) - i.e.
+ * "the object as built in Foundry" per spec. Only resolvable for
+ * locally-known classes/factories; an unresolvable/foreign base (e.g.
+ * `foundry.abstract.TypeDataModel` itself) simply contributes no extra
+ * fields, which is correct since it has none of its own.
+ * @param {string} className
+ * @param {Map<string, {classInfo: object, file: object}>} classIndex
+ * @param {Set<string>} [visited] - cycle guard
+ * @returns {{properties: Array<{name:string,type:string}>, notes: string[]}}
  */
-export function orderFiles(orderEntries, files) {
-    const remaining = [...files];
-    const ordered = [];
-    for (const entry of orderEntries) {
-        const idx = remaining.findIndex(f => f.relPath.split('/').pop() === entry);
-        if (idx !== -1) ordered.push(remaining.splice(idx, 1)[0]);
+export function flattenSchema(className, classIndex, visited = new Set()) {
+    if (visited.has(className)) return {properties: [], notes: []};
+    visited.add(className);
+
+    const entry = classIndex.get(className);
+    if (!entry) return {properties: [], notes: []};
+    const {classInfo, file} = entry;
+
+    let parentProps = [];
+    let notes = [];
+    if (classInfo.superClass.kind === 'local' && classIndex.has(classInfo.superClass.name)) {
+        const parent = flattenSchema(classInfo.superClass.name, classIndex, visited);
+        parentProps = parent.properties;
+        notes = notes.concat(parent.notes);
     }
-    remaining.sort((a, b) => a.relPath.localeCompare(b.relPath));
-    return [...ordered, ...remaining];
+
+    const own = ownSchemaProperties(classInfo, file);
+    notes = notes.concat(own.notes);
+
+    const merged = new Map(parentProps.map(p => [p.name, p]));
+    for (const p of own.properties) merged.set(p.name, p);
+
+    return {properties: [...merged.values()], notes};
+}
+
+function indentBlock(lines) {
+    return lines.map(l => ` * ${l}`).join('\n');
 }
 
 /**
- * Render the aggregate jsdoc file for a whole scripts subdirectory.
+ * Render a `<ClassName>Schema` typedef for a DataModel-role class, if it (or
+ * any of its ancestors) declares schema fields. Returns null if there's
+ * nothing to say (e.g. a class with an empty/unresolvable schema).
+ * @param {string} className
+ * @param {Map} classIndex
+ * @returns {{text: string, notes: string[]}|null}
+ */
+export function renderSchemaTypedef(className, classIndex) {
+    const {properties, notes} = flattenSchema(className, classIndex);
+    if (!properties.length) return null;
+
+    const lines = [
+        `Resolved from ${className}.defineSchema(), flattened across its full`,
+        'inheritance chain (parent fields first, own fields override by name).',
+        `@typedef {object} ${className}Schema`,
+        ...properties.map(p => `@property {${p.type}} ${p.name}`),
+    ];
+    return {
+        text: `/**\n${indentBlock(lines)}\n */`,
+        notes,
+    };
+}
+
+/**
+ * Render a `<DocumentClass>.prototype.system` type augmentation, if the
+ * document is paired to a DataModel via `UOSE.register*`. This is a
+ * *reference* to the real class (never a redeclaration), so it can't shadow
+ * or hijack go-to-definition on the real class.
+ * @param {string} documentClassName
+ * @param {string} dataModelClassName
+ * @param {Map} classIndex
+ */
+export function renderSystemAugmentation(documentClassName, dataModelClassName, classIndex) {
+    const hasSchema = classIndex.has(dataModelClassName) && flattenSchema(dataModelClassName, classIndex).properties.length > 0;
+    const type = hasSchema ? `${dataModelClassName} & ${dataModelClassName}Schema` : dataModelClassName;
+    return [
+        `/** @type {${type}} */`,
+        `${documentClassName}.prototype.system;`,
+    ].join('\n');
+}
+
+/**
+ * Render a `<SheetClass>.prototype.document` type augmentation.
+ */
+export function renderDocumentAugmentation(sheetClassName, documentClassName) {
+    return [
+        `/** @type {${documentClassName}} */`,
+        `${sheetClassName}.prototype.document;`,
+    ].join('\n');
+}
+
+/**
+ * Render the aggregate jsdoc file for a whole scripts subdirectory. Emits
+ * ONLY typedefs and prototype-expando type augmentations - it never
+ * redeclares a real project class, so it can't collide with or hijack
+ * "go to declaration" on the real source.
  * @param {string} dirRelPath
  * @param {Array<object>} filesInDir - parsed file objects for this dir (index.js already excluded upstream)
  * @param {object} registry
+ * @param {Map} classIndex
  * @param {string} headerTimestamp
  */
-export function renderDirectoryFile(dirRelPath, filesInDir, registry, headerTimestamp) {
+export function renderDirectoryFile(dirRelPath, filesInDir, registry, classIndex, headerTimestamp) {
     const role = roleForDir(dirRelPath);
     const pairing = buildPairingMaps(registry);
 
     const chunks = [];
     const allNotes = [];
+
     for (const file of filesInDir) {
         for (const classInfo of file.classes) {
-            const {text, notes} = renderClass(classInfo, file, {role, pairing});
-            chunks.push(text);
-            allNotes.push(...notes.map(n => `${file.relPath}: ${n}`));
+            if (role === 'dataModel') {
+                const typedef = renderSchemaTypedef(classInfo.name, classIndex);
+                if (typedef) {
+                    chunks.push(typedef.text);
+                    allNotes.push(...typedef.notes.map(n => `${file.relPath}: ${n}`));
+                }
+            } else if (role === 'document' && pairing.docToDataModel.has(classInfo.name)) {
+                const dm = pairing.docToDataModel.get(classInfo.name);
+                chunks.push(renderSystemAugmentation(classInfo.name, dm, classIndex));
+            } else if (role === 'sheet' && pairing.sheetToDoc.has(classInfo.name)) {
+                const doc = pairing.sheetToDoc.get(classInfo.name);
+                chunks.push(renderDocumentAugmentation(classInfo.name, doc));
+            }
+            // role === 'other' (apps/engine/foundry/replacements): nothing to add -
+            // real methods/fields are already fully visible via real "go to
+            // declaration" on the actual source, so there's no non-redundant,
+            // non-colliding value jsdocs can add for these.
         }
     }
 
@@ -172,8 +180,10 @@ export function renderDirectoryFile(dirRelPath, filesInDir, registry, headerTime
         `// Last Updated: ${headerTimestamp}`,
         '//',
         '// This file is part of the "jsdocs" WebStorm library (see .idea/libraries/jsdocs.xml)',
-        '// and is never imported or executed - it exists purely to give WebStorm real',
-        '// code-completion and inspections for the runtime shape of UOSE classes.',
+        '// and is never imported or executed. It ONLY ever declares brand-new type names',
+        '// (`<Class>Schema` typedefs) and augments real classes via `Class.prototype.x = ...`',
+        '// references - it never redeclares a real class under its own name, so it cannot',
+        '// shadow or hijack "go to declaration" on the actual source.',
     ];
     if (allNotes.length) {
         header.push('//', '// Notes from static analysis (unresolved/dynamic schema pieces):');
