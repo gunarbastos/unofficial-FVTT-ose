@@ -1,14 +1,20 @@
 {
+  "name": "unofficial-fvtt-ose",
+  "private": true,
+  "type": "module",
   "scripts": {
-    "preinstall": "python -c \"import sys; exit(0 if sys.version_info >= (3,10) else 1)\" || (echo Python 3.10+ required && exit 1)"
+    "tools": "node tools/index.js"
   },
   "engines": {
-    "python": ">=3.10.0"
+    "node": ">=20.0.0"
   },
   "devDependencies": {
     "less": "^4.4.0"
   },
   "dependencies": {
+    "acorn": "^8.15.0",
+    "acorn-walk": "^8.3.4",
+    "archiver": "^7.0.1",
     "fast-glob": "^3.3.3"
   }
 }
