@@ -1,8 +1,8 @@
-import {UOSE} from "../../foundry/index.js";
+import {UOSE, UOSEMixins} from "../../foundry/index.js";
 
 console.log(`Loaded: ${import.meta.url}`);
 
-export class UOSEBaseActorSheet extends foundry.applications.api.HandlebarsApplicationMixin(foundry.applications.sheets.ActorSheetV2) {
+export class UOSEBaseActorSheet extends UOSEMixins.UOSESheet(foundry.applications.api.HandlebarsApplicationMixin(foundry.applications.sheets.ActorSheetV2)) {
 
     static get PARTS() {
         const baseFolder = game.uose.constants.TEMPLATES.DIR.ROOT_DIR

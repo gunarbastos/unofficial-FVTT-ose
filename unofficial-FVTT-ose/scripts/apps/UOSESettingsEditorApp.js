@@ -1,13 +1,12 @@
 import {UOSEBaseApp} from "./UOSEBaseApp.js";
-import {UOSE} from "../foundry/index.js";
+import {UOSE, UOSEMixins} from "../foundry/index.js";
 import {UOSESettingsEditorSettings} from "./UOSESettingsEditorSettings.js";
 
 console.log(`Loaded: ${import.meta.url}`);
 
-export class UOSESettingsEditorApp extends UOSEBaseApp {
+export class UOSESettingsEditorApp extends UOSEMixins.UOSEApp("SettingsEditorApp", UOSEBaseApp) {
 
     static settingsClass = UOSESettingsEditorSettings;
-    static id = "SettingsEditorApp";
 
     static get PARTS() {
         return {
@@ -30,11 +29,14 @@ export class UOSESettingsEditorApp extends UOSEBaseApp {
     }
 
     static get DEFAULT_OPTIONS() {
-        const options = UOSESettingsEditorApp.baseDefaultOptions();
-        options.window.title = 'UOSE.APPS.SETTINGS_EDITOR.TITLE';
-        options.position = {width: '80%', height: '80%', top: '20%', left: '20%' };
-        options.tag = 'form';
-        return options;
+        return {
+            position: {width: '80%', height: '80%', top: '20%', left: '20%' },
+            tag: 'form',
+        }
+    }
+
+    get title() {
+        return game.uose.utils.localize(game.uose.lang.APPS.SETTINGS_EDITOR.TITLE);
     }
 
     static async formSubmitHandler(event, form, formData) {

@@ -320,6 +320,81 @@
   height: 128px;
   width: 128px;
 }
+.uose.uose-pma {
+  interpolate-size: allow-keywords;
+}
+.uose.uose-pma .pma-content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.uose.uose-pma h4.divider {
+  margin: 0.5em 0;
+}
+.uose.uose-pma h4.divider::before {
+  margin-right: 0;
+}
+.uose.uose-pma h4.divider::after {
+  margin-left: 0;
+}
+.uose.uose-pma h4.divider.light::before,
+.uose.uose-pma h4.divider.light::after {
+  border-color: var(--color-cool-3);
+}
+.uose.uose-pma .actions {
+  display: flex;
+  gap: 1em;
+  align-items: center;
+  justify-content: center;
+}
+.uose.uose-pma .workspace {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  gap: 0.5em;
+}
+.uose.uose-pma .workspace-panel {
+  background: var(--background);
+  border-radius: 2%;
+  padding: 1em;
+}
+.uose.uose-pma .workspace-panel summary i {
+  margin-right: 0.5em;
+}
+.uose.uose-pma .workspace-panel .workspace-panel-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+.uose.uose-pma .workspace-panel::details-content {
+  block-size: 0;
+  transition: block-size 0.3s, content-visibility 0.3s;
+  transition-behavior: allow-discrete;
+}
+.uose.uose-pma .workspace-panel[open]::details-content {
+  block-size: auto;
+  /*block-size: calc-size(auto, size);*/
+}
+.uose.uose-pma .party-members .member {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+.uose.uose-pma .party-members .member-expedition-flag {
+  display: flex;
+  align-items: center;
+}
+.uose.uose-pma .party-members .member-name {
+  width: 100%;
+}
+.uose.uose-pma .party-members .member-actions {
+  display: flex;
+  gap: 0.2em;
+}
+.uose.uose-pma .party-members .member-actions button {
+  border: none;
+}
 .uose.SettingsEditorApp .sea-content {
   display: grid;
   grid-template-columns: 20% minmax(0, 1fr);

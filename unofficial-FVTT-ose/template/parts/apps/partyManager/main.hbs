@@ -1,1 +1,55 @@
-<div class="pma-content">TEMP AS FUCK!</div>
+<div class="pma-content">
+    <div class="actions">
+        <button><i class="fa fa-coins"></i>{{localize LANG.APPS.PARTY_MANAGER.UI.ADD_GOLD_BTN}}</button>
+        <button><i class="fa fa-treasure-chest"></i>{{localize LANG.APPS.PARTY_MANAGER.UI.ADD_ITEMS_BTN}}</button>
+        <button><i class="fa fa-medal"></i>{{localize LANG.APPS.PARTY_MANAGER.UI.ADD_XP_BTN}}</button>
+    </div>
+    <h4 class="divider"></h4>
+    <div class="workspace">
+        <details class="workspace-panel" open>
+            <summary><i class="fa fa-users"></i>{{localize LANG.APPS.PARTY_MANAGER.UI.MEMBERS_TITLE}}</summary>
+            <h4 class="divider light"></h4>
+            {{#each members as |member| ~}}
+                <div class="workspace-panel-content party-members">
+                    <div class="member">
+                        <div class="member-expedition-flag">
+                            <input type="checkbox" id="{{member.actor.uuid}}_expedition" name="{{member.actor.uuid}}.expedition" class="member-switch" switch {{checked member.expedition}}/>
+                            <label for="{{member.actor.uuid}}_expedition"><i class="fa fa-wagon-covered fa-thin"></i></label>
+                        </div>
+                        <label class="member-name">
+                            <i class="fa {{#if (eq 'character' member.type)}}fa-user-crown{{/if}}{{#if (eq 'retainer' member.type)}}fa-user-group-crown{{/if}}{{#if (eq 'npc' member.type)}}fa-user{{/if}}"></i>
+                            {{member.actor.name}}
+                        </label>
+                        {{#if (eq 'npc' member.type)~}}
+                            <div class="member-actions">
+                                <button><i class="fa fa-trash-can fa-sm"></i></button>
+                                <button><i class="fa fa-lock fa-sm"></i></button>
+                            </div>
+                        {{~/if}}
+                    </div>
+                </div>
+            {{~/each}}
+        </details>
+        <details class="workspace-panel" open>
+            <summary><i class="fa fa-treasure-chest"></i>{{localize LANG.APPS.PARTY_MANAGER.UI.TREASURE_TITLE}}</summary>
+            <h4 class="divider light"></h4>
+            <div class="workspace-panel-content">
+                <div>{{localize LANG.APPS.PARTY_MANAGER.UI.TREASURE_GOLD}}</div>
+                <div>{{localize LANG.APPS.PARTY_MANAGER.UI.TREASURE_LOOT}}</div>
+            </div>
+        </details>
+        <details class="workspace-panel" open>
+            <summary><i class="fa fa-people-arrows"></i>{{localize LANG.APPS.PARTY_MANAGER.UI.OTHER_ACTORS_TITLE}}</summary>
+            <h4 class="divider light"></h4>
+            <div class="workspace-panel-content actor-list">
+                <div class="actor">
+                    <label class="actor-name"><i class="fa fa-user-crown"></i> Name</label>
+                    <div class="actor-actions">
+                        <button><i class="fa fa-add fa-sm"></i></button>
+                        <button><i class="fa fa-info fa-sm"></i></button>
+                    </div>
+                </div>
+            </div>
+        </details>
+    </div>
+</div>

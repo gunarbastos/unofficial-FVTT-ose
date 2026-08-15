@@ -1,4 +1,4 @@
-polymorphicDataType
-baseDataModel
-valueRangeDataModel
-effectDataModel
+TGLPolymorphicDataType
+UOSEBaseDataModel
+UOSEValueRangeDataModel
+UOSEEffectDataModel

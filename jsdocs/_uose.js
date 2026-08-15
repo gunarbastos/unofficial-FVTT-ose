@@ -1,5 +1,5 @@
 // File generated automatically by `tools jsdocs`. Do not edit by hand.
-// Last Updated: 19/07/2026 20:21:48.336 UTC-3
+// Last Updated: 14/08/2026 15:28:03.263 UTC-3
 //
 // Mirrors the runtime shape of `_uose` / `game.uose` (scripts/foundry/uose.js),
 // including everything registered into it via `UOSE.Register*(...)` calls
@@ -11,6 +11,14 @@
  * string (e.g. `_uose.lang.SYSTEM.NAME === "UOSE.SYSTEM.NAME"`), so every leaf
  * here is typed as `string`.
  * @typedef {object} _UOSELang
+ * @property {object} COMMON
+ * @property {object} COMMON.UI
+ * @property {string} COMMON.UI.ADD
+ * @property {string} COMMON.UI.EDIT
+ * @property {string} COMMON.UI.REMOVE
+ * @property {string} COMMON.UI.INCREASE
+ * @property {string} COMMON.UI.DECREASE
+ * @property {string} COMMON.UI.SETTINGS
  * @property {object} SYSTEM
  * @property {string} SYSTEM.NAME
  * @property {string} SYSTEM.SHORT
@@ -179,6 +187,17 @@
  * @property {string} APPS.PARTY_MANAGER.TITLE
  * @property {object} APPS.PARTY_MANAGER.UI
  * @property {string} APPS.PARTY_MANAGER.UI.LAUNCHER_BTN
+ * @property {string} APPS.PARTY_MANAGER.UI.ADD_GOLD_BTN
+ * @property {string} APPS.PARTY_MANAGER.UI.ADD_ITEMS_BTN
+ * @property {string} APPS.PARTY_MANAGER.UI.ADD_XP_BTN
+ * @property {string} APPS.PARTY_MANAGER.UI.MEMBERS_TITLE
+ * @property {string} APPS.PARTY_MANAGER.UI.PLAYER_MEMBER
+ * @property {string} APPS.PARTY_MANAGER.UI.RETAINER_MEMBER
+ * @property {string} APPS.PARTY_MANAGER.UI.GUEST_MEMBER
+ * @property {string} APPS.PARTY_MANAGER.UI.TREASURE_TITLE
+ * @property {string} APPS.PARTY_MANAGER.UI.TREASURE_GOLD
+ * @property {string} APPS.PARTY_MANAGER.UI.TREASURE_LOOT
+ * @property {string} APPS.PARTY_MANAGER.UI.OTHER_ACTORS_TITLE
  * @property {object} SHEETS
  * @property {object} SHEETS.ACTORS
  * @property {object} SHEETS.ACTORS.ANIMAL

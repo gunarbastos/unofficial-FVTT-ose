@@ -1,0 +1,101 @@
+.uose.uose-pma {
+  interpolate-size: allow-keywords;
+
+  .pma-content {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  h4.divider {
+    margin: 0.5em 0;
+
+    &::before {
+      margin-right: 0;
+    }
+
+    &::after {
+      margin-left: 0;
+    }
+
+    &.light {
+      &::before,
+      &::after {
+        border-color: var(--color-cool-3);
+      }
+    }
+  }
+
+  .actions {
+    display: flex;
+    gap: 1em;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .workspace {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    gap: 0.5em;
+  }
+
+  .workspace-panel {
+    background: var(--background);
+    border-radius: 2%;
+    padding: 1em;
+
+    summary {
+      i {
+        margin-right: 0.5em;
+      }
+    }
+
+    .workspace-panel-content {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5em;
+    }
+
+    &::details-content {
+      block-size: 0;
+
+      transition: block-size 0.3s, content-visibility 0.3s;
+      transition-behavior: allow-discrete;
+    }
+
+    &[open]::details-content {
+      block-size: auto;
+      /*block-size: calc-size(auto, size);*/
+    }
+
+  }
+
+  .party-members {
+    .member {
+      display: flex;
+      align-items: center;
+      gap: 0.5em;
+    }
+
+    .member-expedition-flag {
+      display: flex;
+      align-items: center;
+    }
+
+    .member-name {
+      width: 100%;
+    }
+
+    .member-actions {
+      display: flex;
+      gap: 0.2em;
+
+      button {
+        border: none;
+      }
+    }
+  }
+
+}

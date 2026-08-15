@@ -1,5 +1,5 @@
 // File generated automatically by `tools jsdocs`. Do not edit by hand.
-// Last Updated: 19/07/2026 19:47:49.905 UTC-3
+// Last Updated: 12/08/2026 10:27:14.481 UTC-3
 //
 // This file is part of the "jsdocs" WebStorm library (see .idea/libraries/jsdocs.xml)
 // and is never imported or executed. It ONLY ever declares brand-new type names
@@ -9,6 +9,35 @@
 //
 // Notes from static analysis (unresolved/dynamic schema pieces):
 //  - dataModels/UOSEAbilityDataModel.js: unmapped Foundry field type 'TGLPolymorphicEmbeddedField' - defaulted to '*'
+
+/**
+ * Resolved from UOSEBaseDataModel.defineSchema(), flattened across its full
+ * inheritance chain (parent fields first, own fields override by name).
+ * @typedef {object} UOSEBaseDataModelSchema
+ * @property {object} automation
+ */
+
+/**
+ * Resolved from UOSEEmbedBaseDataModel.defineSchema(), flattened across its full
+ * inheritance chain (parent fields first, own fields override by name).
+ * @typedef {object} UOSEEmbedBaseDataModelSchema
+ * @property {object} automation
+ */
+
+/**
+ * Resolved from UOSEValueRangeDataModel.defineSchema(), flattened across its full
+ * inheritance chain (parent fields first, own fields override by name).
+ * @typedef {object} UOSEValueRangeDataModelSchema
+ * @property {number} start
+ * @property {number} end
+ */
+
+/**
+ * Resolved from UOSEEffectDataModel.defineSchema(), flattened across its full
+ * inheritance chain (parent fields first, own fields override by name).
+ * @typedef {object} UOSEEffectDataModelSchema
+ * @property {string} internalType
+ */
 
 /**
  * Resolved from UOSEAbilityDataModel.defineSchema(), flattened across its full
@@ -37,27 +66,6 @@
  * @property {string} targets
  * @property {string} saveAgainst
  * @property {string} description
- */
-
-/**
- * Resolved from UOSEBaseDataModel.defineSchema(), flattened across its full
- * inheritance chain (parent fields first, own fields override by name).
- * @typedef {object} UOSEBaseDataModelSchema
- * @property {object} automation
- */
-
-/**
- * Resolved from UOSEEmbedBaseDataModel.defineSchema(), flattened across its full
- * inheritance chain (parent fields first, own fields override by name).
- * @typedef {object} UOSEEmbedBaseDataModelSchema
- * @property {object} automation
- */
-
-/**
- * Resolved from UOSEEffectDataModel.defineSchema(), flattened across its full
- * inheritance chain (parent fields first, own fields override by name).
- * @typedef {object} UOSEEffectDataModelSchema
- * @property {string} internalType
  */
 
 /**
@@ -119,12 +127,4 @@
  * @property {number} min
  * @property {number} max
  * @property {number} value
- */
-
-/**
- * Resolved from UOSEValueRangeDataModel.defineSchema(), flattened across its full
- * inheritance chain (parent fields first, own fields override by name).
- * @typedef {object} UOSEValueRangeDataModelSchema
- * @property {number} start
- * @property {number} end
  */

@@ -1,13 +1,16 @@
 import {UOSEBaseApp} from "./UOSEBaseApp.js";
 import {UOSEPartyManagerSettings} from "./UOSEPartyManagerSettings.js";
-import {UOSE} from "../foundry/index.js";
+import {UOSE, UOSEMixins} from "../foundry/index.js";
 
 console.log(`Loaded: ${import.meta.url}`);
 
-export class UOSEPartyManagerApp extends UOSEBaseApp {
+/**
+ * @typedef {UOSEBaseApp} UOSEPartyManagerApp
+ * @property {UOSEPartyManagerSettings} settings
+ */
+export class UOSEPartyManagerApp extends UOSEMixins.UOSEApp("uose-pma", UOSEBaseApp) {
 
     static settingsClass = UOSEPartyManagerSettings;
-    static id = "uose-pma";
 
     //#region AppUI
     static get PARTS() {
@@ -31,11 +34,13 @@ export class UOSEPartyManagerApp extends UOSEBaseApp {
     // }
 
     static get DEFAULT_OPTIONS() {
-        const options = UOSEPartyManagerApp.baseDefaultOptions();
-        options.window.title = 'UOSE.APPS.PARTY_MANAGER.TITLE';
-        // options.position = {width: '80%', height: '80%', top: '20%', left: '20%' };
-        options.tag = 'form';
-        return options;
+        return {
+            tag: 'form'
+        }
+    }
+
+    get title(){
+        return game.uose.utils.localize(game.uose.lang.APPS.PARTY_MANAGER.TITLE);
     }
 
     static async formSubmitHandler(event, form, formData) {
@@ -44,8 +49,14 @@ export class UOSEPartyManagerApp extends UOSEBaseApp {
 
     async _prepareContext(options) {
         const base = await super._prepareContext(options);
+        const expeditionMembers = game.uose.apps.partyManager.settings.expeditionMembers;
+        const partyMembers = game.uose.classes.apps.PartyManager.getPartyMembers().map(
+            member => { return {...member, expedition: expeditionMembers.some(uuid => uuid === member.actor.uuid)}}
+        );
         return {
             ...base,
+            members: partyMembers,
+            treasure: game.uose.apps.partyManager.settings.treasure
         };
     }
     //#endregion

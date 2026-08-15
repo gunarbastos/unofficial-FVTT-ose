@@ -1,5 +1,15 @@
 {
   "UOSE": {
+    "COMMON": {
+      "UI": {
+        "ADD": "Add",
+        "EDIT": "Edit",
+        "REMOVE": "Remove",
+        "INCREASE": "Increase",
+        "DECREASE": "Decrease",
+        "SETTINGS": "Settings"
+      }
+    },
     "SYSTEM": {
       "NAME": "Unofficial Old-School Essentials",
       "SHORT": "UOSE"
@@ -71,7 +81,18 @@
         "NAME": "Party Manager",
         "TITLE": "Party Manager",
         "UI": {
-          "LAUNCHER_BTN": "{UOSE.SYSTEM.SHORT} {UOSE.APPS.PARTY_MANAGER.NAME}"
+          "LAUNCHER_BTN": "{UOSE.SYSTEM.SHORT} {UOSE.APPS.PARTY_MANAGER.NAME}",
+          "ADD_GOLD_BTN": "Add Gold",
+          "ADD_ITEMS_BTN": "Add Items",
+          "ADD_XP_BTN": "Add XP",
+          "MEMBERS_TITLE": "Party Members",
+          "PLAYER_MEMBER": "Player",
+          "RETAINER_MEMBER": "Retainer",
+          "GUEST_MEMBER": "Guest",
+          "TREASURE_TITLE": "Treasure",
+          "TREASURE_GOLD": "Money",
+          "TREASURE_LOOT": "Loot",
+          "OTHER_ACTORS_TITLE": "Other Actors"
         }
       }
     },

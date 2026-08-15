@@ -6,9 +6,11 @@
     </facet>
   </component>
   <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$/../daggerheart_tg/dtg">
+      <excludePattern pattern="*" />
+    </content>
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/.venv" />
-      <excludeFolder url="file://$MODULE_DIR$/dtg-old" />
       <excludeFolder url="file://$MODULE_DIR$/releases" />
       <excludeFolder url="file://$MODULE_DIR$/tools" />
       <excludeFolder url="file://$MODULE_DIR$/.idea" />

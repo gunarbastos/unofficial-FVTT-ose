@@ -1,8 +1,8 @@
-import {UOSE} from "../../foundry/index.js";
+import {UOSE, UOSEMixins} from "../../foundry/index.js";
 
 console.log(`Loaded: ${import.meta.url}`);
 
-export class UOSEBaseItemSheet extends foundry.applications.api.HandlebarsApplicationMixin(foundry.applications.sheets.ItemSheetV2) {
+export class UOSEBaseItemSheet extends UOSEMixins.UOSESheet(foundry.applications.api.HandlebarsApplicationMixin(foundry.applications.sheets.ItemSheetV2)) {
 
     static _hasSpecific = undefined;
 

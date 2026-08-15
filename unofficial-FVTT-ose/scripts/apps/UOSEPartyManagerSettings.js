@@ -2,6 +2,37 @@ import {UOSEBaseAppSettings} from "./UOSEBaseAppSettings.js";
 
 console.log(`Loaded: ${import.meta.url}`);
 
+/**
+ * @typedef {Object} UOSEPartyManagerSettingsMember
+ * @property {string} actor
+ * @property {string} observations
+ * @property {{value: number, frequency: number}} wage
+ * @property {{value: number, frequency: number, fractionalShares: number}} fee
+ */
+
+/**
+ * @typedef {Object} UOSEPartyManagerSettingsTreasureLedger
+ * @prop {string} id
+ * @prop {number} timestamp
+ * @prop {string} actor
+ * @prop {string} kind
+ * @prop {number} amount
+ * @prop {Object} item
+ */
+
+/**
+ * @typedef {Object} UOSEPartyManagerSettingsTreasure
+ * @property {number} gold
+ * @property {Array[Object]} items
+ * @property {Array[UOSEPartyManagerSettingsTreasureLedger]} ledger
+ */
+
+/**
+ * @typedef {UOSEBaseAppSettings} UOSEPartyManagerSettings
+ * @property {Array[UOSEPartyManagerSettingsMember]} manualMembers
+ * @property {Array[string]} expeditionMembers
+ * @property {UOSEPartyManagerSettingsTreasure} treasure
+ */
 export class UOSEPartyManagerSettings extends UOSEBaseAppSettings {
 
     _namespace = `PartyManager`

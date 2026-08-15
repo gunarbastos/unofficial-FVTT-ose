@@ -7,7 +7,6 @@ let _rawConstants = {
     SHORT_ID: "uose",
     CSS_ROOT_CLASS: "uose",
     PACKAGE_TYPE: "system",
-    VERSION: "0.0.1",
     FOUNDRY: CONST,
 }
 
@@ -79,7 +78,10 @@ _rawConstants = {
     },
 
     //Enums
-
+    FLAG_TYPES: {
+        user: 'user',
+        document: 'document',
+    }
     //Defaults
 }
 

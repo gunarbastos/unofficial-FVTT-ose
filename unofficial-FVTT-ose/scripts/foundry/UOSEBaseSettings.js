@@ -1,44 +1,12 @@
 import {UOSE} from "./uose.js";
+import {TGLBaseSettings} from "./TGLBaseSettings.js";
 
 console.log(`Loaded: ${import.meta.url}`);
 
-export class UOSEBaseSettings {
-
-    #definitions;
-
-    get _definitions() {
-        if (!this.#definitions) {
-            this.#definitions = this._buildDefinitions();
-        }
-        return this.#definitions;
-    }
-
-    _buildDefinitions() {
-        return {};
-    }
-
-    _namespace = null;
+export class UOSEBaseSettings extends TGLBaseSettings {
 
     register(){
-        for(const [settingKey, settingValue] of Object.entries(this._definitions)) {
-            const finalSettingKey = this._namespace ? `${this._namespace}_${settingKey}` : settingKey;
-            if(game.settings.settings.has(`${game.uose.constants.PACKAGE_ID}.${finalSettingKey}`)) continue; //already registered
-            game.uose.utils.log(this.constructor.name, `Registering Setting`, finalSettingKey);
-            settingValue.key = finalSettingKey;
-            const hasMethod = typeof this[`${settingKey}OnChange`] === 'function';
-            if(hasMethod === true) {
-                settingValue.onChange = this[`${settingKey}OnChange`];
-            }
-            game.settings.register(game.uose.constants.PACKAGE_ID, finalSettingKey, settingValue);
-
-            Object.defineProperty(this, settingKey, {
-               enumerable: true,
-               configurable: true,
-               get () {
-                   return game.uose.utils.getGameSetting(settingValue);
-               }
-            });
-        }
+        this._internalRegister(game.uose.constants.PACKAGE_ID);
     }
 
 }

@@ -2,7 +2,7 @@
   "id": "unofficial-FVTT-ose",
   "title": "Unofficial Old School Essentials (OSE)",
   "description": "Unofficial Old Shool Essentials / Advanced Fantasy system for Foundry VTT.",
-  "version": "0.0.0.1",
+  "version": "0.0.1",
   "compatibility": {
     "verified": 14
   },
@@ -90,7 +90,7 @@
       "Weapon": {},
       "Ammunition": {},
       "Armor": {},
-      "Adventuring Gear": {},
+      "AdventuringGear": {},
       "Container": {},
       "Poison": {},
       "Spell": {},
