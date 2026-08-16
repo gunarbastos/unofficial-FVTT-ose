@@ -5,13 +5,6 @@ console.log(`Loaded: ${import.meta.url}`);
 
 export class UOSERetainerActorSheet extends UOSEBaseActorSheet {
 
-    static get PARTS() {
-        const baseFolder = `${game.uose.constants.TEMPLATES.DIR.APPV2PARTS}/sheets/actors/Retainer`
-
-        return {
-            //TODO: fill parts
-        };
-    }
 
     static get DEFAULT_OPTIONS() {
         return {

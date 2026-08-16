@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="ProjectTasksOptions">
+  <component name="ProjectTasksOptions" suppressed-tasks="Less">
     <TaskOptions isEnabled="true">
       <option name="arguments" value="less" />
       <option name="checkSyntaxErrors" value="true" />
       <option name="description" />
       <option name="exitCodeBehavior" value="ERROR" />
-      <option name="fileExtension" value="less" />
+      <option name="fileExtension" value="*" />
       <option name="immediateSync" value="true" />
       <option name="name" value="less" />
       <option name="output" value="" />
@@ -26,7 +26,7 @@
       <option name="checkSyntaxErrors" value="true" />
       <option name="description" />
       <option name="exitCodeBehavior" value="ERROR" />
-      <option name="fileExtension" value="js" />
+      <option name="fileExtension" value="*" />
       <option name="immediateSync" value="true" />
       <option name="name" value="index.js" />
       <option name="output" value="" />

@@ -1,36 +1,33 @@
 import {TGLMixins} from "./TGLMixins.js";
-import {TGLUtils} from "./TGLUtils.js";
+import {UOSE} from "./uose.js";
 
 console.log(`Loaded: ${import.meta.url}`);
 
 export class UOSEMixins {
 
-    static #defaultParts = [
+    static #defaultMixins = [
         TGLMixins.MIXINS.CaretPositionPreservation,
         TGLMixins.MIXINS.SettingsRegistration,
         TGLMixins.MIXINS.ShowSettings,
         TGLMixins.MIXINS.RegisterPartials
     ];
 
-    static #UOSECommon(BaseClass, Mixins) {
+    static #UOSECommon(Type, BaseClass, Mixins) {
 
         return class extends TGLMixins.BuildComposedMixins(BaseClass, Mixins) {
 
-            /*expected format
-            * {
-            *   flagName: {type: 'user'|'document', default: ''},
-            *   flagName: {type: 'user'|'document'}
-            * }
-            * */
-            get _flags() { return {}; }
-            #flags = undefined;
-            get flags () {
-                if(!this.#flags) {
-                    this.#flags = {};
-                    this._buildFlags();
-                    Object.freeze(this.#flags);
+            static get PARTS() {
+                const domain = UOSE.getDomainFromName(this.name);
+                let mainFilePath = `${game.uose.constants.TEMPLATES.DIR.ROOT_DIR}/missing.hbs`;
+                if (domain) {
+                    const domainFilePath = `${game.uose.constants.TEMPLATES.DIR.APPV2PARTS}/${Type.toLowerCase()}s/${domain}/main.hbs`;
+                    if(domainFilePath in Handlebars.partials) mainFilePath = domainFilePath;
                 }
-                return this.#flags;
+                game.uose.utils.log('UOSEMixins', '#UOSECommon', 'static get PARTS()', this.name, domain, mainFilePath);
+                return {
+                    main: { template: mainFilePath  },
+                    debug: { template: `${game.uose.constants.TEMPLATES.DIR.ROOT_DIR}/debug.hbs`}
+                }
             }
 
             static get DEFAULT_OPTIONS() {
@@ -50,8 +47,22 @@ export class UOSEMixins {
                 }
             }
 
-            get title(){
-                return game.uose.utils.localize(this.options.window.title ?? 'Missing Title');
+            //#region Flags
+            /*expected format
+            * {
+            *   flagName: {type: 'user'|'document', default: ''},
+            *   flagName: {type: 'user'|'document'}
+            * }
+            * */
+            get _flags() { return {}; }
+            #flags = undefined;
+            get flags () {
+                if(!this.#flags) {
+                    this.#flags = {};
+                    this._buildFlags();
+                    Object.freeze(this.#flags);
+                }
+                return this.#flags;
             }
 
             getUserFlag(flag){
@@ -110,6 +121,12 @@ export class UOSEMixins {
                     }
                 }
             }
+            //#endregion
+
+            //#region overrides
+            get title(){
+                return game.uose.utils.localize(this.options.window.title ?? 'Missing Title');
+            }
 
             async _prepareContext(options) {
                 const base = await super._prepareContext(options);
@@ -123,6 +140,18 @@ export class UOSEMixins {
                 };
             }
 
+            _configureRenderOptions(options) {
+                super._configureRenderOptions(options);
+                if(game.user && game.uose.settings.debug) {
+                    options.parts.push("debug");
+                } else {
+                    const debugIdx = options.parts.indexOf("debug");
+                    if(debugIdx > -1) options.parts.splice(debugIdx, 1);
+                }
+            }
+            //#endregion
+
+            //#region utilities
             async reRenderHeader(){
                 await this.render({ window: { controls: true } });
             }
@@ -131,58 +160,27 @@ export class UOSEMixins {
                 const controls = this.options?.window?.controls ?? [];
                 return controls.find(c => c.action === action);
             }
+            //#endregion
         }
     }
 
     static UOSESheet(BaseClass) {
-        return class extends UOSEMixins.#UOSECommon(BaseClass, [
-            ...UOSEMixins.#defaultParts,
+        return class extends UOSEMixins.#UOSECommon('sheet', BaseClass, [
+            ...UOSEMixins.#defaultMixins,
         ]) {
 
-            // static FLAG_DEFAULT_VALUES = {}
-            //
-            //
-            // _getFlag(flag){
-            //     let value = this.document.getFlag(game.uose.constants.PACKAGE_ID, flag);
-            //     if (Utils.isBoxedPrimitive(value)) {
-            //         ui.notifications.error(`Flag ${flag} is a boxed primitive.`);
-            //         value = undefined;
-            //     }
-            //     if(!value && this.constructor.FLAG_DEFAULT_VALUES[flag]) value = this.constructor.FLAG_DEFAULT_VALUES[flag];
-            //
-            //     return value;
-            // }
-            //
-            // async _setFlag(flag, value){
-            //     if (Utils.isBoxedPrimitive(value)) {
-            //         ui.notifications.error(`Value passed to flag ${flag} is a boxed primitive.`);
-            //         return;
-            //     }
-            //     let finalName = `flags.${game.uose.constants.PACKAGE_ID}.${flag}`;
-            //     if(!value){
-            //         value = null;
-            //         finalName = `flags.${game.uose.constants.PACKAGE_ID}.-=${flag}`;
-            //     }
-            //     await this.document.update({[finalName]: value}, {render: false});
-            // }
 
         }
     }
 
     static UOSEApp(AppId, BaseClass) {
-        return class extends UOSEMixins.#UOSECommon(BaseClass, [
-            ...UOSEMixins.#defaultParts,
+        return class extends UOSEMixins.#UOSECommon('app', BaseClass, [
+            ...UOSEMixins.#defaultMixins,
             TGLMixins.MIXINS.OpenCloseStatusPreservation,
             TGLMixins.MIXINS.RememberPosition
         ]) {
 
             static id = AppId;
-
-            static get PARTS() {
-                return {
-                    content: { template: `${game.uose.constants.TEMPLATES.DIR.ROOT_DIR}/missing.hbs` },
-                };
-            }
 
             static get DEFAULT_OPTIONS() {
                 return {

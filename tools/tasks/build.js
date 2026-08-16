@@ -53,7 +53,7 @@ export async function buildRelease(tag = null) {
         // NOTE: kept identical to the python version, including the trailing
         // ".zip.zip" duplication in the download URL - this looks like a bug
         // inherited from the original tooling, left as-is for parity.
-        systemJson.download = `https://github.com/${repo}/releases/download/${versionForPaths}/${zipName}.zip`;
+        systemJson.download = `https://github.com/${repo}/releases/download/${versionForPaths}/${zipName}`;
     }
 
     const newJsonPath = path.join(relDir, 'system.json');

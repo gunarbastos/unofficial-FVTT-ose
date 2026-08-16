@@ -25,12 +25,24 @@ export class UOSE {
 
     static actor = 'actor';
     static item = 'item';
-    static #bitsAndBobsMatch = /^UOSE(?<name>.*?)(?<suffix>Vehicle|Animal)?(?<type>Actor|Item)?(?<object>Document|DataModel|Sheet)$/;
-    static #bitsAndBobsReplace = "$<name>$<suffix>";
+    static #classNamePattern = /^UOSE(?<name>.*?)(?<suffix>Vehicle|Animal)?(?<type>Actor|Item)?(?<object>Document|DataModel|Sheet)|UOSE(?<name>.*?)(?<object>App)$/;
+    static #domainNameGroups = "$<name>$<suffix>";
+
+    static #pathsToLoad = [];
 
 
     static publicView() {
+        for(const file of this.#pathsToLoad) foundry.applications.handlebars.getTemplate(file).catch(() => null);
+        this.#pathsToLoad = [];
         return _uose;
+    }
+
+    static getDomainFromName(ClassName) {
+        const groups = this.#classNamePattern.exec(ClassName)?.groups;
+
+        if(!groups || groups.length === 0) return undefined;
+        if(!groups.object) return 'UOSE';
+        return `${groups.name.toLowerCase()}${groups.suffix ?? ''}`;
     }
 
     static #register({collection, name, cls, collectionName, typeCollection = null} = {}){
@@ -50,7 +62,7 @@ export class UOSE {
         this.#register(
             {
                 collection: _uose.classes.documents[`${type}s`],
-                name: cls.prototype.constructor.name.replace(this.#bitsAndBobsMatch, this.#bitsAndBobsReplace),
+                name: cls.prototype.constructor.name.replace(this.#classNamePattern, this.#domainNameGroups),
                 cls: cls,
                 collectionName: 'documents',
                 typeCollection: _uose.classes[`${type}s`]
@@ -63,7 +75,7 @@ export class UOSE {
         this.#register(
             {
                 collection: _uose.classes.dataModels[`${type}s`],
-                name: cls.prototype.constructor.name.replace(this.#bitsAndBobsMatch, this.#bitsAndBobsReplace),
+                name: cls.prototype.constructor.name.replace(this.#classNamePattern, this.#domainNameGroups),
                 cls: cls,
                 collectionName: 'dataModels',
                 typeCollection: _uose.classes[`${type}s`]
@@ -73,10 +85,12 @@ export class UOSE {
 
     static registerSheet(type, cls) {
         if(!type || !cls) return;
+        const domain = cls.prototype.constructor.name.replace(this.#classNamePattern, this.#domainNameGroups);
+        this.#pathsToLoad.push(`systems/unofficial-FVTT-ose/template/parts/sheets/${type}s/${domain.charAt(0).toLowerCase()}${domain.slice(1)}/main.hbs`)
         this.#register(
             {
                 collection: _uose.classes.sheets[`${type}s`],
-                name: cls.prototype.constructor.name.replace(this.#bitsAndBobsMatch, this.#bitsAndBobsReplace),
+                name: domain,
                 cls: cls,
                 collectionName: 'sheets',
                 typeCollection: _uose.classes[`${type}s`]
@@ -86,10 +100,12 @@ export class UOSE {
 
     static registerApp(cls) {
         if(!cls) return;
+        const domain = cls.prototype.constructor.name.replace(this.#classNamePattern, this.#domainNameGroups);
+        this.#pathsToLoad.push(`systems/unofficial-FVTT-ose/template/parts/apps/${domain.charAt(0).toLowerCase()}${domain.slice(1)}/main.hbs`)
         this.#register(
             {
                 collection: _uose.classes.apps,
-                name: cls.prototype.constructor.name.replace(/^UOSE(?<name>.*?)App$/, '$<name>'),
+                name: domain,
                 cls: cls,
                 collectionName: 'apps'
             }

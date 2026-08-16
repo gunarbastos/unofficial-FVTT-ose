@@ -1,35 +1,10 @@
-.uose .btn-settings {
-  width: 32px;
-  height: 32px;
-  padding: 0;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: transparent;
-}
-.uose .btn-settings i {
-  font-size: 1rem;
-}
-.uose .btn-settings:hover {
-  background: var(--button-hover-background-color, transparent);
-}
-.uose form,
-.uose .sheet-body {
-  flex: 1 1 auto;
-  min-height: 0;
-  overflow: auto;
-}
 .uose form {
   display: flex;
-  --my-random-prop: 12px;
   flex-direction: column;
+  flex: 1 1 auto;
   height: 100%;
   min-height: 0;
-}
-.uose .items-button-row {
-  display: flex;
-  gap: 0.5em;
-  margin-top: 1em;
+  overflow: auto;
 }
 .uose .btn-action {
   border-radius: 4px;
@@ -52,12 +27,6 @@
 }
 .uose .btn-action.danger:hover {
   background: #c44a;
-}
-.uose .btn-link {
-  cursor: pointer;
-}
-.uose .btn-link:hover {
-  text-decoration: underline;
 }
 .uose .field-label {
   opacity: 0.8;
@@ -82,122 +51,6 @@
 .uose .field-editor .editor-container {
   margin-left: 5px;
   margin-right: 5px;
-}
-.uose .section-header {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-weight: 600;
-  margin-bottom: 6px;
-  height: 1em;
-  justify-content: flex-start;
-}
-.uose .section-header ~ .section-header {
-  margin-top: 0.5em;
-}
-.uose .section-header .section-name {
-  white-space: nowrap;
-}
-.uose .section-header .section-line {
-  flex: 1 1 auto;
-  height: 1px;
-  background: var(--color-border, #8882);
-}
-.uose .section-header .section-filter {
-  display: inline-flex;
-  gap: 6px;
-}
-.uose .section-header .section-filter .btn-filter {
-  padding: 2px 8px;
-  border-radius: 100vh;
-  background: transparent;
-}
-.uose .section-header .section-filter .btn-filter:hover {
-  background: var(--button-hover-background-color, transparent);
-}
-.uose .section-header .section-filter .btn-filter[aria-pressed="true"] {
-  background: rgba(94, 214, 255, 0.2);
-  border-color: rgba(94, 214, 255, 0.95);
-  box-shadow: 0 0 0 1px rgba(94, 214, 255, 0.95) inset, 0 0 8px 1px rgba(94, 214, 255, 0.4);
-  font-weight: 700;
-}
-.uose .section-header .section-filter .btn-filter[aria-pressed="true"]:hover {
-  background: rgba(94, 214, 255, 0.28);
-}
-.uose .section-body {
-  margin-top: 0.2em;
-}
-.uose .item-row {
-  display: grid;
-  grid-template-columns: 1fr auto auto;
-  align-items: center;
-  gap: 10px;
-  padding: 6px 8px;
-  border: 1px solid var(--color-border, #8882);
-  border-radius: 8px;
-}
-.uose .item-row:hover {
-  border-color: var(--color-form-label-hover) 1px solid;
-}
-.uose .item-row:focus-within {
-  border-color: var(--color-form-label-hover) 1px solid;
-}
-.uose .item-row .qty-ctrl {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-}
-.uose .item-row .qty-ctrl .field-input {
-  width: 56px;
-  padding: 3px 6px;
-  text-align: center;
-}
-.uose .item-row.is-dragover {
-  outline: 2px dashed var(--color-border, #aaa);
-}
-.uose .item-row .item-main {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  min-width: 0;
-}
-.uose .item-row .item-main .item-name {
-  font-weight: 600;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  cursor: pointer;
-}
-.uose .item-row .item-main .item-type {
-  opacity: 0.6;
-  font-size: 12px;
-  border: 1px solid var(--color-border, #8882);
-  border-radius: 6px;
-  padding: 1px 6px;
-  white-space: nowrap;
-}
-.uose .item-row .item-meta {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.uose .item-row .item-meta .qty {
-  font-variant-numeric: tabular-nums;
-}
-.uose .item-row .item-actions {
-  display: inline-flex;
-  gap: 6px;
-}
-.uose .item-row .item-actions .btn-action {
-  width: 26px;
-  height: 26px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 6px;
-}
-.uose .item-row .item-actions .btn-action[aria-pressed="true"] {
-  box-shadow: inset 0 0 0 999px var(--color-accent-ghost, #8881);
 }
 .uose .switch-control {
   display: flex;
@@ -256,6 +109,32 @@
 }
 .uose button {
   border-radius: 8px;
+}
+.uose .btn-link,
+.uose.btn-link {
+  cursor: pointer;
+}
+.uose .btn-link:hover,
+.uose.btn-link:hover {
+  text-decoration: underline;
+}
+.uose .btn-settings,
+.uose.btn-settings {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+}
+.uose .btn-settings i,
+.uose.btn-settings i {
+  font-size: 1rem;
+}
+.uose .btn-settings:hover,
+.uose.btn-settings:hover {
+  background: var(--button-hover-background-color, transparent);
 }
 .uose .full-width,
 .uose.full-width {

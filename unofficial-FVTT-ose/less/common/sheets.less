@@ -1,23 +1,11 @@
 .uose {
-  form,
-  .sheet-body {
-    flex: 1 1 auto;
-    min-height: 0;
-    overflow: auto;
-  }
-
   form {
     display: flex;
-    --my-random-prop: 12px;
     flex-direction: column;
+    flex: 1 1 auto;
     height: 100%;
     min-height: 0;
-  }
-
-  .items-button-row {
-    display: flex;
-    gap: 0.5em;
-    margin-top: 1em;
+    overflow: auto;
   }
 
   .btn-action {
@@ -50,14 +38,6 @@
     }
   }
 
-  .btn-link {
-    cursor: pointer;
-
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-
   .field-label {
     opacity: 0.8
   }
@@ -85,144 +65,6 @@
     .editor-container {
       margin-left: 5px;
       margin-right: 5px;
-    }
-  }
-
-  .section-header {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-weight: 600;
-    margin-bottom: 6px;
-    height: 1em;
-
-    justify-content: flex-start;
-
-    ~ .section-header {
-      margin-top: 0.5em;
-    }
-
-    .section-name {
-      white-space: nowrap;
-    }
-
-    .section-line {
-      flex: 1 1 auto;
-      height: 1px;
-      background: var(--color-border, #8882);
-    }
-
-    .section-filter {
-      display: inline-flex;
-      gap: 6px;
-
-      .btn-filter {
-        padding: 2px 8px;
-        border-radius: 100vh;
-        background: transparent;
-
-        &:hover {
-          background: var(--button-hover-background-color, transparent);
-        }
-
-        &[aria-pressed="true"] {
-          background: rgba(94, 214, 255, 0.20);
-          border-color: rgba(94, 214, 255, 0.95);
-          box-shadow:
-                  0 0 0 1px rgba(94, 214, 255, 0.95) inset,
-                  0 0 8px 1px rgba(94, 214, 255, 0.40);
-          font-weight: 700;
-        }
-
-        &[aria-pressed="true"]:hover {
-          background: rgba(94, 214, 255, 0.28);
-        }
-      }
-    }
-  }
-
-  .section-body {
-    margin-top: 0.2em;
-  }
-
-  .item-row {
-    display: grid;
-    grid-template-columns: 1fr auto auto;
-    align-items: center;
-    gap: 10px;
-    padding: 6px 8px;
-    border: 1px solid var(--color-border, #8882);
-    border-radius: 8px;
-
-    &:hover {
-      border-color: var(--color-form-label-hover) 1px solid;
-    }
-    &:focus-within {
-      border-color: var(--color-form-label-hover) 1px solid;
-    }
-
-    .qty-ctrl {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-
-      .field-input {
-        width: 56px;
-        padding: 3px 6px;
-        text-align: center;
-      }
-    }
-
-
-    &.is-dragover { outline: 2px dashed var(--color-border, #aaa); }
-
-    .item-main {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      min-width: 0;
-
-      .item-name {
-        font-weight: 600;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        cursor: pointer;
-      }
-
-      .item-type {
-        opacity: .6;
-        font-size: 12px;
-        border: 1px solid var(--color-border, #8882);
-        border-radius: 6px;
-        padding: 1px 6px;
-        white-space: nowrap;
-      }
-    }
-
-    .item-meta {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      .qty { font-variant-numeric: tabular-nums; }
-    }
-
-    .item-actions {
-      display: inline-flex;
-      gap: 6px;
-
-      .btn-action {
-        width: 26px;
-        height: 26px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 6px;
-
-        &[aria-pressed="true"] {
-          box-shadow: inset 0 0 0 999px var(--color-accent-ghost, #8881);
-        }
-      }
     }
   }
 

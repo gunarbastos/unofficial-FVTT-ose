@@ -107,10 +107,10 @@
     "distance": 5,
     "units": "ft"
   },
-  "url": "https://github.com/gunarbastos/daggerheart_tg",
-  "readme": "https://raw.githubusercontent.com/gunarbastos/daggerheart_tg/stable/README.md",
-  "changelog": "https://raw.githubusercontent.com/gunarbastos/daggerheart_tg/stable/CHANGELOG.md",
-  "license": "https://raw.githubusercontent.com/gunarbastos/daggerheart_tg/stable/LICENSE",
-  "manifest": "https://github.com/gunarbastos/daggerheart_tg/releases/latest/download/system.json",
-  "download": "https://github.com/gunarbastos/daggerheart_tg/releases/download/v0.1.1/dtg-v0.1.1.zip"
+  "url": "https://github.com/gunarbastos/unofficial-FVTT-ose",
+  "readme": "https://raw.githubusercontent.com/gunarbastos/unofficial-FVTT-ose/stable/README.md",
+  "changelog": "https://raw.githubusercontent.com/gunarbastos/unofficial-FVTT-ose/stable/CHANGELOG.md",
+  "license": "https://raw.githubusercontent.com/gunarbastos/unofficial-FVTT-ose/stable/LICENSE",
+  "manifest": "https://github.com/gunarbastos/unofficial-FVTT-ose/releases/latest/download/system.json",
+  "download": "https://github.com/gunarbastos/unofficial-FVTT-ose/releases/download/v0.1.1/uose-v0.1.1.zip"
 }

@@ -1,5 +1,5 @@
 import {UOSELivingDataModel} from "./UOSELivingDataModel.js";
-import {UOSEMovementDataModel} from "../UOSEMovementDataModel.js";
+import {UOSEMovementDataModel} from "../index.js";
 import {UOSE} from "../../foundry/index.js"; //livingDataModel
 
 console.log(`Loaded: ${import.meta.url}`);

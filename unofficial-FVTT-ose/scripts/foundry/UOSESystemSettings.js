@@ -7,7 +7,7 @@ export class UOSESystemSettings extends UOSEBaseSettings {
 
     _buildDefinitions() {
         return {
-            //CUSTOMIZABLE ASPECTS
+            //#region CUSTOMIZABLE ASPECTS
             languages: {
                 scope: 'world',
                 config: false,
@@ -16,8 +16,9 @@ export class UOSESystemSettings extends UOSEBaseSettings {
                     'Kobold', 'Lizard Man', 'Medusa', 'Minotaur', 'Ogre', 'Orcish', 'Pixie', 'Human dialect', 'Druidic', 'Deepcommon', 'Secret language of spiders', 'Languague of creatures of Sylvan forests', 'Secret language of burrowing mammals', 'Language of earth elementals']
             },
             alignment: {scope: 'world', config: false, type: Array, default: ['Lawful', 'Neutral', 'Evil']},
+            //#endregion
 
-            //OPTIONAL RULES
+            //#region OPTIONAL RULES
             advancedCharacterCreation: {scope: 'world', config: false, type: Boolean, default: false},
             multiclass: {scope: 'world', config: false, type: Boolean, default: false},
             individualInitiative: {scope: 'world', config: false, type: Boolean, default: false},
@@ -60,6 +61,11 @@ export class UOSESystemSettings extends UOSEBaseSettings {
             treasureShareXp: {scope: 'world', config: false, type: Boolean, default: false},
             cantrips: {scope: 'world', config: false, type: Boolean, default: false},
             specialMaterials: {scope: 'world', config: false, type: Boolean, default: false},
+            //#endregion
+
+            //#region USER CONFIG
+            debug: {scope: 'user', config: false, type: Boolean, default: false},
+            //#endregion
         };
     }
 

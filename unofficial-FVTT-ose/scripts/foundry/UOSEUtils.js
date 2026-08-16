@@ -15,10 +15,6 @@ export class UOSEUtils extends TGLUtils {
         await super.setGameSetting(game.uose.constants.PACKAGE_ID, setting.key, value);
     }
 
-    static getTemplateUrl(templateUrlFromProjectRoot){
-        return `${game.uose.constants.TEMPLATES.DIR.ROOT}/${templateUrlFromProjectRoot}`;
-    }
-
     static createLangObject() {
         const langObject = this.deepClone(game.i18n.translations.UOSE);
         const flatLangObject = foundry.utils.flattenObject({UOSE:langObject});

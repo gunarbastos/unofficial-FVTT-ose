@@ -4,18 +4,17 @@ console.log(`Loaded: ${import.meta.url}`);
 
 export class UOSEBaseActorSheet extends UOSEMixins.UOSESheet(foundry.applications.api.HandlebarsApplicationMixin(foundry.applications.sheets.ActorSheetV2)) {
 
-    static get PARTS() {
-        const baseFolder = game.uose.constants.TEMPLATES.DIR.ROOT_DIR
-
-        return {
-            content: { template: `${baseFolder}/base.hbs` },
-            debug: { template: `${baseFolder}/debug.hbs` },
-        };
-    }
+    // static get PARTS() {
+    //     const baseFolder = game.uose.constants.TEMPLATES.DIR.ROOT_DIR
+    //
+    //     return {
+    //         debug: { template: `${baseFolder}/debug.hbs` },
+    //     };
+    // }
 
     static get DEFAULT_OPTIONS() {
         return {
-            classes: [game.uose.constants.SHORT_ID, 'actor'],
+            classes: ['actor'],
         };
     }
 

@@ -1,18 +1,106 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import * as acorn from 'acorn';
 import * as common from '../common.js';
 
 console.log(`Loaded: ${import.meta.url}`);
 
-const exportRegexes = [common.regex.EXPORT_DECL, common.regex.EXPORT_LIST];
+/**
+ * Collect every name bound by a declaration id, including destructuring forms.
+ * @param {object} idNode
+ * @param {string[]} out
+ */
+function collectPatternNames(idNode, out) {
+    if (!idNode) return;
+    switch (idNode.type) {
+        case 'Identifier':
+            out.push(idNode.name);
+            break;
+        case 'ObjectPattern':
+            for (const prop of idNode.properties) {
+                if (prop.type === 'RestElement') collectPatternNames(prop.argument, out);
+                else collectPatternNames(prop.value, out);
+            }
+            break;
+        case 'ArrayPattern':
+            for (const el of idNode.elements) collectPatternNames(el, out);
+            break;
+        case 'AssignmentPattern':
+            collectPatternNames(idNode.left, out);
+            break;
+        case 'RestElement':
+            collectPatternNames(idNode.argument, out);
+            break;
+        default:
+            break;
+    }
+}
+
+/**
+ * Names exported by a source file, in source order.
+ *
+ * Parsed rather than pattern-matched: a regex cannot tell an export from the
+ * same text inside a comment or a string literal, and misses multi-declarator
+ * and destructuring forms entirely.
+ *
+ * `export default` is skipped - it cannot be re-exported by bare name from a
+ * barrel. `export * from` contributes no names.
+ *
+ * @param {string} filePath - absolute path
+ * @returns {string[]|null} null when the file could not be parsed
+ */
+function collectExports(filePath) {
+    const source = fs.readFileSync(filePath, 'utf-8');
+    let ast;
+    try {
+        ast = acorn.parse(source, {
+            ecmaVersion: 'latest',
+            sourceType: 'module',
+            allowHashBang: true,
+        });
+    } catch (e) {
+        console.error(`Warning: failed to parse ${filePath}: ${e.message}`);
+        return null;
+    }
+
+    const names = [];
+    for (const stmt of ast.body) {
+        if (stmt.type !== 'ExportNamedDeclaration') continue;
+
+        if (stmt.declaration) {
+            const declaration = stmt.declaration;
+            if (declaration.type === 'VariableDeclaration') {
+                for (const declarator of declaration.declarations) collectPatternNames(declarator.id, names);
+            } else if (declaration.id) {
+                names.push(declaration.id.name);
+            }
+            continue;
+        }
+
+        for (const spec of stmt.specifiers) {
+            const exported = spec.exported;
+            const name = exported.type === 'Identifier' ? exported.name : String(exported.value);
+            if (name === 'default') continue;
+            names.push(name);
+        }
+    }
+    return names;
+}
 
 /**
  * @param {string} directory - absolute path
+ * @returns {'created'|'changed'|'unchanged'|'empty'}
  */
 function generateIndexesInternal(directory) {
     if (!fs.existsSync(directory)) {
         console.log(`Directory ${directory} does not exist`);
         process.exit(1);
+    }
+
+    // The tooling is not a module tree. Generating a barrel here would overwrite
+    // the CLI entry point with generated exports and break every invocation.
+    if (common.isInsideToolsRoot(directory)) {
+        common.fail(`Refusing to generate an index.js inside the tooling folder: ${directory}`);
     }
 
     console.log(`Generating index.js file for directory ${directory}`);
@@ -35,21 +123,9 @@ function generateIndexesInternal(directory) {
     const exports = [];
     for (const file of orderedFileList) {
         if (path.basename(file) === 'index.js') continue;
-        const content = fs.readFileSync(file, 'utf-8');
         const baseName = path.basename(file, path.extname(file));
-        const fileExports = [];
-        for (const re of exportRegexes) {
-            re.lastIndex = 0;
-            let match;
-            while ((match = re.exec(content)) !== null) {
-                const rawNames = match[1].split(',');
-                for (const name of rawNames) {
-                    const parts = name.trim().split(common.regex.EXPORT_AS);
-                    const exportName = parts.length > 1 ? parts[1].trim() : parts[0].trim();
-                    if (exportName) fileExports.push(exportName);
-                }
-            }
-        }
+        const fileExports = collectExports(file);
+        if (fileExports === null) continue;
         const joinedFileExports = fileExports.join(', ');
         exports.push(`export {${joinedFileExports}} from './${baseName}.js';`);
     }
@@ -62,21 +138,23 @@ function generateIndexesInternal(directory) {
     const body = 'console.log(`Loaded: ${import.meta.url}`);\n\n' + exports.join('\n') + '\n';
     const newContent = header + body;
 
-    if (exports.length > 0) {
-        if (!createdFile) {
-            const existingLines = fs.readFileSync(indexFile, 'utf-8').split('\n');
-            const newLines = newContent.split('\n');
-            const existingBody = existingLines.slice(2).join('\n');
-            const newBody = newLines.slice(2).join('\n');
-            if (existingBody !== newBody) {
-                fs.writeFileSync(indexFile, newContent, 'utf-8');
-            }
-        } else {
-            console.log(`adding ${indexFile} to git`);
-            fs.writeFileSync(indexFile, newContent, 'utf-8');
-            common.run(['git', 'add', indexFile]);
-        }
+    if (exports.length === 0) return 'empty';
+
+    if (createdFile) {
+        fs.writeFileSync(indexFile, newContent, 'utf-8');
+        console.log(`[CREATED] ${indexFile} (staged with git add)`);
+        common.run(['git', 'add', indexFile]);
+        return 'created';
     }
+
+    // Compare below the two-line header, so a timestamp alone is not a change
+    const existingBody = fs.readFileSync(indexFile, 'utf-8').split('\n').slice(2).join('\n');
+    const newBody = newContent.split('\n').slice(2).join('\n');
+    if (existingBody === newBody) return 'unchanged';
+
+    fs.writeFileSync(indexFile, newContent, 'utf-8');
+    console.log(`[CHANGED] ${indexFile}`);
+    return 'changed';
 }
 
 /**
@@ -84,20 +162,31 @@ function generateIndexesInternal(directory) {
  * @param {string|null} dir - directory to generate index.js for
  */
 export async function generateIndexes(file, dir) {
+    const tally = {created: 0, changed: 0, unchanged: 0, empty: 0};
+    const record = (result) => {
+        tally[result] += 1;
+    };
+
     if (file != null) {
-        generateIndexesInternal(path.dirname(path.resolve(file)));
+        record(generateIndexesInternal(path.dirname(path.resolve(file))));
     } else if (dir != null) {
-        generateIndexesInternal(path.resolve(dir));
+        record(generateIndexesInternal(path.resolve(dir)));
     } else {
         const root = path.join(common.projectRoot(), 'unofficial-FVTT-ose', 'scripts');
         const stack = [root];
         while (stack.length) {
             const dirPath = stack.shift();
-            generateIndexesInternal(dirPath);
+            record(generateIndexesInternal(dirPath));
             for (const entry of fs.readdirSync(dirPath, {withFileTypes: true})) {
                 if (entry.isDirectory()) stack.push(path.join(dirPath, entry.name));
             }
         }
     }
+
+    const touched = tally.created + tally.changed;
+    console.log(`indexes: ${touched} file(s) updated`
+        + ` (${tally.created} created, ${tally.changed} changed,`
+        + ` ${tally.unchanged} unchanged, ${tally.empty} with no exports).`);
+
     process.exit(0);
 }

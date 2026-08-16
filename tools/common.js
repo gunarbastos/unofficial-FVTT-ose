@@ -53,6 +53,26 @@ export function projectRoot() {
     return path.resolve(here, '..');
 }
 
+/**
+ * Absolute path to the tooling folder itself - the directory this file lives in.
+ * Derived rather than named, so it stays correct when the toolchain is copied
+ * into another project under a different folder name.
+ * @returns {string}
+ */
+export function toolsRoot() {
+    return path.dirname(fileURLToPath(import.meta.url));
+}
+
+/**
+ * True when `directory` is the tooling folder or anything beneath it.
+ * @param {string} directory - absolute path
+ * @returns {boolean}
+ */
+export function isInsideToolsRoot(directory) {
+    const relative = path.relative(toolsRoot(), path.resolve(directory));
+    return relative === '' || (!relative.startsWith('..') && !path.isAbsolute(relative));
+}
+
 /** @returns {Date} the current date/time (JS Dates always carry local tz offset info) */
 export function nowTmz() {
     return new Date();
@@ -145,9 +165,4 @@ export const regex = {
         const escaped = version.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
         return new RegExp(`^\\[\\s*v?${escaped}\\s*]\\s*:\\s*(\\S+)\\s*$`, 'im');
     },
-
-    // --- JS export parsing ---
-    EXPORT_DECL: /export\s+(?:const|let|var|function|class)\s+([a-zA-Z0-9_]+)/g,
-    EXPORT_LIST: /export\s*\{\s*([^}]+)\s*}/g,
-    EXPORT_AS: /\s+as\s+/,
 };

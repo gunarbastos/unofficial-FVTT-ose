@@ -5,14 +5,6 @@ console.log(`Loaded: ${import.meta.url}`);
 
 export class UOSECharacterActorSheet extends UOSEBaseActorSheet {
 
-    static get PARTS() {
-        const baseFolder = `${game.uose.constants.TEMPLATES.DIR.APPV2PARTS}/sheets/actors`
-
-        return {
-            //TODO: fill parts
-        };
-    }
-
     static get DEFAULT_OPTIONS() {
         return {
             classes: [game.uose.classes.actors.Character.type],

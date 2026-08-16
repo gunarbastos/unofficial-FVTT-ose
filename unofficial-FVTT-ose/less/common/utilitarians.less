@@ -4,6 +4,30 @@
     border-radius: 8px;
   }
 
+  .uose-util(btn-link; {
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  });
+
+  .uose-util(btn-settings; {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+
+    i { font-size: 1rem; }
+
+    &:hover {
+      background: var(--button-hover-background-color, transparent);
+    }
+  });
+
   .uose-util(full-width; { width: 100%; });
   .uose-util(preserve-width; { flex: none; });
   .uose-util(center-items; { align-items: center; });
