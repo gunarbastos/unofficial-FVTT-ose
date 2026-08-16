@@ -1,91 +1,9 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import * as acorn from 'acorn';
 import * as common from '../common.js';
+import {collectExports} from '../lib/jsExports.js';
 
 console.log(`Loaded: ${import.meta.url}`);
-
-/**
- * Collect every name bound by a declaration id, including destructuring forms.
- * @param {object} idNode
- * @param {string[]} out
- */
-function collectPatternNames(idNode, out) {
-    if (!idNode) return;
-    switch (idNode.type) {
-        case 'Identifier':
-            out.push(idNode.name);
-            break;
-        case 'ObjectPattern':
-            for (const prop of idNode.properties) {
-                if (prop.type === 'RestElement') collectPatternNames(prop.argument, out);
-                else collectPatternNames(prop.value, out);
-            }
-            break;
-        case 'ArrayPattern':
-            for (const el of idNode.elements) collectPatternNames(el, out);
-            break;
-        case 'AssignmentPattern':
-            collectPatternNames(idNode.left, out);
-            break;
-        case 'RestElement':
-            collectPatternNames(idNode.argument, out);
-            break;
-        default:
-            break;
-    }
-}
-
-/**
- * Names exported by a source file, in source order.
- *
- * Parsed rather than pattern-matched: a regex cannot tell an export from the
- * same text inside a comment or a string literal, and misses multi-declarator
- * and destructuring forms entirely.
- *
- * `export default` is skipped - it cannot be re-exported by bare name from a
- * barrel. `export * from` contributes no names.
- *
- * @param {string} filePath - absolute path
- * @returns {string[]|null} null when the file could not be parsed
- */
-function collectExports(filePath) {
-    const source = fs.readFileSync(filePath, 'utf-8');
-    let ast;
-    try {
-        ast = acorn.parse(source, {
-            ecmaVersion: 'latest',
-            sourceType: 'module',
-            allowHashBang: true,
-        });
-    } catch (e) {
-        console.error(`Warning: failed to parse ${filePath}: ${e.message}`);
-        return null;
-    }
-
-    const names = [];
-    for (const stmt of ast.body) {
-        if (stmt.type !== 'ExportNamedDeclaration') continue;
-
-        if (stmt.declaration) {
-            const declaration = stmt.declaration;
-            if (declaration.type === 'VariableDeclaration') {
-                for (const declarator of declaration.declarations) collectPatternNames(declarator.id, names);
-            } else if (declaration.id) {
-                names.push(declaration.id.name);
-            }
-            continue;
-        }
-
-        for (const spec of stmt.specifiers) {
-            const exported = spec.exported;
-            const name = exported.type === 'Identifier' ? exported.name : String(exported.value);
-            if (name === 'default') continue;
-            names.push(name);
-        }
-    }
-    return names;
-}
 
 /**
  * @param {string} directory - absolute path

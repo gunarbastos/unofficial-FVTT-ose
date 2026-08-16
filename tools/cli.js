@@ -28,6 +28,12 @@ Usage:
       Generate WebStorm JSDoc library files under /jsdocs from the game system's
       scripts. If no extra parameters are given, regenerates for the whole
       scripts tree. If both are given, --file takes precedence over --dir.
+
+  ${PROG} validate
+      Check structural invariants across the source tree: barrels current,
+      order entries resolving, registered class names matching the key pattern,
+      system.json documentTypes round-tripping, and relative imports resolving
+      to a real file and a real exported name. Exits non-zero on any problem.
 `;
 
 function usageError(msg) {
@@ -98,6 +104,11 @@ export async function main() {
             });
             const {generateJsdocs} = await import('./tasks/jsdocs.js');
             await generateJsdocs(values.file ?? null, values.dir ?? null);
+            break;
+        }
+        case 'validate': {
+            const {validate} = await import('./tasks/validate.js');
+            await validate();
             break;
         }
         default:
