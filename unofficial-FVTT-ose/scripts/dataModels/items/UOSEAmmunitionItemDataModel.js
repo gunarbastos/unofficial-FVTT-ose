@@ -4,7 +4,7 @@ import {UOSE} from "../../foundry/index.js";
 console.log(`Loaded: ${import.meta.url}`);
 
 
-export class UOSEAmmunitionDataModel extends UOSEInventoryItemDataModel {
+export class UOSEAmmunitionItemDataModel extends UOSEInventoryItemDataModel {
 
     /** @inheritDoc */
     static _enableV10Validation = true;
@@ -37,4 +37,4 @@ class UOSEEmbedAmmunitionDataModel extends foundry.abstract.DataModel {
 
 }
 
-UOSE.registerDataModel(UOSE.item, UOSEAmmunitionDataModel);
+UOSE.registerDataModel(UOSE.item, UOSEAmmunitionItemDataModel);

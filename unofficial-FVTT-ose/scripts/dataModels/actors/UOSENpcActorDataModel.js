@@ -1,9 +1,9 @@
-import {UOSELivingDataModel} from "./UOSELivingDataModel.js";
+import {UOSELivingActorDataModel} from "./UOSELivingActorDataModel.js";
 import {UOSEAttackDataModel, UOSEAbilityDataModel} from "../index.js";
 
 console.log(`Loaded: ${import.meta.url}`);
 
-export class UOSENpcDataModel extends UOSELivingDataModel {
+export class UOSENpcActorDataModel extends UOSELivingActorDataModel {
 
     /** @inheritDoc */
     static _enableV10Validation = true;

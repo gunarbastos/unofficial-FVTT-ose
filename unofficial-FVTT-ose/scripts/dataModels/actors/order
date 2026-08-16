@@ -1,4 +1,4 @@
 UOSEBaseActorDataModel
-UOSELivingDataModel
-UOSENpcDataModel
-UOSECharacterDataModel
+UOSELivingActorDataModel
+UOSENpcActorDataModel
+UOSECharacterActorDataModel

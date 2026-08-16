@@ -1,9 +1,9 @@
-import {UOSENpcDataModel} from "./UOSENpcDataModel.js";
+import {UOSENpcActorDataModel} from "./UOSENpcActorDataModel.js";
 import {UOSE} from "../../foundry/index.js"; //npcDataModel
 
 console.log(`Loaded: ${import.meta.url}`);
 
-export class UOSEAnimalActorDataModel extends UOSENpcDataModel {
+export class UOSEAnimalActorDataModel extends UOSENpcActorDataModel {
 
     /** @inheritDoc */
     static _enableV10Validation = true;

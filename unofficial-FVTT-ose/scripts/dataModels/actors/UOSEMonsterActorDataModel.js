@@ -1,10 +1,10 @@
-import {UOSENpcDataModel} from "./UOSENpcDataModel.js";
+import {UOSENpcActorDataModel} from "./UOSENpcActorDataModel.js";
 import {UOSENumberAppearingDataModel} from "../index.js";
 import {UOSE} from "../../foundry/index.js";
 
 console.log(`Loaded: ${import.meta.url}`);
 
-export class UOSEMonsterDataModel extends UOSENpcDataModel {
+export class UOSEMonsterActorDataModel extends UOSENpcActorDataModel {
 
     /** @inheritDoc */
     static _enableV10Validation = true;
@@ -22,4 +22,4 @@ export class UOSEMonsterDataModel extends UOSENpcDataModel {
     }
 }
 
-UOSE.registerDataModel(UOSE.actor, UOSEMonsterDataModel);
+UOSE.registerDataModel(UOSE.actor, UOSEMonsterActorDataModel);

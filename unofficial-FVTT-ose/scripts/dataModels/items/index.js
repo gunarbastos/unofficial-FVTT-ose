@@ -1,5 +1,5 @@
 // File generated automatically.
-// Last Updated: 11/08/2026 18:38:42.928 UTC-3
+// Last Updated: 16/08/2026 03:27:44.531 UTC-3
 
 console.log(`Loaded: ${import.meta.url}`);
 
@@ -7,16 +7,16 @@ export {UOSEBaseItemDataModel} from './UOSEBaseItemDataModel.js';
 export {UOSEMarketItemDataModel} from './UOSEMarketItemDataModel.js';
 export {UOSEInventoryItemDataModel} from './UOSEInventoryItemDataModel.js';
 export {UOSEEquipableItemDataModel} from './UOSEEquipableItemDataModel.js';
-export {UOSEAdventuringGearDataModel} from './UOSEAdventuringGearDataModel.js';
-export {UOSEAmmunitionDataModel} from './UOSEAmmunitionDataModel.js';
+export {UOSEAdventuringGearItemDataModel} from './UOSEAdventuringGearItemDataModel.js';
+export {UOSEAmmunitionItemDataModel} from './UOSEAmmunitionItemDataModel.js';
 export {UOSEAnimalItemDataModel} from './UOSEAnimalItemDataModel.js';
-export {UOSEArmorDataModel} from './UOSEArmorDataModel.js';
-export {UOSEClassDataModel} from './UOSEClassDataModel.js';
-export {UOSEContainerDataModel} from './UOSEContainerDataModel.js';
+export {UOSEArmorItemDataModel} from './UOSEArmorItemDataModel.js';
+export {UOSEClassItemDataModel} from './UOSEClassItemDataModel.js';
+export {UOSEContainerItemDataModel} from './UOSEContainerItemDataModel.js';
 export {UOSELandVehicleItemDataModel} from './UOSELandVehicleItemDataModel.js';
-export {UOSEPoisonDataModel} from './UOSEPoisonDataModel.js';
-export {UOSERaceDataModel} from './UOSERaceDataModel.js';
-export {UOSEServiceDataModel} from './UOSEServiceDataModel.js';
-export {UOSESpellDataModel} from './UOSESpellDataModel.js';
+export {UOSEPoisonItemDataModel} from './UOSEPoisonItemDataModel.js';
+export {UOSERaceItemDataModel} from './UOSERaceItemDataModel.js';
+export {UOSEServiceItemDataModel} from './UOSEServiceItemDataModel.js';
+export {UOSESpellItemDataModel} from './UOSESpellItemDataModel.js';
 export {UOSEWaterVehicleItemDataModel} from './UOSEWaterVehicleItemDataModel.js';
-export {UOSEWeaponDataModel} from './UOSEWeaponDataModel.js';
+export {UOSEWeaponItemDataModel} from './UOSEWeaponItemDataModel.js';

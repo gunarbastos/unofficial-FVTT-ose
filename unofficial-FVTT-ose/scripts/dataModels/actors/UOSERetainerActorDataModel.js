@@ -1,9 +1,9 @@
-import {UOSECharacterDataModel} from "./UOSECharacterDataModel.js";
+import {UOSECharacterActorDataModel} from "./UOSECharacterActorDataModel.js";
 import {UOSE} from "../../foundry/index.js"; //characterDataModel
 
 console.log(`Loaded: ${import.meta.url}`);
 
-export class UOSERetainerDataModel extends UOSECharacterDataModel {
+export class UOSERetainerActorDataModel extends UOSECharacterActorDataModel {
 
     /** @inheritDoc */
     static _enableV10Validation = true;
@@ -21,4 +21,4 @@ export class UOSERetainerDataModel extends UOSECharacterDataModel {
 
 }
 
-UOSE.registerDataModel(UOSE.actor, UOSERetainerDataModel);
+UOSE.registerDataModel(UOSE.actor, UOSERetainerActorDataModel);

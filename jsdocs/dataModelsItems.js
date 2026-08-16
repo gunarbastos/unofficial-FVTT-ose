@@ -1,5 +1,5 @@
 // File generated automatically by `tools jsdocs`. Do not edit by hand.
-// Last Updated: 19/07/2026 19:47:49.905 UTC-3
+// Last Updated: 16/08/2026 03:28:03.864 UTC-3
 //
 // This file is part of the "jsdocs" WebStorm library (see .idea/libraries/jsdocs.xml)
 // and is never imported or executed. It ONLY ever declares brand-new type names
@@ -49,9 +49,9 @@
  */
 
 /**
- * Resolved from UOSEAdventuringGearDataModel.defineSchema(), flattened across its full
+ * Resolved from UOSEAdventuringGearItemDataModel.defineSchema(), flattened across its full
  * inheritance chain (parent fields first, own fields override by name).
- * @typedef {object} UOSEAdventuringGearDataModelSchema
+ * @typedef {object} UOSEAdventuringGearItemDataModelSchema
  * @property {object} automation
  * @property {string} description
  * @property {number} price
@@ -71,9 +71,9 @@
  */
 
 /**
- * Resolved from UOSEAmmunitionDataModel.defineSchema(), flattened across its full
+ * Resolved from UOSEAmmunitionItemDataModel.defineSchema(), flattened across its full
  * inheritance chain (parent fields first, own fields override by name).
- * @typedef {object} UOSEAmmunitionDataModelSchema
+ * @typedef {object} UOSEAmmunitionItemDataModelSchema
  * @property {object} automation
  * @property {string} description
  * @property {number} price
@@ -112,9 +112,9 @@
  */
 
 /**
- * Resolved from UOSEArmorDataModel.defineSchema(), flattened across its full
+ * Resolved from UOSEArmorItemDataModel.defineSchema(), flattened across its full
  * inheritance chain (parent fields first, own fields override by name).
- * @typedef {object} UOSEArmorDataModelSchema
+ * @typedef {object} UOSEArmorItemDataModelSchema
  * @property {object} automation
  * @property {string} description
  * @property {number} price
@@ -128,9 +128,9 @@
  */
 
 /**
- * Resolved from UOSEClassDataModel.defineSchema(), flattened across its full
+ * Resolved from UOSEClassItemDataModel.defineSchema(), flattened across its full
  * inheritance chain (parent fields first, own fields override by name).
- * @typedef {object} UOSEClassDataModelSchema
+ * @typedef {object} UOSEClassItemDataModelSchema
  * @property {object} automation
  * @property {string} description
  * @property {{stat: string, value: number}[]} requirements
@@ -153,9 +153,9 @@
  */
 
 /**
- * Resolved from UOSEContainerDataModel.defineSchema(), flattened across its full
+ * Resolved from UOSEContainerItemDataModel.defineSchema(), flattened across its full
  * inheritance chain (parent fields first, own fields override by name).
- * @typedef {object} UOSEContainerDataModelSchema
+ * @typedef {object} UOSEContainerItemDataModelSchema
  * @property {object} automation
  * @property {string} description
  * @property {number} price
@@ -188,9 +188,9 @@
  */
 
 /**
- * Resolved from UOSEPoisonDataModel.defineSchema(), flattened across its full
+ * Resolved from UOSEPoisonItemDataModel.defineSchema(), flattened across its full
  * inheritance chain (parent fields first, own fields override by name).
- * @typedef {object} UOSEPoisonDataModelSchema
+ * @typedef {object} UOSEPoisonItemDataModelSchema
  * @property {object} automation
  * @property {string} description
  * @property {number} price
@@ -204,9 +204,9 @@
  */
 
 /**
- * Resolved from UOSERaceDataModel.defineSchema(), flattened across its full
+ * Resolved from UOSERaceItemDataModel.defineSchema(), flattened across its full
  * inheritance chain (parent fields first, own fields override by name).
- * @typedef {object} UOSERaceDataModelSchema
+ * @typedef {object} UOSERaceItemDataModelSchema
  * @property {object} automation
  * @property {string} description
  * @property {{stat: string, value: number}[]} requirements
@@ -218,9 +218,9 @@
  */
 
 /**
- * Resolved from UOSEServiceDataModel.defineSchema(), flattened across its full
+ * Resolved from UOSEServiceItemDataModel.defineSchema(), flattened across its full
  * inheritance chain (parent fields first, own fields override by name).
- * @typedef {object} UOSEServiceDataModelSchema
+ * @typedef {object} UOSEServiceItemDataModelSchema
  * @property {object} automation
  * @property {string} description
  * @property {string} subtype
@@ -237,9 +237,9 @@
  */
 
 /**
- * Resolved from UOSESpellDataModel.defineSchema(), flattened across its full
+ * Resolved from UOSESpellItemDataModel.defineSchema(), flattened across its full
  * inheritance chain (parent fields first, own fields override by name).
- * @typedef {object} UOSESpellDataModelSchema
+ * @typedef {object} UOSESpellItemDataModelSchema
  * @property {object} automation
  * @property {string} description
  * @property {number} level
@@ -277,9 +277,9 @@
  */
 
 /**
- * Resolved from UOSEWeaponDataModel.defineSchema(), flattened across its full
+ * Resolved from UOSEWeaponItemDataModel.defineSchema(), flattened across its full
  * inheritance chain (parent fields first, own fields override by name).
- * @typedef {object} UOSEWeaponDataModelSchema
+ * @typedef {object} UOSEWeaponItemDataModelSchema
  * @property {object} automation
  * @property {string} description
  * @property {number} price

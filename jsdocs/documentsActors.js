@@ -1,5 +1,5 @@
 // File generated automatically by `tools jsdocs`. Do not edit by hand.
-// Last Updated: 19/07/2026 19:47:49.905 UTC-3
+// Last Updated: 16/08/2026 03:28:03.864 UTC-3
 //
 // This file is part of the "jsdocs" WebStorm library (see .idea/libraries/jsdocs.xml)
 // and is never imported or executed. It ONLY ever declares brand-new type names
@@ -10,16 +10,16 @@
 /** @type {UOSEAnimalActorDataModel & UOSEAnimalActorDataModelSchema} */
 UOSEAnimalActorDocument.prototype.system;
 
-/** @type {UOSECharacterDataModel & UOSECharacterDataModelSchema} */
+/** @type {UOSECharacterActorDataModel & UOSECharacterActorDataModelSchema} */
 UOSECharacterActorDocument.prototype.system;
 
 /** @type {UOSELandVehicleActorDataModel & UOSELandVehicleActorDataModelSchema} */
 UOSELandVehicleActorDocument.prototype.system;
 
-/** @type {UOSEMonsterDataModel & UOSEMonsterDataModelSchema} */
+/** @type {UOSEMonsterActorDataModel & UOSEMonsterActorDataModelSchema} */
 UOSEMonsterActorDocument.prototype.system;
 
-/** @type {UOSERetainerDataModel & UOSERetainerDataModelSchema} */
+/** @type {UOSERetainerActorDataModel & UOSERetainerActorDataModelSchema} */
 UOSERetainerActorDocument.prototype.system;
 
 /** @type {UOSEWaterVehicleActorDataModel & UOSEWaterVehicleActorDataModelSchema} */

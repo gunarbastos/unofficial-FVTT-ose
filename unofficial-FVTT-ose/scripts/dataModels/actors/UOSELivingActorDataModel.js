@@ -3,7 +3,7 @@ import {UOSEAbilityDataModel, UOSEHitDiceDataModel, UOSESavesDataModel, UOSEToHi
 
 console.log(`Loaded: ${import.meta.url}`);
 
-export class UOSELivingDataModel extends UOSEBaseActorDataModel {
+export class UOSELivingActorDataModel extends UOSEBaseActorDataModel {
 
     /** @inheritDoc */
     static _enableV10Validation = true;

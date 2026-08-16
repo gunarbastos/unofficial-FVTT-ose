@@ -1,5 +1,5 @@
 // File generated automatically by `tools jsdocs`. Do not edit by hand.
-// Last Updated: 19/07/2026 19:47:49.905 UTC-3
+// Last Updated: 16/08/2026 03:28:03.864 UTC-3
 //
 // This file is part of the "jsdocs" WebStorm library (see .idea/libraries/jsdocs.xml)
 // and is never imported or executed. It ONLY ever declares brand-new type names
@@ -7,41 +7,41 @@
 // references - it never redeclares a real class under its own name, so it cannot
 // shadow or hijack "go to declaration" on the actual source.
 
-/** @type {UOSEAdventuringGearDataModel & UOSEAdventuringGearDataModelSchema} */
+/** @type {UOSEAdventuringGearItemDataModel & UOSEAdventuringGearItemDataModelSchema} */
 UOSEAdventuringGearItemDocument.prototype.system;
 
-/** @type {UOSEAmmunitionDataModel & UOSEAmmunitionDataModelSchema} */
+/** @type {UOSEAmmunitionItemDataModel & UOSEAmmunitionItemDataModelSchema} */
 UOSEAmmunitionItemDocument.prototype.system;
 
 /** @type {UOSEAnimalItemDataModel & UOSEAnimalItemDataModelSchema} */
 UOSEAnimalItemDocument.prototype.system;
 
-/** @type {UOSEArmorDataModel & UOSEArmorDataModelSchema} */
+/** @type {UOSEArmorItemDataModel & UOSEArmorItemDataModelSchema} */
 UOSEArmorItemDocument.prototype.system;
 
-/** @type {UOSEClassDataModel & UOSEClassDataModelSchema} */
+/** @type {UOSEClassItemDataModel & UOSEClassItemDataModelSchema} */
 UOSEClassItemDocument.prototype.system;
 
-/** @type {UOSEContainerDataModel & UOSEContainerDataModelSchema} */
+/** @type {UOSEContainerItemDataModel & UOSEContainerItemDataModelSchema} */
 UOSEContainerItemDocument.prototype.system;
 
 /** @type {UOSELandVehicleItemDataModel & UOSELandVehicleItemDataModelSchema} */
 UOSELandVehicleItemDocument.prototype.system;
 
-/** @type {UOSEPoisonDataModel & UOSEPoisonDataModelSchema} */
+/** @type {UOSEPoisonItemDataModel & UOSEPoisonItemDataModelSchema} */
 UOSEPoisonItemDocument.prototype.system;
 
-/** @type {UOSERaceDataModel & UOSERaceDataModelSchema} */
+/** @type {UOSERaceItemDataModel & UOSERaceItemDataModelSchema} */
 UOSERaceItemDocument.prototype.system;
 
-/** @type {UOSEServiceDataModel & UOSEServiceDataModelSchema} */
+/** @type {UOSEServiceItemDataModel & UOSEServiceItemDataModelSchema} */
 UOSEServiceItemDocument.prototype.system;
 
-/** @type {UOSESpellDataModel & UOSESpellDataModelSchema} */
+/** @type {UOSESpellItemDataModel & UOSESpellItemDataModelSchema} */
 UOSESpellItemDocument.prototype.system;
 
 /** @type {UOSEWaterVehicleItemDataModel & UOSEWaterVehicleItemDataModelSchema} */
 UOSEWaterVehicleItemDocument.prototype.system;
 
-/** @type {UOSEWeaponDataModel & UOSEWeaponDataModelSchema} */
+/** @type {UOSEWeaponItemDataModel & UOSEWeaponItemDataModelSchema} */
 UOSEWeaponItemDocument.prototype.system;

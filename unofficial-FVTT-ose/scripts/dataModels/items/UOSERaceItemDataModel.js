@@ -4,7 +4,7 @@ import {UOSE} from "../../foundry/index.js";
 
 console.log(`Loaded: ${import.meta.url}`);
 
-export class UOSERaceDataModel extends UOSEBaseItemDataModel {
+export class UOSERaceItemDataModel extends UOSEBaseItemDataModel {
 
     /** @inheritDoc */
     static _enableV10Validation = true;
@@ -34,4 +34,4 @@ export class UOSERaceDataModel extends UOSEBaseItemDataModel {
     }
 }
 
-UOSE.registerDataModel(UOSE.item, UOSERaceDataModel);
+UOSE.registerDataModel(UOSE.item, UOSERaceItemDataModel);

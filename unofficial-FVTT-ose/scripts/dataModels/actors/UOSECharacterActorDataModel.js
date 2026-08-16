@@ -1,10 +1,10 @@
-import {UOSELivingDataModel} from "./UOSELivingDataModel.js";
+import {UOSELivingActorDataModel} from "./UOSELivingActorDataModel.js";
 import {UOSEMovementDataModel} from "../index.js";
 import {UOSE} from "../../foundry/index.js"; //livingDataModel
 
 console.log(`Loaded: ${import.meta.url}`);
 
-export class UOSECharacterDataModel extends UOSELivingDataModel {
+export class UOSECharacterActorDataModel extends UOSELivingActorDataModel {
 
     /** @inheritDoc */
     static _enableV10Validation = true;
@@ -48,4 +48,4 @@ export class UOSECharacterDataModel extends UOSELivingDataModel {
 
 }
 
-UOSE.registerDataModel(UOSE.actor, UOSECharacterDataModel);
+UOSE.registerDataModel(UOSE.actor, UOSECharacterActorDataModel);

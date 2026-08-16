@@ -4,7 +4,7 @@ import {UOSE} from "../../foundry/index.js";
 
 console.log(`Loaded: ${import.meta.url}`);
 
-export class UOSESpellDataModel extends UOSEBaseItemDataModel {
+export class UOSESpellItemDataModel extends UOSEBaseItemDataModel {
 
     /** @inheritDoc */
     static _enableV10Validation = true;
@@ -27,4 +27,4 @@ export class UOSESpellDataModel extends UOSEBaseItemDataModel {
     }
 }
 
-UOSE.registerDataModel(UOSE.item, UOSESpellDataModel);
+UOSE.registerDataModel(UOSE.item, UOSESpellItemDataModel);

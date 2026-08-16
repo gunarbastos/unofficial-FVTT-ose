@@ -1,5 +1,5 @@
 // File generated automatically by `tools jsdocs`. Do not edit by hand.
-// Last Updated: 19/07/2026 19:47:49.905 UTC-3
+// Last Updated: 16/08/2026 03:28:03.864 UTC-3
 //
 // This file is part of the "jsdocs" WebStorm library (see .idea/libraries/jsdocs.xml)
 // and is never imported or executed. It ONLY ever declares brand-new type names
@@ -17,9 +17,9 @@
  */
 
 /**
- * Resolved from UOSELivingDataModel.defineSchema(), flattened across its full
+ * Resolved from UOSELivingActorDataModel.defineSchema(), flattened across its full
  * inheritance chain (parent fields first, own fields override by name).
- * @typedef {object} UOSELivingDataModelSchema
+ * @typedef {object} UOSELivingActorDataModelSchema
  * @property {object} automation
  * @property {UOSEArmorClassDataModel} armorClass
  * @property {UOSEMovementDataModel} movement
@@ -32,9 +32,9 @@
  */
 
 /**
- * Resolved from UOSENpcDataModel.defineSchema(), flattened across its full
+ * Resolved from UOSENpcActorDataModel.defineSchema(), flattened across its full
  * inheritance chain (parent fields first, own fields override by name).
- * @typedef {object} UOSENpcDataModelSchema
+ * @typedef {object} UOSENpcActorDataModelSchema
  * @property {object} automation
  * @property {UOSEArmorClassDataModel} armorClass
  * @property {UOSEMovementDataModel} movement
@@ -50,9 +50,9 @@
  */
 
 /**
- * Resolved from UOSECharacterDataModel.defineSchema(), flattened across its full
+ * Resolved from UOSECharacterActorDataModel.defineSchema(), flattened across its full
  * inheritance chain (parent fields first, own fields override by name).
- * @typedef {object} UOSECharacterDataModelSchema
+ * @typedef {object} UOSECharacterActorDataModelSchema
  * @property {object} automation
  * @property {UOSEArmorClassDataModel} armorClass
  * @property {UOSEMovementDataModel} movement
@@ -98,9 +98,9 @@
  */
 
 /**
- * Resolved from UOSEMonsterDataModel.defineSchema(), flattened across its full
+ * Resolved from UOSEMonsterActorDataModel.defineSchema(), flattened across its full
  * inheritance chain (parent fields first, own fields override by name).
- * @typedef {object} UOSEMonsterDataModelSchema
+ * @typedef {object} UOSEMonsterActorDataModelSchema
  * @property {object} automation
  * @property {UOSEArmorClassDataModel} armorClass
  * @property {UOSEMovementDataModel} movement
@@ -119,9 +119,9 @@
  */
 
 /**
- * Resolved from UOSERetainerDataModel.defineSchema(), flattened across its full
+ * Resolved from UOSERetainerActorDataModel.defineSchema(), flattened across its full
  * inheritance chain (parent fields first, own fields override by name).
- * @typedef {object} UOSERetainerDataModelSchema
+ * @typedef {object} UOSERetainerActorDataModelSchema
  * @property {object} automation
  * @property {UOSEArmorClassDataModel} armorClass
  * @property {UOSEMovementDataModel} movement
